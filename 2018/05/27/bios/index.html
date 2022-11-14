@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="C-state disabled. Ensure that the CPUs are always in the C0 (fully operational) state. Each CPU has several power modes and they are collectively called “C-states” or “C-modes.”.~~ *P-state disabled.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BIOS">
+<meta property="og:url" content="http://example.com/2018/05/27/bios/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="C-state disabled. Ensure that the CPUs are always in the C0 (fully operational) state. Each CPU has several power modes and they are collectively called “C-states” or “C-modes.”.~~ *P-state disabled.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/mpt3sas-no-boot.jpg">
+<meta property="og:image" content="http://example.com/img/power-policy1.png">
+<meta property="og:image" content="http://example.com/img/power-policy2.png">
+<meta property="article:published_time" content="2018-05-26T22:54:45.000Z">
+<meta property="article:modified_time" content="2020-10-11T10:05:01.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="bios">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/mpt3sas-no-boot.jpg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>BIOS</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2018/05/27/ipmi/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2016/06/16/benchmark/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2018/05/27/bios/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2018/05/27/bios/&text=BIOS"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2018/05/27/bios/&title=BIOS"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2018/05/27/bios/&is_video=false&description=BIOS"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=BIOS&body=Check out this article: http://example.com/2018/05/27/bios/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2018/05/27/bios/&title=BIOS"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2018/05/27/bios/&title=BIOS"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2018/05/27/bios/&title=BIOS"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2018/05/27/bios/&title=BIOS"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2018/05/27/bios/&name=BIOS&description=&lt;ul&gt;
+&lt;li&gt;C-state disabled. Ensure that the CPUs are always in the C0 (fully operational) state. Each CPU has several power modes and they are collectively called “C-states” or “C-modes.”.&lt;br&gt;~~ *P-state disabled. The processor P-state is the capability of running the processor at different voltage and&amp;#x2F;or frequency levels. Generally, P0 is the highest state resulting in maximum performance, while P1, P2, and so on, will save power but at some penalty to CPU performance. ~~&lt;ul&gt;
+&lt;li&gt;I can ‘t agree it, I will active the P-state&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Hyper-threading enabled&amp;#x2F;disabled&lt;ul&gt;
+&lt;li&gt;it ‘s depends your application&lt;br&gt;~~ * Turbo Boost Disabled. Turbo Boost has a series of dynamic frequency scaling technologies enabling the processor to run above its base operating frequency via dynamic control. Although Turbo Boost (overclocking) would increase the performance, not all cores would be running at the turbo frequency and it would impact the consistency of the performance tests, thus it would not be a real representation of the platform performance. ~~&lt;/li&gt;
+&lt;li&gt;I can ‘t agree it, From Xeon E5 v2 to Scalable Xeon, intel just write single core turbo in ark, but it ‘s not means all cores could bot be turbo.  Eg: I enabled all core turbo for E5 2630v4, the performance same with not enable Turbo from E5 2640v4. I have test E7-4890v2, default cpu frequency only 2.8GHz, All cores turbo could reach 3.2GHz&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2018/05/27/bios/&t=BIOS"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#mpt3sas-x2F-mpt2sas-HBA-boot-with-high-density-JBOD"><span class="toc-number">1.</span> <span class="toc-text">mpt3sas&#x2F;mpt2sas HBA boot with high density JBOD</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Set-quick-boot"><span class="toc-number">1.1.</span> <span class="toc-text">Set quick boot</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Power-setting"><span class="toc-number">2.</span> <span class="toc-text">Power setting</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#OS-control"><span class="toc-number">2.1.</span> <span class="toc-text">OS control</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-loading-balance-mode-for-power-supply"><span class="toc-number">2.2.</span> <span class="toc-text">1+1 loading balance mode for power supply</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        BIOS
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">John Doe</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2018-05-26T22:54:45.000Z" itemprop="datePublished">2018-05-27</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Hardware/">Hardware</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/bios/" rel="tag">bios</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <ul>
+<li>C-state disabled. Ensure that the CPUs are always in the C0 (fully operational) state. Each CPU has several power modes and they are collectively called “C-states” or “C-modes.”.<br>~~ *P-state disabled. The processor P-state is the capability of running the processor at different voltage and&#x2F;or frequency levels. Generally, P0 is the highest state resulting in maximum performance, while P1, P2, and so on, will save power but at some penalty to CPU performance. ~~<ul>
+<li>I can ‘t agree it, I will active the P-state</li>
+</ul>
+</li>
+<li>Hyper-threading enabled&#x2F;disabled<ul>
+<li>it ‘s depends your application<br>~~ * Turbo Boost Disabled. Turbo Boost has a series of dynamic frequency scaling technologies enabling the processor to run above its base operating frequency via dynamic control. Although Turbo Boost (overclocking) would increase the performance, not all cores would be running at the turbo frequency and it would impact the consistency of the performance tests, thus it would not be a real representation of the platform performance. ~~</li>
+<li>I can ‘t agree it, From Xeon E5 v2 to Scalable Xeon, intel just write single core turbo in ark, but it ‘s not means all cores could bot be turbo.  Eg: I enabled all core turbo for E5 2630v4, the performance same with not enable Turbo from E5 2640v4. I have test E7-4890v2, default cpu frequency only 2.8GHz, All cores turbo could reach 3.2GHz</li>
+</ul>
+</li>
+</ul>
+<span id="more"></span>
+
+<ul>
+<li><p>System Management Interrupts disabled. Disabling the Processor Power and Utilization Monitoring SMI has a great effect because it generates a processor interrupt eight times a second in G6 and later servers. Disabling the Memory Pre-Failure Notification SMI has a smaller effect because it generates an interrupt at a lower frequency</p>
+</li>
+<li><p>Correct setting of BIOS for DUT (w&#x2F; SmartNIC) is important, to address:</p>
+<ul>
+<li>Throughput variations due to CPU power state changes (C-state; P-state)</li>
+<li>Blips (short duration packet drops) due to interrupts (SMI)</li>
+</ul>
+</li>
+<li><p>Power Management</p>
+<ul>
+<li>Power Regulator &#x3D; [Static High Performance] (was “dynamic power<br>savings”)</li>
+<li>Minimum Processor Core Idle C-state &#x3D; [No C-states] (was C-6)</li>
+<li>Minimum Package Idle C-state &#x3D; [ No package state] (was C-6)</li>
+<li>Power Profile &#x3D; [ Max Performance ] (was “customer”) this ended up setting the above anyway (and graying them out)</li>
+</ul>
+</li>
+<li><p>Prevent CPUs from entering power savings modes as transitions cause OS and VM drivers to drop packets.</p>
+<ul>
+<li>Yes, I have the same issues.</li>
+</ul>
+</li>
+</ul>
+<p>Example settings (HP) changes (cont.)</p>
+<ul>
+<li>SMI - System Management Interrupts<ul>
+<li>Memory pre-failure notification &#x3D; [disabled] (was enabled)</li>
+</ul>
+</li>
+<li>When enabled, CPU is periodically interrupted, resulting in packet drops when close to throughput<br>capacity.<ul>
+<li>Disable all non-essential SMIs</li>
+<li>Frequency of SMI varies<ul>
+<li>On an HP DL380 gen9 it is every 60s</li>
+<li>On gen6,7 it is every hour</li>
+<li>On gen8 every 5 minutes</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>System management interrupts (SMIs) are used to offer extended functionality, such as legacy hardware device emulation. They can also be used for system management tasks. SMIs are similar to NMIs in that they use a special electrical signalling line directly into the CPU, and are generally not able to be masked.<br>When an SMI is received, the CPU will enter System Management Mode (SMM). In this mode, a very low-level handler routine is run to handle the SMIs. The SMM is typically provided directly from the system management firmware, often the BIOS or the EFI.<br>SMIs are most often used to provide legacy hardware emulation. A common example is to emulate a diskette drive. If there is no diskette attached to the system, a virtualized network-managed emulation can be used instead. When the operating system attempts to access the diskette, an SMI is triggered and a handler provides the operating system with an emulated device instead. The operating system then treats the emulation as though it were the legacy device itself.<br>Red Hat Enterprise Linux for Real Time can be adversely affected by SMIs because they take place without the direct involvement of the operating system. A poorly written SMI handling routine may consume many milliseconds of CPU time, and the operating system is not able to preempt the handler if it needs to. This situation creates periodic high latencies in an otherwise well-tuned, highly responsive system. Unfortunately, because SMI handlers can be used by a vendor to manage CPU temperature and fan control, it is not possible to disable them. Instead, it is recommended that you notify the vendor of the problem.<br>You can attempt to isolate SMIs on a Red Hat Enterprise Linux for Real Time system using the hwlatdetect utility, which is available in the rt-tests package. This utility is designed to measure periods of time during which the CPU has been stolen by an SMI handling routine.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">processor	: 119</span><br><span class="line">vendor_id	: GenuineIntel</span><br><span class="line">cpu family	: 6</span><br><span class="line">model		: 62</span><br><span class="line">model name	: Intel(R) Xeon(R) CPU E7-4890 v2 @ 2.80GHz</span><br><span class="line">stepping	: 7</span><br><span class="line">microcode	: 0x713</span><br><span class="line">cpu MHz		: 3199.902</span><br><span class="line">cache size	: 38400 KB</span><br><span class="line">physical <span class="built_in">id</span>	: 3</span><br><span class="line">siblings	: 30</span><br><span class="line">core <span class="built_in">id</span>		: 14</span><br><span class="line">cpu cores	: 15</span><br><span class="line">apicid		: 125</span><br><span class="line">initial apicid	: 125</span><br><span class="line">fpu		: <span class="built_in">yes</span></span><br><span class="line">fpu_exception	: <span class="built_in">yes</span></span><br><span class="line">cpuid level	: 13</span><br><span class="line">wp		: <span class="built_in">yes</span></span><br><span class="line">flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm epb intel_ppin ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid fsgsbase smep erms xsaveopt dtherm ida arat pln pts spec_ctrl intel_stibp</span><br><span class="line">bogomips	: 5638.89</span><br><span class="line">clflush size	: 64</span><br><span class="line">cache_alignment	: 64</span><br><span class="line">address sizes	: 46 bits physical, 48 bits virtual</span><br><span class="line">power management:</span><br><span class="line"></span><br><span class="line"><span class="built_in">cat</span> /proc/cpuinfo | grep MHz</span><br><span class="line">cpu MHz		: 3199.902</span><br><span class="line">cpu MHz		: 3199.902</span><br><span class="line">cpu MHz		: 3199.902</span><br><span class="line">cpu MHz		: 3199.902</span><br><span class="line">cpu MHz		: 3199.902</span><br><span class="line">cpu MHz		: 3199.902</span><br><span class="line">cpu MHz		: 3199.902</span><br><span class="line">....</span><br></pre></td></tr></table></figure>
+
+<h3 id="mpt3sas-x2F-mpt2sas-HBA-boot-with-high-density-JBOD"><a href="#mpt3sas-x2F-mpt2sas-HBA-boot-with-high-density-JBOD" class="headerlink" title="mpt3sas&#x2F;mpt2sas HBA boot with high density JBOD"></a>mpt3sas&#x2F;mpt2sas HBA boot with high density JBOD</h3><h4 id="Set-quick-boot"><a href="#Set-quick-boot" class="headerlink" title="Set quick boot"></a>Set quick boot</h4><p>Under BIOS boot mode and enable HBA ctrl + C option<br><img src="/img/mpt3sas-no-boot.jpg"></p>
+<h3 id="Power-setting"><a href="#Power-setting" class="headerlink" title="Power setting"></a>Power setting</h3><h4 id="OS-control"><a href="#OS-control" class="headerlink" title="OS control"></a>OS control</h4><p><img src="/img/power-policy1.png"></p>
+<h4 id="1-1-loading-balance-mode-for-power-supply"><a href="#1-1-loading-balance-mode-for-power-supply" class="headerlink" title="1+1 loading balance mode for power supply"></a>1+1 loading balance mode for power supply</h4><p><img src="/img/power-policy2.png"></p>
+<p><a target="_blank" rel="noopener" href="https://open-nfp.org/m/documents/Measuring_a_25_and_40Gbps_Data_Plane.pdf">reference</a><br><a target="_blank" rel="noopener" href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux_for_real_time/7/html/reference_guide/system_management_interrupts">reference2</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#mpt3sas-x2F-mpt2sas-HBA-boot-with-high-density-JBOD"><span class="toc-number">1.</span> <span class="toc-text">mpt3sas&#x2F;mpt2sas HBA boot with high density JBOD</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Set-quick-boot"><span class="toc-number">1.1.</span> <span class="toc-text">Set quick boot</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Power-setting"><span class="toc-number">2.</span> <span class="toc-text">Power setting</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#OS-control"><span class="toc-number">2.1.</span> <span class="toc-text">OS control</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-loading-balance-mode-for-power-supply"><span class="toc-number">2.2.</span> <span class="toc-text">1+1 loading balance mode for power supply</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2018/05/27/bios/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2018/05/27/bios/&text=BIOS"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2018/05/27/bios/&title=BIOS"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2018/05/27/bios/&is_video=false&description=BIOS"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=BIOS&body=Check out this article: http://example.com/2018/05/27/bios/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2018/05/27/bios/&title=BIOS"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2018/05/27/bios/&title=BIOS"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2018/05/27/bios/&title=BIOS"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2018/05/27/bios/&title=BIOS"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2018/05/27/bios/&name=BIOS&description=&lt;ul&gt;
+&lt;li&gt;C-state disabled. Ensure that the CPUs are always in the C0 (fully operational) state. Each CPU has several power modes and they are collectively called “C-states” or “C-modes.”.&lt;br&gt;~~ *P-state disabled. The processor P-state is the capability of running the processor at different voltage and&amp;#x2F;or frequency levels. Generally, P0 is the highest state resulting in maximum performance, while P1, P2, and so on, will save power but at some penalty to CPU performance. ~~&lt;ul&gt;
+&lt;li&gt;I can ‘t agree it, I will active the P-state&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Hyper-threading enabled&amp;#x2F;disabled&lt;ul&gt;
+&lt;li&gt;it ‘s depends your application&lt;br&gt;~~ * Turbo Boost Disabled. Turbo Boost has a series of dynamic frequency scaling technologies enabling the processor to run above its base operating frequency via dynamic control. Although Turbo Boost (overclocking) would increase the performance, not all cores would be running at the turbo frequency and it would impact the consistency of the performance tests, thus it would not be a real representation of the platform performance. ~~&lt;/li&gt;
+&lt;li&gt;I can ‘t agree it, From Xeon E5 v2 to Scalable Xeon, intel just write single core turbo in ark, but it ‘s not means all cores could bot be turbo.  Eg: I enabled all core turbo for E5 2630v4, the performance same with not enable Turbo from E5 2640v4. I have test E7-4890v2, default cpu frequency only 2.8GHz, All cores turbo could reach 3.2GHz&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2018/05/27/bios/&t=BIOS"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    John Doe
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

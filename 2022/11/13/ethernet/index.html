@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Ethernet cable Active The Active cable makes use of electronics for signal conditioning   Passive The Passive cable does not make use of electronics for signal conditioning Passive twinax cables are r">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ethernet">
+<meta property="og:url" content="http://example.com/2022/11/13/ethernet/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Ethernet cable Active The Active cable makes use of electronics for signal conditioning   Passive The Passive cable does not make use of electronics for signal conditioning Passive twinax cables are r">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-11-13T08:51:06.000Z">
+<meta property="article:modified_time" content="2022-11-13T14:17:43.563Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="network">
+<meta property="article:tag" content="ethernet">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>ethernet</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2022/11/13/pcie/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2022/11/13/rdma/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2022/11/13/ethernet/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2022/11/13/ethernet/&text=ethernet"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2022/11/13/ethernet/&title=ethernet"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2022/11/13/ethernet/&is_video=false&description=ethernet"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ethernet&body=Check out this article: http://example.com/2022/11/13/ethernet/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2022/11/13/ethernet/&title=ethernet"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2022/11/13/ethernet/&title=ethernet"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2022/11/13/ethernet/&title=ethernet"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2022/11/13/ethernet/&title=ethernet"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2022/11/13/ethernet/&name=ethernet&description=&lt;h3 id=&#34;Ethernet-cable&#34;&gt;&lt;a href=&#34;#Ethernet-cable&#34; class=&#34;headerlink&#34; title=&#34;Ethernet cable&#34;&gt;&lt;/a&gt;&lt;a href=&#34;https://cshihong.github.io/2020/08/23/%E5%85%89%E7%BA%A4%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/&#34;&gt;Ethernet cable&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Active&lt;ul&gt;
+&lt;li&gt;The Active cable makes use of electronics for signal conditioning&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Passive&lt;ul&gt;
+&lt;li&gt;The Passive cable does not make use of electronics for signal conditioning&lt;ul&gt;
+&lt;li&gt;Passive twinax cables are rated for ranges up to 5m and provide a good working solutions at a great cost"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2022/11/13/ethernet/&t=ethernet"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Ethernet-cable"><span class="toc-number">1.</span> <span class="toc-text">Ethernet cable</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        ethernet
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">John Doe</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-11-13T08:51:06.000Z" itemprop="datePublished">2022-11-13</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Network/">Network</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/ethernet/" rel="tag">ethernet</a>, <a class="tag-link-link" href="/tags/network/" rel="tag">network</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="Ethernet-cable"><a href="#Ethernet-cable" class="headerlink" title="Ethernet cable"></a><a target="_blank" rel="noopener" href="https://cshihong.github.io/2020/08/23/%E5%85%89%E7%BA%A4%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">Ethernet cable</a></h3><ul>
+<li>Active<ul>
+<li>The Active cable makes use of electronics for signal conditioning</li>
+</ul>
+</li>
+<li>Passive<ul>
+<li>The Passive cable does not make use of electronics for signal conditioning<ul>
+<li>Passive twinax cables are rated for ranges up to 5m and provide a good working solutions at a great cost<span id="more"></span></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.arista.com/assets/data/pdf/Arista100G_TC_QA.pdf">Arista 100G cable</a><br><a target="_blank" rel="noopener" href="https://www.arista.com/assets/data/pdf/Arista100G_TC_QA.pdf">Mellanox 100G DAC cable</a><br><a target="_blank" rel="noopener" href="https://www.mellanox.com/sites/default/files/products/interconnect/pdf/Mellanox_Cable_Management_Guidelines_and_FAQs_Application_Note.pdf">Mellanox cable </a></p>
+<ul>
+<li><p>PCC (passive copper cable)</p>
+<ul>
+<li>A high-speed electrical cable with an SFP or QSFP connector in each end, but no active components in the RF connections. The term ‘passive’ means that there is no active processing of the electrical signal.</li>
+</ul>
+</li>
+<li><p>Direct Attach Copper cable (DAC)</p>
+<ul>
+<li>direct electrical connection between cable ends</li>
+<li>The DACs still have an EEPROM, a memory chip in each end, so the host system can read which type of cable is plugged in, and how much attenuation it should expect.</li>
+</ul>
+</li>
+<li><p>Active Optical cable (AOC)</p>
+<ul>
+<li>Electrical conversion to optics transmitted over integrated optical fibers</li>
+<li>An optical fiber cable iwth an optical transceiver with the fibers bonded inside and not removeable</li>
+</ul>
+</li>
+<li><p>Optical Transceivers</p>
+<ul>
+<li>Electrical conversion to optics over fibers with optical connectors<ul>
+<li>More expensive SR(short range),SR4(Short range 4 channels)</li>
+<li>4 parallecl multi-mode fibers<ul>
+<li>100m after which the signal degrades</li>
+</ul>
+</li>
+<li>4 parallecl single-mode fibers<ul>
+<li>Parallel single-mode transceivers(PSM4) are used from 500m-2km the ost of 8 fibers adds up with each meter</li>
+<li>Multiplexing the four channels signals into two single fibers is more economical with CWDM4(Coarse Wavelength division multiplexer 4 channels) for up 2KM and LR4(long range 4 channels) up to 10km</li>
+</ul>
+</li>
+<li>4 Channels multiplexed over 2 single-mode fibers</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Connector Types</p>
+<ul>
+<li>SFP (Small Formfactor Pluggable)<ul>
+<li>A transceiver or cable with a single lane(channel) in each direction</li>
+</ul>
+</li>
+<li>SFP+ denotes the 10~14Gb&#x2F;s type of AOC&#x2F;transceivers</li>
+<li>QSFP(Quad small Formfactor Pluggable)<ul>
+<li>A bidirectional transceiver or cable with 4 lanes in each direction</li>
+</ul>
+</li>
+<li>QSFP+ denotes cables&#x2F;transceivers for 4x (10<del>14)Gbps applications, while QSFP28 denotes the 4 x(24</del>28)&#x3D;100Gbps product range with QSFP form factor</li>
+<li>QSFP-DD(double-density) support up to 400Gbps in aggregate over an 8x 50Gbps electrical interface.</li>
+<li>Transceiver (transmitter and receiver) is a converter with an electrical connector in one end and optical connector in the other end</li>
+</ul>
+</li>
+<li><p>Optical Transmission and Fiber Types</p>
+<ul>
+<li>MMF(multi-mode fiber)<ul>
+<li>The type of fiber used for VCSEL (Vertical Cavity Surface<br>Emitting Laser) based transmission, normally operating at 850 nm wavelength. Its maximum reach is 100 m for 25 Gb&#x2F;s line rates.</li>
+</ul>
+</li>
+<li>OM2&#x2F;3&#x2F;4(optical multi-mode) are classiffications of MMF for different reach.<ul>
+<li>higher number indicates lower degradation of the optical signal, and longer reach. MMF cables usually have the following color scheme</li>
+<li>OM2 orange used for data rates at 1~14 Gbps, 62.5 μm fiber core diameter</li>
+<li>OM3 aqua or teal 70m reach for 25&#x2F;100Gbps transceivers, 50 μm fiber core diameter</li>
+<li>OM4 aqua or purple 100m reach for 25&#x2F;100Gbps transceivers, 50-um core diameter</li>
+<li>OM5 aqua green not commonly used</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Optical connector type</p>
+<ul>
+<li>MPO (Multi-fiber plush on)<ul>
+<li>is a connector standard supporting multiple rows with up to 12<br>fibers in each. A QSFP transceiver with MPO receptacle uses the outermost 4 positions on each side</li>
+</ul>
+</li>
+<li>MTP<ul>
+<li>are a vendor specific proprietary high-precision version of MPO connectors</li>
+</ul>
+</li>
+<li>LC<ul>
+<li>are used for both single-mode and multi-mode fibers and used in both SFP and QSFP MSA transceivers</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>diff 100GbE IB and Ethernet cable</p>
+<ul>
+<li>CDR (clock and data retimeing) default status</li>
+<li>IB EDR CDR is bypsswd&#x2F;disabled this ensures backward compatibility to FDR devices</li>
+<li>EThernet 100G: The CDR is default on, and must be disabled at lower data rates, eg: 40Gbps</li>
+<li>Copper cables<ul>
+<li>IB EDR: The link budget usually assumes that the signal attenuation is small enough to allow operation without Forward Error Correction (FEC).</li>
+<li>Ethernet 100G: RS-FEC enabled by default</li>
+</ul>
+</li>
+<li>Identifier<ul>
+<li>IB EDR and QSFP+ backward compatibility to FDR devices</li>
+<li>Ethernet 100G: QSFP28<ul>
+<li>The EEPROM memory map of QSFP28 (100 Gb&#x2F;s cables&#x2F;transceivers) is defined in specification SFF-8636 and for SFP28 (25 Gb&#x2F;s cables&#x2F;transceivers) in SFF-8472</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Bit error ratios<ul>
+<li>IEEE defines the BER of 1E-5 for Ethernet that is corrected with FEC in the host to 1E-12</li>
+<li>InfiniBand assumes no use of FEC in the host and requires 1E-15 BER.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>The Ethernet standards define FEC (Forward Error Correction) on by default for AOCs and optical transceivers. This implies that the Bit Error Rate (BER &#x3D; bit errors&#x2F;bits transmitted) maximum is 1E-12 after FEC (pre-FEC of maximum 1E-5). All LinkX products are tested in Mellanox end-to-end systems for pre-FEC BER of 1E-15 as part of our product qualification, more specifically the System Level Performance Quality Assurance (SLPQA) test.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>meters</th>
+<th>Standard</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>QSFP 100GbE Transceivers (OM3 70m&#x2F;4 100m)</td>
+<td>70~100</td>
+<td>100(100GBASE-SR10),70(100GBASE-SR4, SR&#x3D;short reach)</td>
+</tr>
+<tr>
+<td></td>
+<td>10k</td>
+<td>100GBASE-LR4, LR&#x3D;long reach</td>
+</tr>
+<tr>
+<td></td>
+<td>80k</td>
+<td>100GBASE-ZR, it is not an IEEE standard</td>
+</tr>
+<tr>
+<td>QSFP 100GbE Transceivers</td>
+<td>500,2k,10k,40k</td>
+<td>10k(100GBASE-LR4),40k(100GBASE-ER4, ER&#x3D;Extended reach)</td>
+</tr>
+<tr>
+<td>100GbE QSFP to QSFP Active Optical cable</td>
+<td>3~30</td>
+<td>Based on IEEE 100GBASE-SR4</td>
+</tr>
+<tr>
+<td>QSFP+ to QSFP+ passive Twinax Copper Cables</td>
+<td>0.5~5</td>
+<td>100GBASE-ER4(The 802.3bj covers the electrical)</td>
+</tr>
+<tr>
+<td>100GbE QSFP28 Direct Attach Copper Cable</td>
+<td>3~7</td>
+<td>5m(IEEE 802.3bj CA-25G-L),2m(IEEE 802.3bj CA-25G-N, 100BASE-CR4)</td>
+</tr>
+</tbody></table>
+<p>AOC not support DDM(Digital Diagnostic Monitoring)&#x2F;DOM(Digital optical monitoring)<br>RGD means rugged transceivers, and can operate under more extreme conditions<br>Physical Media Devices (PMDs)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">                            nTYPE-LLLm</span><br><span class="line">                            | |   ||||</span><br><span class="line">10 10Mb/s-------------------- |   ||||</span><br><span class="line">2.5G 2.5Gb/s                  |   |||-----------Trailing number</span><br><span class="line">10G  10Gb/s                   |   |||            1,4,8,10,16 pairs or lanes</span><br><span class="line">24/40/100/400 Gbps            |   ||------------Third letter</span><br><span class="line">                              |   ||            M multimode</span><br><span class="line">                              |   ||</span><br><span class="line">                              |   ||</span><br><span class="line">Modulation TYPE----------------   ||</span><br><span class="line">BASE    Baseband                  ||</span><br><span class="line">BROAD   Broadband                 |-----------------Second letter</span><br><span class="line">PASS    Passband                  |                 P PAM4</span><br><span class="line">                                  First letter      R Scrambled</span><br><span class="line">                                  B Bidirectional   W WAN coding</span><br><span class="line">                                  C Twin-ax copper  X External coding</span><br><span class="line">                                  E Extra long or 40km</span><br><span class="line">                                  F fiber or 2km</span><br><span class="line">                                  K Backplane</span><br><span class="line">                                  L long or 10km</span><br><span class="line">                                  P PON</span><br><span class="line">                                  S Short or 100</span><br><span class="line">                                  T twisted pair</span><br></pre></td></tr></table></figure>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Ethernet-cable"><span class="toc-number">1.</span> <span class="toc-text">Ethernet cable</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2022/11/13/ethernet/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2022/11/13/ethernet/&text=ethernet"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2022/11/13/ethernet/&title=ethernet"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2022/11/13/ethernet/&is_video=false&description=ethernet"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ethernet&body=Check out this article: http://example.com/2022/11/13/ethernet/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2022/11/13/ethernet/&title=ethernet"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2022/11/13/ethernet/&title=ethernet"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2022/11/13/ethernet/&title=ethernet"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2022/11/13/ethernet/&title=ethernet"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2022/11/13/ethernet/&name=ethernet&description=&lt;h3 id=&#34;Ethernet-cable&#34;&gt;&lt;a href=&#34;#Ethernet-cable&#34; class=&#34;headerlink&#34; title=&#34;Ethernet cable&#34;&gt;&lt;/a&gt;&lt;a href=&#34;https://cshihong.github.io/2020/08/23/%E5%85%89%E7%BA%A4%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/&#34;&gt;Ethernet cable&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Active&lt;ul&gt;
+&lt;li&gt;The Active cable makes use of electronics for signal conditioning&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Passive&lt;ul&gt;
+&lt;li&gt;The Passive cable does not make use of electronics for signal conditioning&lt;ul&gt;
+&lt;li&gt;Passive twinax cables are rated for ranges up to 5m and provide a good working solutions at a great cost"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2022/11/13/ethernet/&t=ethernet"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    John Doe
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
