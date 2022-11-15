@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="mdraid check1&#x2F;etc&#x2F;sysconfig&#x2F;raid-check  grub boot failed because replace mdadm root device CentOS 7 ISO boot trouble shotting –&gt; resuce mode –&gt; 1.continue&#x2F;2.read-only mode&#x2F;3.skip to sh">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The mdraid info">
+<meta property="og:url" content="http://example.com/2020/06/01/mdadm/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="mdraid check1&#x2F;etc&#x2F;sysconfig&#x2F;raid-check  grub boot failed because replace mdadm root device CentOS 7 ISO boot trouble shotting –&gt; resuce mode –&gt; 1.continue&#x2F;2.read-only mode&#x2F;3.skip to sh">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-06-01T04:40:20.000Z">
+<meta property="article:modified_time" content="2022-07-29T01:51:28.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="md">
+<meta property="article:tag" content="raid">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>The mdraid info</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2022/09/17/ftrace/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2019/11/26/xfs/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2020/06/01/mdadm/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2020/06/01/mdadm/&text=The mdraid info"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2020/06/01/mdadm/&title=The mdraid info"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2020/06/01/mdadm/&is_video=false&description=The mdraid info"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=The mdraid info&body=Check out this article: http://example.com/2020/06/01/mdadm/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2020/06/01/mdadm/&title=The mdraid info"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2020/06/01/mdadm/&title=The mdraid info"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2020/06/01/mdadm/&title=The mdraid info"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2020/06/01/mdadm/&title=The mdraid info"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2020/06/01/mdadm/&name=The mdraid info&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2020/06/01/mdadm/&t=The mdraid info"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#mdraid-check"><span class="toc-number">1.</span> <span class="toc-text">mdraid check</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#grub-boot-failed-because-replace-mdadm-root-device"><span class="toc-number">2.</span> <span class="toc-text">grub boot failed because replace mdadm root device</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#force-import"><span class="toc-number">3.</span> <span class="toc-text">force import</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#replace-bad-device"><span class="toc-number">4.</span> <span class="toc-text">replace bad device</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#scrub-mdraid"><span class="toc-number">5.</span> <span class="toc-text">scrub mdraid</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#About-linux-soft-raid5"><span class="toc-number">6.</span> <span class="toc-text">About linux soft raid5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#How-to-backup-mdraid-info-by-dd"><span class="toc-number">7.</span> <span class="toc-text">How to backup mdraid info by dd</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mdadm-raid5-xor"><span class="toc-number">8.</span> <span class="toc-text">mdadm raid5 xor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#issues"><span class="toc-number">9.</span> <span class="toc-text">issues</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#specifying-chunk-size-is-forbidden-for-this-level"><span class="toc-number">9.1.</span> <span class="toc-text">specifying chunk size is forbidden for this level</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        The mdraid info
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">John Doe</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-06-01T04:40:20.000Z" itemprop="datePublished">2020-06-01</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Storage/">Storage</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/md/" rel="tag">md</a>, <a class="tag-link-link" href="/tags/raid/" rel="tag">raid</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="mdraid-check"><a href="#mdraid-check" class="headerlink" title="mdraid check"></a>mdraid check</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/sysconfig/raid-check</span><br></pre></td></tr></table></figure>
+
+<h3 id="grub-boot-failed-because-replace-mdadm-root-device"><a href="#grub-boot-failed-because-replace-mdadm-root-device" class="headerlink" title="grub boot failed because replace mdadm root device"></a>grub boot failed because replace mdadm root device</h3><ul>
+<li>CentOS 7 ISO boot<ul>
+<li>trouble shotting –&gt; resuce mode –&gt; 1.continue&#x2F;2.read-only mode&#x2F;3.skip to shell&#x2F;4.quit(reboot)<ul>
+<li>select 1 continue, but the rescue mode show “not found linux partition”<ul>
+<li>detect the mdadm raid –&gt; mdadm –examine –scan &gt;&gt; &#x2F;etc&#x2F;mdadm.conf<ul>
+<li>show the “&#x2F;dev&#x2F;md&#x2F;efi_boot and &#x2F;dev&#x2F;md&#x2F;root”</li>
+</ul>
+</li>
+<li>mdadm –assemble –scan &#x2F;dev&#x2F;md&#x2F;efi_boot</li>
+<li>mdadm –assemble –scan &#x2F;dev&#x2F;md&#x2F;root</li>
+<li>cat &#x2F;proc&#x2F;mdadm show md126(efi) and md127(root) and the new device not in the raid</li>
+<li>show “md127 : active (auto-read-only)”<ul>
+<li>mdadm –readwrite &#x2F;dev&#x2F;md1</li>
+</ul>
+</li>
+<li>mount &#x2F;dev&#x2F;md127 &#x2F;mnt&#x2F;sysimage</li>
+<li>mount &#x2F;dev&#x2F;md126 &#x2F;mnt&#x2F;sysimage&#x2F;boot&#x2F;efi</li>
+<li>mount -o bind &#x2F;proc &#x2F;mnt&#x2F;sysimage&#x2F;proc</li>
+<li>mount -o bind &#x2F;sys &#x2F;mnt&#x2F;sysimage&#x2F;sys</li>
+<li>mount -o bind &#x2F;dev &#x2F;mnt&#x2F;sysimage&#x2F;dev</li>
+<li>chroot &#x2F;mnt&#x2F;sysimage</li>
+<li>grub2-mkconfig -o &#x2F;boot&#x2F;efi&#x2F;EFI&#x2F;centos&#x2F;grub.cfg</li>
+<li>or you could copy kernel rpm package(iso) and reinstall</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="force-import"><a href="#force-import" class="headerlink" title="force import"></a>force import</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">$ mdadm -A --force /dev/md0 /dev/sd&#123;b..m&#125;1</span><br><span class="line">mdadm: Fail create md0 when using /sys/module/md_mod/parameters/new_array</span><br><span class="line">mdadm: forcing event count in /dev/sdf1(1) from 109018 upto 109023</span><br><span class="line">mdadm: forcing event count in /dev/sdc1(2) from 109018 upto 109023</span><br><span class="line">mdadm: forcing event count in /dev/sdb1(6) from 109018 upto 109023</span><br><span class="line">mdadm: forcing event count in /dev/sdg1(7) from 109015 upto 109023</span><br><span class="line">mdadm: forcing event count in /dev/sdm1(8) from 109015 upto 109023</span><br><span class="line">mdadm: forcing event count in /dev/sde1(9) from 109012 upto 109023</span><br><span class="line">mdadm: forcing event count in /dev/sdk1(10) from 109010 upto 109023</span><br><span class="line">mdadm: forcing event count in /dev/sdl1(11) from 109009 upto 109023</span><br><span class="line">mdadm: clearing FAULTY flag for device 4 in /dev/md0 for /dev/sdf1</span><br><span class="line">mdadm: clearing FAULTY flag for device 1 in /dev/md0 for /dev/sdc1</span><br><span class="line">mdadm: clearing FAULTY flag for device 5 in /dev/md0 for /dev/sdg1</span><br><span class="line">mdadm: clearing FAULTY flag for device 3 in /dev/md0 for /dev/sde1</span><br><span class="line">mdadm: clearing FAULTY flag for device 10 in /dev/md0 for /dev/sdl1</span><br><span class="line">mdadm: Marking array /dev/md0 as &#x27;clean&#x27;</span><br><span class="line">mdadm: /dev/md0 assembled from 12 drives - not enough to start the array.</span><br><span class="line">$ cat /proc/mdstat</span><br><span class="line">Personalities :</span><br><span class="line">unused devices: &lt;none&gt;</span><br><span class="line"></span><br><span class="line"># retry</span><br><span class="line">$ mdadm -A --force /dev/md0 /dev/sd&#123;b..m&#125;1</span><br><span class="line">mdadm: Fail create md0 when using /sys/module/md_mod/parameters/new_array</span><br><span class="line">mdadm: /dev/md0 has been started with 12 drives.</span><br><span class="line">$ cat /proc/mdstat</span><br><span class="line">Personalities : [raid10]</span><br><span class="line">md0 : active raid10 sdd1[0] sdl1[11] sdk1[10] sde1[9] sdm1[8] sdg1[7] sdb1[6] sdj1[5] sdi1[4] sdh1[3] sdc1[2] sdf1[1]</span><br><span class="line">      23429314560 blocks super 1.2 128K chunks 2 near-copies [12/12] [UUUUUUUUUUUU]</span><br><span class="line">      bitmap: 0/175 pages [0KB], 65536KB chunk</span><br><span class="line"></span><br><span class="line">unused devices: &lt;none&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="replace-bad-device"><a href="#replace-bad-device" class="headerlink" title="replace bad device"></a>replace bad device</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">mdadm --manage /dev/md0 --fail /dev/vdb1</span><br><span class="line">mdadm --manage /dev/md0 --remove /dev/vdb1</span><br><span class="line">mdadm --manage --stop /dev/vdb1</span><br><span class="line"></span><br><span class="line"><span class="comment">##re-add there is the partition table in new vdb</span></span><br><span class="line">$ mdadm --zero-superblock /dev/vdb1</span><br><span class="line">$ mdadm --zero-superblock /dev/vdb2</span><br><span class="line"></span><br><span class="line"><span class="comment">#backup partition table by sgdisk</span></span><br><span class="line">$ yum -y install gdisk</span><br><span class="line">$ sgdisk --backup=vdb_part_1 /dev/vdb</span><br><span class="line">$ sgdisk --load-backup=vdb_part_1 /dev/vdb</span><br><span class="line"></span><br><span class="line">$ mdadm --manage /dev/md0 --add /dev/vdb1</span><br><span class="line">$ mdadm --manage /dev/md1 --add /dev/vdb2</span><br><span class="line"></span><br><span class="line">Personalities : [raid1] </span><br><span class="line">md126 : active raid1 sda1[2] sdb1[0]</span><br><span class="line">      205760 blocks super 1.0 [2/2] [UU]</span><br><span class="line">      bitmap: 1/1 pages [4KB], 65536KB chunk</span><br><span class="line"></span><br><span class="line">md127 : active raid1 sda2[2] sdb2[0]</span><br><span class="line">      61374336 blocks super 1.0 [2/1] [U_]</span><br><span class="line">      [&gt;....................]  recovery =  0.3% (185472/61374336) finish=5.4min speed=185472K/sec</span><br><span class="line">      bitmap: 1/1 pages [4KB], 65536KB chunk</span><br><span class="line"></span><br><span class="line"><span class="comment">### assemble the raid, and the config file in the /etc/mdadm.conf</span></span><br><span class="line">$ mdadm --assemble --scan --verbose /dev/md2 /dev/disk/by-id/3500001-part1 /dev/disk/by-id/3500002-part1 /dev/disk/by-id/3500003-part1 /dev/disk/by-id/3500004-part1</span><br></pre></td></tr></table></figure>
+
+<h3 id="scrub-mdraid"><a href="#scrub-mdraid" class="headerlink" title="scrub mdraid"></a>scrub mdraid</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> check &gt; /sys/block/mdX/md/sync_action</span><br><span class="line">$ <span class="built_in">echo</span> repair &gt; /sys/block/mdX/md/sync_action</span><br><span class="line">$ <span class="built_in">echo</span> idle &gt; /sys/block/mdX/md/sync_action</span><br></pre></td></tr></table></figure>
+
+<h3 id="About-linux-soft-raid5"><a href="#About-linux-soft-raid5" class="headerlink" title="About linux soft raid5"></a>About linux soft raid5</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Raid 4/5/6 could include an extra disk <span class="keyword">for</span> data cache besides normal RAID disks. </span><br><span class="line">The role of RAID disks isn<span class="string">&#x27;t changed with the cache disk. </span></span><br><span class="line"><span class="string">The cache disk caches data to the RAID disks. The cache can be in write-through (supported since 4.4) or write-back mode (supported since 4.10). </span></span><br><span class="line"><span class="string">mdadm (supported since3.4) has a new option &#x27;</span>--write-journal<span class="string">&#x27; to create array with cache. Please refer to mdadm manual for details. By default (RAID array starts), the cache is in write-through mode. A user can switch it to write-back mode by:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">echo &quot;write-back&quot; &gt; /sys/block/md0/md/journal_mode</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">And switch it back to write-through mode by:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">echo &quot;write-through&quot; &gt; /sys/block/md0/md/journal_mode</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">In both modes, all writes to the array will hit cache disk first. This means</span></span><br><span class="line"><span class="string">the cache disk must be fast and sustainable.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">$ cat /sys/block/md0/md/stripe_cache_size</span></span><br><span class="line"><span class="string">1024</span></span><br></pre></td></tr></table></figure>
+<p>The stripe_cache_size only be set to 16~2048, you can’ t disable it, the write hole will cause data loss<br>So the raid10 or raid0 is the better choice than linux soft raid 4&#x2F;5&#x2F;6<br>If you add the journal device, the too many performance impact in the raid device  </p>
+<h3 id="How-to-backup-mdraid-info-by-dd"><a href="#How-to-backup-mdraid-info-by-dd" class="headerlink" title="How to backup mdraid info by dd"></a><a target="_blank" rel="noopener" href="https://raid.wiki.kernel.org/index.php/RAID_superblock_formats">How to backup mdraid info by dd</a></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line">md8 : active raid1 sde1[1] sda1[0]</span><br><span class="line">      468717568 blocks super 1.2 [2/2] [UU]</span><br><span class="line">      bitmap: 0/4 pages [0KB], 65536KB chunk</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">dd</span> <span class="keyword">if</span>=/dev/sda1 of=./sda1 bs=1M count=1</span><br><span class="line"></span><br><span class="line">$ hexdump -C sda1 | <span class="built_in">head</span> -n 20</span><br><span class="line">00000000  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|</span><br><span class="line">*</span><br><span class="line">Per-Array Identification &amp; Configuration area:16 Bytes</span><br><span class="line">                                                  0xc~0xf: padding block 0 </span><br><span class="line">00001000  <span class="built_in">fc</span> 4e 2b a9 01 00 00 00      01 00 00 00 00 00 00 00  |.N+.............|</span><br><span class="line">Magic num: a92b4efc Major version:1    0x8~0xb bit fearure_map:value 1 offset 0  raid map is used</span><br><span class="line">                                                   value 2 offset 1  raid recovery is progress</span><br><span class="line">                                                   value 4 offset 2 raid reshape is <span class="keyword">in</span> progress</span><br><span class="line">                                                   the others: undefined/reserved</span><br><span class="line"></span><br><span class="line">section: Per-Array Identification &amp; Configuration area 84 Bytes  </span><br><span class="line">          &lt;----------------------uuid--------------------&gt; 0x10-0x1f 16</span><br><span class="line">00001010  cb <span class="built_in">df</span> 6a 02 54 1a 01 76  9b 9c 29 fe ab 08 8c a0  |..j.T..v..).....|</span><br><span class="line">/dev/sda1: UUID=<span class="string">&quot;cbdf6a02-541a-0176-9b9c-29feab088ca0&quot;</span></span><br><span class="line"></span><br><span class="line">&lt;--------------------------name <span class="keyword">for</span> the array------------&gt; 0x20-0x3f 32</span><br><span class="line">00001020  74 65 73 74 2d 74 65 73  74 2d 61 31 31 2d 32 2e  |test-test-a11-2.|</span><br><span class="line">00001030  74 65 73 74 2e 73 7a 2e  68 70 63 3a 38 00 00 00  |test.sz.hpc:8...|</span><br><span class="line"></span><br><span class="line">ctime(lower 40bit are secs,high 24 bits are microsecs)</span><br><span class="line">                    |               raid1       0 means left asymmetric</span><br><span class="line">                    |                 |            |</span><br><span class="line">00001040  10 77 cc 5e 00 00 00 00  01 00 00 00 00 00 00 00  |.w.^............|a</span><br><span class="line"></span><br><span class="line">         size of component devices(<span class="keyword">in</span> <span class="comment"># of 512-byte sectors),echo $((16#37e02000))=937435136</span></span><br><span class="line">                     |             chucksize not used <span class="keyword">in</span> raid1,linear,multipath</span><br><span class="line">                     |                  |        raid disk(02 means low bit, only 2 x devs to mirror)</span><br><span class="line">00001050  00 20 e0 37 00 00 00 00  00 00 00 00 02 00 00 00  |. .7............|</span><br><span class="line"></span><br><span class="line">          of sectors after superblock that bitmap starts</span><br><span class="line">               |     </span><br><span class="line">00001060  08 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|</span><br><span class="line"></span><br><span class="line">Section: RAID-Reshape In-Process Metadata Storage/Recovery area 28 Bytes</span><br><span class="line">         he new RAID level being reshaped-to</span><br><span class="line">                           |       Next address of the array to reshape</span><br><span class="line">                                              |</span><br><span class="line">00001060              00 00 00 00  00 00 00 00 00 00 00 00  |................|</span><br><span class="line">     	change <span class="keyword">in</span> <span class="comment"># of raid disks</span></span><br><span class="line">               |   new layout <span class="keyword">for</span> array</span><br><span class="line">               |           |      New chunk size; padding block</span><br><span class="line">               |           |            |           |</span><br><span class="line">00001070  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Section: This-Component-Device Information area 64Bytes</span><br><span class="line"> the sector <span class="comment"># upon which data starts, sectors in the device that are used for data</span></span><br><span class="line">                     |                        |</span><br><span class="line">00001080  00 08 04 00 00 00 00 00  00 20 e0 37 00 00 00 00  |......... .7....|</span><br><span class="line">of the sector upon <span class="built_in">which</span> this superblock starts</span><br><span class="line">                     |              sectors before this offset (from data_offset) have been recovered</span><br><span class="line">00001090  08 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|</span><br><span class="line"></span><br><span class="line">           dev_number</span><br><span class="line">               |      Number of read-errors that were corrected by re-writing</span><br><span class="line">               |           |                uuid</span><br><span class="line">000010a0  00 00 00 00 00 00 00 00  07 a8 e4 bf b5 6f c7 d6  |.............o..|</span><br><span class="line">                   uuid           devflags  Padding block 2(1 bit)</span><br><span class="line">                    |              |  Padding block 2 (7 bit)</span><br><span class="line">000010b0  90 d1 9b 62 bf 89 <span class="built_in">cd</span> e7  00 00 08 00 10 00 00 00  |...b............|</span><br><span class="line"></span><br><span class="line">Section: Array-State Information area 64Btes</span><br><span class="line">Time of last superblock update    Event Count <span class="keyword">for</span> the Array</span><br><span class="line">                     |                        |</span><br><span class="line">000010c0  5a 73 d4 5e 00 00 00 00  e6 05 00 00 00 00 00 00  |Zs.^............|</span><br><span class="line"></span><br><span class="line">      Event Count <span class="keyword">for</span> the Array    sb_csum        max_dev 0x80=128</span><br><span class="line">                     |                  |           |</span><br><span class="line">000010d0  ff ff ff ff ff ff ff ff  cf 29 76 cf 80 00 00 00  |.........)v.....|</span><br><span class="line"></span><br><span class="line">&lt;----32Bytes------------zero---------padding-------------&gt;</span><br><span class="line">000010e0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|</span><br><span class="line">000010f0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|</span><br><span class="line"></span><br><span class="line">Section: Device-Roles (Positions-in-Array) area</span><br><span class="line">Length: Variable number of bytes (but at least 768 bytes?)</span><br><span class="line">2 Bytes per device <span class="keyword">in</span> the array, including both spare-devices and faulty-devices</span><br><span class="line">*</span><br><span class="line">00001100  00 00 01 00 ff ff ff ff  ff ff ff ff ff ff ff ff  |................|</span><br><span class="line">00001110  ff ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |................|</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">          of sectors after superblock that bitmap starts</span><br><span class="line">               |</span><br><span class="line">00001060  08 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|</span><br></pre></td></tr></table></figure>
+
+<p>In mdraid superblock, you could see bitmap starts at 8 x 512B&#x3D;4096<br>You could see “bitm” magic num start at 0x1000&#x3D;4096</p>
+<p>You could see the data update from 0x1200, so you could backup first 4608 Bytes in raid1<br>dd if&#x3D;&#x2F;dev&#x2F;sdb1 of&#x3D;sdb1_superblock bs&#x3D;1 count&#x3D;4608</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">00000000  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|</span><br><span class="line">*</span><br><span class="line">00001000  fc 4e 2b a9 01 00 00 00  01 00 00 00 00 00 00 00  |.N+.............|</span><br><span class="line">00001010  a3 00 8f 75 49 1d ee e6  38 e6 cb d0 e5 3b 8b d2  |...uI...8....;..|</span><br><span class="line">00001020  74 65 73 74 2d 74 65 73  74 2d 61 31 31 2d 32 2e  |test-test-a11-2.|</span><br><span class="line">00001030  74 65 73 74 2e 73 7a 2e  68 70 63 3a 30 00 00 00  |test.sz.hpc:0...|</span><br><span class="line">00001040  16 71 cc 5e 00 00 00 00  01 00 00 00 00 00 00 00  |.q.^............|</span><br><span class="line">00001050  00 00 49 ba 00 00 00 00  00 00 00 00 02 00 00 00  |..I.............|</span><br><span class="line">00001060  08 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|</span><br><span class="line">00001070  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|</span><br><span class="line">00001080  00 08 04 00 00 00 00 00  00 00 49 ba 00 00 00 00  |..........I.....|</span><br><span class="line">00001090  08 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|</span><br><span class="line">000010a0  00 00 00 00 00 00 00 00  d5 31 5f 6a c9 58 c2 a0  |.........1_j.X..|</span><br><span class="line">000010b0  55 50 81 dc 35 4b d1 e3  00 00 08 00 10 00 00 00  |UP..5K..........|</span><br><span class="line">000010c0  5a 99 d4 5e 00 00 00 00  0b 0d 00 00 00 00 00 00  |Z..^............|</span><br><span class="line">000010d0  ff ff ff ff ff ff ff ff  b5 64 59 a7 80 00 00 00  |.........dY.....|</span><br><span class="line">000010e0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|</span><br><span class="line">*</span><br><span class="line">00001100  00 00 01 00 ff ff ff ff  ff ff ff ff ff ff ff ff  |................|</span><br><span class="line">00001110  ff ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |................|</span><br><span class="line">*</span><br><span class="line">00001200  e8 0f a4 c4 ee 8d 1a 13  fd 81 a0 d0 6b ef c3 10  |............k...|</span><br><span class="line">00001210  3f 90 15 39 9d 95 0d 1d  07 32 03 df 28 16 cc 06  |?..9.....2..(...|</span><br><span class="line">00001220  40 e6 dc 82 43 13 36 1e  c8 9c 3b fd f9 00 e5 15  |@...C.6...;.....|</span><br><span class="line">00001230  99 73 43 71 81 a1 b7 19  73 ee 5b 74 8e 3b 65 09  |.sCq....s.[t.;e.|</span><br><span class="line">00001240  ce fd 51 d7 43 6d ca 07  b9 3f 03 7c ff 61 79 1f  |..Q.Cm...?.|.ay.|</span><br><span class="line">00001250  f7 e7 a3 4f 3e 6e be 16  fe fc f8 d5              |...O&gt;n......|</span><br></pre></td></tr></table></figure>
+
+<h3 id="mdadm-raid5-xor"><a href="#mdadm-raid5-xor" class="headerlink" title="mdadm raid5 xor"></a>mdadm raid5 xor</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">c means <span class="built_in">cksum</span>, i means input</span><br><span class="line">c[old]=i[old0] xor i[1] ...xor i[n]</span><br><span class="line">c[new]=i[new0] xor i[1]....xor i[n]</span><br><span class="line">1 xor 0=1  0 xor 0=0 means i xor 0=i</span><br><span class="line"> </span><br><span class="line">c[new]=i[new0] xor i[1]...xor i[n] xor 0</span><br><span class="line">0 = i[old0] xor i[old0]</span><br><span class="line">                                          ------------c[old]</span><br><span class="line">                                          |</span><br><span class="line">c[new]=i[new0] xor i[old0] xor (i[old0] xor i[1]...xor i[n])</span><br><span class="line">c[new]=i[new0] xor i[old0] xor c[old] </span><br></pre></td></tr></table></figure>
+<p>don’t need to read each block, in raid5 4k data, only 2 device could be read, more device means more iops<br>For reduce read amplification, it will compare the old data size (i[old0] &gt; i[2]+..i[n] or i[old0] &lt; i[2]+..i[n])<br>rmw:read-modified-write, i[old0] &lt; i[2]+..i[n], only read i[old0], just read i[old0] and the old parity c[old]<br>rcw:read-construct-write, i[old0] &gt; i[2]+..i[n], only read i[2]..i[n], just read i[2]..i[n] and the old parity c[old]   </p>
+<h3 id="issues"><a href="#issues" class="headerlink" title="issues"></a>issues</h3><h4 id="specifying-chunk-size-is-forbidden-for-this-level"><a href="#specifying-chunk-size-is-forbidden-for-this-level" class="headerlink" title="specifying chunk size is forbidden for this level"></a>specifying chunk size is forbidden for this level</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#upgrade</span></span><br><span class="line">No new issue found on mdadm-4.2-rc1_4.el8.</span><br></pre></td></tr></table></figure>
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#mdraid-check"><span class="toc-number">1.</span> <span class="toc-text">mdraid check</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#grub-boot-failed-because-replace-mdadm-root-device"><span class="toc-number">2.</span> <span class="toc-text">grub boot failed because replace mdadm root device</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#force-import"><span class="toc-number">3.</span> <span class="toc-text">force import</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#replace-bad-device"><span class="toc-number">4.</span> <span class="toc-text">replace bad device</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#scrub-mdraid"><span class="toc-number">5.</span> <span class="toc-text">scrub mdraid</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#About-linux-soft-raid5"><span class="toc-number">6.</span> <span class="toc-text">About linux soft raid5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#How-to-backup-mdraid-info-by-dd"><span class="toc-number">7.</span> <span class="toc-text">How to backup mdraid info by dd</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mdadm-raid5-xor"><span class="toc-number">8.</span> <span class="toc-text">mdadm raid5 xor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#issues"><span class="toc-number">9.</span> <span class="toc-text">issues</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#specifying-chunk-size-is-forbidden-for-this-level"><span class="toc-number">9.1.</span> <span class="toc-text">specifying chunk size is forbidden for this level</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2020/06/01/mdadm/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2020/06/01/mdadm/&text=The mdraid info"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2020/06/01/mdadm/&title=The mdraid info"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2020/06/01/mdadm/&is_video=false&description=The mdraid info"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=The mdraid info&body=Check out this article: http://example.com/2020/06/01/mdadm/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2020/06/01/mdadm/&title=The mdraid info"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2020/06/01/mdadm/&title=The mdraid info"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2020/06/01/mdadm/&title=The mdraid info"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2020/06/01/mdadm/&title=The mdraid info"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2020/06/01/mdadm/&name=The mdraid info&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2020/06/01/mdadm/&t=The mdraid info"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    John Doe
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = '67e8c052/67e8c052.github.io';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'blog-comments';
+      var utterances_theme = 'github-dark';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>
