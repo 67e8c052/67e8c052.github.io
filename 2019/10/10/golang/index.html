@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Corss compile1234567891011121314151617181920$ go tool dist list | grep linuxlinux&#x2F;386linux&#x2F;amd64linux&#x2F;armlinux&#x2F;arm64linux&#x2F;mipslinux&#x2F;mips64linux&#x2F;mips64lelinux&#x2F;mipslelinux&#x2F;ppc64linux&#x2F;ppc64lelinux&#x2F;riscv6">
+<meta property="og:type" content="article">
+<meta property="og:title" content="golang">
+<meta property="og:url" content="http://example.com/2019/10/10/golang/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Corss compile1234567891011121314151617181920$ go tool dist list | grep linuxlinux&#x2F;386linux&#x2F;amd64linux&#x2F;armlinux&#x2F;arm64linux&#x2F;mipslinux&#x2F;mips64linux&#x2F;mips64lelinux&#x2F;mipslelinux&#x2F;ppc64linux&#x2F;ppc64lelinux&#x2F;riscv6">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-10-10T15:38:16.000Z">
+<meta property="article:modified_time" content="2022-11-15T02:58:21.929Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="golang">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>golang</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2019/11/26/xfs/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2018/12/02/process/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2019/10/10/golang/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2019/10/10/golang/&text=golang"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2019/10/10/golang/&title=golang"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2019/10/10/golang/&is_video=false&description=golang"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=golang&body=Check out this article: http://example.com/2019/10/10/golang/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2019/10/10/golang/&title=golang"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2019/10/10/golang/&title=golang"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2019/10/10/golang/&title=golang"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2019/10/10/golang/&title=golang"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2019/10/10/golang/&name=golang&description=&lt;h3 id=&#34;Corss-compile&#34;&gt;&lt;a href=&#34;#Corss-compile&#34; class=&#34;headerlink&#34; title=&#34;Corss compile&#34;&gt;&lt;/a&gt;Corss compile&lt;/h3&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ go tool dist list | grep linux&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;linux/386&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;linux/amd64&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;linux/arm&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;linux/arm64&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;linux/mips&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;linux/mips64&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;linux/mips64le&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;linux/mipsle&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;linux/ppc64&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;linux/ppc64le&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;linux/riscv64&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;linux/s390x&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#!/usr/bin/bash&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;archs=(amd64 arm64 ppc64le ppc64 s390x)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;built_in&#34;&gt;arch&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;variable&#34;&gt;$&amp;#123;archs[@]&amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;do&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;built_in&#34;&gt;env&lt;/span&gt; GOOS=linux GOARCH=&lt;span class=&#34;variable&#34;&gt;$&amp;#123;arch&amp;#125;&lt;/span&gt; go build -o prepnode_&lt;span class=&#34;variable&#34;&gt;$&amp;#123;arch&amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;done&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h3 id=&#34;runtime-x2F-pprof-example&#34;&gt;&lt;a href=&#34;#runtime-x2F-pprof-example&#34; class=&#34;headerlink&#34; title=&#34;runtime&amp;#x2F;pprof example&#34;&gt;&lt;/a&gt;runtime&amp;#x2F;pprof example&lt;/h3&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2019/10/10/golang/&t=golang"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Corss-compile"><span class="toc-number">1.</span> <span class="toc-text">Corss compile</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#runtime-x2F-pprof-example"><span class="toc-number">2.</span> <span class="toc-text">runtime&#x2F;pprof example</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bitwise-operators-example"><span class="toc-number">3.</span> <span class="toc-text">bitwise operators example</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#string-to-reader"><span class="toc-number">4.</span> <span class="toc-text">string to reader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ouput-to-stdout"><span class="toc-number">5.</span> <span class="toc-text">Ouput to stdout</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        golang
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">John Doe</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-10-10T15:38:16.000Z" itemprop="datePublished">2019-10-10</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Scripts/">Scripts</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/golang/" rel="tag">golang</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="Corss-compile"><a href="#Corss-compile" class="headerlink" title="Corss compile"></a>Corss compile</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ go tool dist list | grep linux</span><br><span class="line">linux/386</span><br><span class="line">linux/amd64</span><br><span class="line">linux/arm</span><br><span class="line">linux/arm64</span><br><span class="line">linux/mips</span><br><span class="line">linux/mips64</span><br><span class="line">linux/mips64le</span><br><span class="line">linux/mipsle</span><br><span class="line">linux/ppc64</span><br><span class="line">linux/ppc64le</span><br><span class="line">linux/riscv64</span><br><span class="line">linux/s390x</span><br><span class="line"></span><br><span class="line"><span class="comment">#!/usr/bin/bash</span></span><br><span class="line">archs=(amd64 arm64 ppc64le ppc64 s390x)</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">arch</span> <span class="keyword">in</span> <span class="variable">$&#123;archs[@]&#125;</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">        <span class="built_in">env</span> GOOS=linux GOARCH=<span class="variable">$&#123;arch&#125;</span> go build -o prepnode_<span class="variable">$&#123;arch&#125;</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="runtime-x2F-pprof-example"><a href="#runtime-x2F-pprof-example" class="headerlink" title="runtime&#x2F;pprof example"></a>runtime&#x2F;pprof example</h3><span id="more"></span>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"><span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//pprof</span></span><br><span class="line"><span class="string">&quot;runtime/pprof&quot;</span></span><br><span class="line"><span class="comment">//end</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;runtime&quot;</span></span><br><span class="line"><span class="string">&quot;flag&quot;</span></span><br><span class="line"><span class="string">&quot;os&quot;</span></span><br><span class="line"><span class="string">&quot;log&quot;</span></span><br><span class="line"><span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">//pprof</span></span><br><span class="line"><span class="keyword">var</span> cpuprofile = flag.String(<span class="string">&quot;cpuprofile&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;write cpu profile to file.&quot;</span>)</span><br><span class="line"><span class="keyword">var</span> memprofile = flag.String(<span class="string">&quot;memprofile&quot;</span>,<span class="string">&quot;&quot;</span>,<span class="string">&quot;write memory profile to `file`&quot;</span>)</span><br><span class="line"><span class="comment">//end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Send the sequence 2, 3, 4, ... to channel &#x27;ch&#x27;.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Generate</span><span class="params">(ch <span class="keyword">chan</span>&lt;- <span class="type">int</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">2</span>; ;i++ &#123;</span><br><span class="line">          ch &lt;- i <span class="comment">// Send &#x27;i&#x27; to channel &#x27;ch&#x27;.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Copy the values from channel &#x27;in&#x27; to channel &#x27;out&#x27;,</span></span><br><span class="line"><span class="comment">// removing those divisible by &#x27;prime&#x27;.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Filter</span><span class="params">(in &lt;-<span class="keyword">chan</span> <span class="type">int</span>, out <span class="keyword">chan</span>&lt;- <span class="type">int</span>, prime <span class="type">int</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        i := &lt;-in <span class="comment">// Receive value from &#x27;in&#x27;.</span></span><br><span class="line">        <span class="keyword">if</span> i%prime != <span class="number">0</span> &#123;</span><br><span class="line">            out &lt;- i <span class="comment">// Send &#x27;i&#x27; to &#x27;out&#x27;.</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// The prime sieve: Daisy-chain Filter processes.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">//pprof</span></span><br><span class="line">    flag.Parse()</span><br><span class="line">    <span class="keyword">if</span> *cpuprofile != <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">         f,err := os.Create(*cpuprofile)</span><br><span class="line">         <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">             log.Fatal(err)</span><br><span class="line">         &#125;</span><br><span class="line">         pprof.StartCPUProfile(f)</span><br><span class="line">         <span class="keyword">defer</span> pprof.StopCPUProfile()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> *memprofile != <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">         f,err := os.Create(*memprofile)</span><br><span class="line">         <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">             log.Fatal(err)</span><br><span class="line">         &#125;</span><br><span class="line">         runtime.GC()</span><br><span class="line">         <span class="keyword">if</span> err := pprof.WriteHeapProfile(f); err != <span class="literal">nil</span> &#123;</span><br><span class="line">             log.Fatal(err)</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="comment">//f.Close()</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//end</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//ch := make(chan int, runtime.NumCPU()) // Create a new channel.</span></span><br><span class="line">    ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>, <span class="number">128</span>) <span class="comment">// Create a new channel.</span></span><br><span class="line">    <span class="keyword">go</span> Generate(ch)      <span class="comment">// Launch Generate goroutine.</span></span><br><span class="line">    now := time.Now()</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">200000</span>; i++ &#123;</span><br><span class="line">          prime := &lt;-ch</span><br><span class="line">          <span class="keyword">if</span> (i!=<span class="number">0</span> &amp;&amp; i%<span class="number">1000</span>==<span class="number">0</span>) &#123;</span><br><span class="line">            fmt.Println(i)</span><br><span class="line">            fmt.Println(<span class="string">&quot;time consuming:&quot;</span>, time.Since(now))</span><br><span class="line">            now = time.Now()</span><br><span class="line">          &#125;</span><br><span class="line">          ch1 := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>, <span class="number">128</span>)</span><br><span class="line">          <span class="keyword">go</span> Filter(ch, ch1, prime)</span><br><span class="line">          ch = ch1</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">$ go build prime.go</span><br><span class="line">$ ./prime -cpuprofile cpu.prof -memprofile mem.prof</span><br><span class="line">$ go tool pprof prime ./cpu.prof</span><br><span class="line">File: prime</span><br><span class="line">Type: cpu</span><br><span class="line">Time: Oct 10, 2019 at 11:46pm (HKT)</span><br><span class="line">Duration: 5.09mins, Total samples = 49.93mins (980.06%)</span><br><span class="line">Entering interactive mode (type &quot;help&quot; for commands, &quot;o&quot; for options)</span><br><span class="line">(pprof) top</span><br><span class="line">Showing nodes accounting for 46.37mins, 92.87% of 49.93mins total</span><br><span class="line">Dropped 97 nodes (cum &lt;= 0.25mins)</span><br><span class="line">Showing top 10 nodes out of 17</span><br><span class="line">      flat  flat%   sum%        cum   cum%</span><br><span class="line"> 10.78mins 21.59% 21.59%  10.79mins 21.61%  runtime.lock</span><br><span class="line"> 10.64mins 21.31% 42.90%  10.64mins 21.31%  runtime.unlock</span><br><span class="line">  5.78mins 11.58% 54.48%  49.41mins 98.96%  main.Filter</span><br><span class="line">  5.28mins 10.58% 65.06%  22.28mins 44.63%  runtime.chanrecv</span><br><span class="line">  4.19mins  8.38% 73.44%  19.19mins 38.43%  runtime.chansend</span><br><span class="line">  3.03mins  6.06% 79.50%   5.33mins 10.68%  runtime.typedmemmove</span><br><span class="line">  2.31mins  4.62% 84.12%   2.31mins  4.62%  runtime.memmove</span><br><span class="line">  1.70mins  3.40% 87.52%   2.86mins  5.72%  runtime.typedmemclr</span><br><span class="line">  1.46mins  2.92% 90.45%   1.46mins  2.92%  runtime.(*waitq).dequeue</span><br><span class="line">  1.21mins  2.42% 92.87%  20.40mins 40.85%  runtime.chansend1</span><br><span class="line"></span><br><span class="line">$ (pprof) web</span><br><span class="line">failed to execute dot. Is Graphviz installed? Error: exec: &quot;dot&quot;: executable file not found in $PATH</span><br><span class="line"></span><br><span class="line">$ go tool pprof -http=:8080 cpu.prof</span><br><span class="line">Failed to execute dot. Is Graphviz installed?</span><br><span class="line">exec: &quot;dot&quot;: executable file not found in $PATH</span><br><span class="line"></span><br><span class="line">$ yum -y install graphviz graphviz-devel</span><br></pre></td></tr></table></figure>
+
+<h3 id="bitwise-operators-example"><a href="#bitwise-operators-example" class="headerlink" title="bitwise operators example"></a>bitwise operators example</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// Use bitwise OR | to get the bits that are in 1 OR 2</span></span><br><span class="line">    <span class="comment">// 1     = 00000001</span></span><br><span class="line">    <span class="comment">// 2     = 00000010</span></span><br><span class="line">    <span class="comment">// 1 | 2 = 00000011 = 3</span></span><br><span class="line">    fmt.Println(<span class="number">1</span> | <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Use bitwise OR | to get the bits that are in 1 OR 5</span></span><br><span class="line">    <span class="comment">// 1     = 00000001</span></span><br><span class="line">    <span class="comment">// 5     = 00000101</span></span><br><span class="line">    <span class="comment">// 1 | 5 = 00000101 = 5</span></span><br><span class="line">    fmt.Println(<span class="number">1</span> | <span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Use bitwise XOR ^ to get the bits that are in 3 OR 6 BUT NOT BOTH</span></span><br><span class="line">    <span class="comment">// 3     = 00000011</span></span><br><span class="line">    <span class="comment">// 6     = 00000110</span></span><br><span class="line">    <span class="comment">// 3 ^ 6 = 00000101 = 5</span></span><br><span class="line">    fmt.Println(<span class="number">3</span> ^ <span class="number">6</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Use bitwise AND &amp; to get the bits that are in 3 AND 6</span></span><br><span class="line">    <span class="comment">// 3     = 00000011</span></span><br><span class="line">    <span class="comment">// 6     = 00000110</span></span><br><span class="line">    <span class="comment">// 3 &amp; 6 = 00000010 = 2</span></span><br><span class="line">    fmt.Println(<span class="number">3</span> &amp; <span class="number">6</span>)  </span><br><span class="line"></span><br><span class="line">    <span class="comment">// Use bit clear AND NOT &amp;^ to get the bits that are in 3 AND NOT 6 (order matters)</span></span><br><span class="line">    <span class="comment">// 26     = 00011010</span></span><br><span class="line">    <span class="comment">// 6      = 00000110</span></span><br><span class="line">    <span class="comment">// turn          11111001</span></span><br><span class="line">    <span class="comment">// 3 &amp;^ 6 = 00011000 = 1</span></span><br><span class="line">    fmt.Println(<span class="number">26</span> &amp;^ <span class="number">6</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 5  00000101</span></span><br><span class="line"><span class="comment">//-5  11111010+1=1111011 (two&#x27;s complement of 5, the value was -5)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 6  00000110</span></span><br><span class="line"><span class="comment">//-6  11111001+1=11111010</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 5  00000101</span></span><br><span class="line"><span class="comment">//-6  11111010 (one&#x27;s complement of 5, the value was -6)</span></span><br><span class="line"></span><br><span class="line">     fmt.Println(^<span class="number">5</span>) </span><br><span class="line"></span><br><span class="line">     a := <span class="number">1</span></span><br><span class="line">     a |= <span class="number">1</span> &lt;&lt; <span class="number">2</span> </span><br><span class="line">     <span class="comment">// 0000100 | 00000001 = 0000101 =5 </span></span><br><span class="line">     </span><br><span class="line">     fmt.Println(a)</span><br><span class="line">     a |= <span class="number">1</span> &lt;&lt; <span class="number">6</span> </span><br><span class="line">     <span class="comment">// 0000101 | 0100000 = 0100101 =69</span></span><br><span class="line">     </span><br><span class="line">     fmt.Println(a)</span><br><span class="line">     fmt.Println(<span class="number">1</span>&lt;&lt;<span class="number">6</span>) </span><br><span class="line">     <span class="comment">//0000001 &lt;&lt;6 = 1000000 = 64</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">24</span></span><br><span class="line"><span class="number">-6</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">69</span></span><br><span class="line"><span class="number">64</span></span><br></pre></td></tr></table></figure>
+
+<p>###Reader to string</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">buf := <span class="built_in">new</span>(bytes.Buffer)</span><br><span class="line">buf.ReadFrom(yourReader)</span><br><span class="line">s := buf.String() <span class="comment">// Does a complete copy of the bytes in the buffer.</span></span><br><span class="line"></span><br><span class="line">buf := <span class="built_in">new</span>(bytes.Buffer)</span><br><span class="line">buf.ReadFrom(yourReader)</span><br><span class="line">b := buf.Bytes()</span><br><span class="line">s := *(*<span class="type">string</span>)(unsafe.Pointer(&amp;b))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> b, err := ioutil.ReadAll(rc); err == <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="type">string</span>(b)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">or gzip the buffer</span><br><span class="line">   raw := bytes.NewBuffer(data)</span><br><span class="line">   unz, err := gzip.NewReader(raw)</span><br><span class="line">   buf, err := ioutil.ReadAll(unz)</span><br><span class="line">   <span class="keyword">return</span> json.Unmarshal(buf, &amp;v)</span><br></pre></td></tr></table></figure>
+
+<h3 id="string-to-reader"><a href="#string-to-reader" class="headerlink" title="string to reader"></a>string to reader</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">	r:=strings.NewReader(<span class="string">&quot;(1,2,34,55,666)&quot;</span>)</span><br><span class="line">	<span class="keyword">var</span> d [<span class="number">5</span>]<span class="type">int</span></span><br><span class="line">	fmt.Fscanf(r,<span class="string">&quot;(%d,%d,%d,%d,%d)&quot;</span>,&amp;d[<span class="number">0</span>],&amp;d[<span class="number">1</span>],&amp;d[<span class="number">2</span>],&amp;d[<span class="number">3</span>],&amp;d[<span class="number">4</span>])</span><br><span class="line">	fmt.Println(d)</span><br><span class="line">or </span><br><span class="line"></span><br><span class="line">	buf := bytes.NewBufferString(<span class="string">&quot;R29waGVycyBydWxlIQ==&quot;</span>)</span><br><span class="line">	dec := base64.NewDecoder(base64.StdEncoding, buf)</span><br><span class="line">	io.Copy(os.Stdout, dec)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Ouput-to-stdout"><a href="#Ouput-to-stdout" class="headerlink" title="Ouput to stdout"></a>Ouput to stdout</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">reader := bufio.NewReader(os.Stdin)</span><br><span class="line">fmt.Print(<span class="string">&quot;What is your name:&quot;</span>)</span><br><span class="line">data, _, _ := reader.ReadLine()</span><br><span class="line">fmt.Printf(<span class="string">&quot;Your name is %s.\r\n&quot;</span>, data)</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/9644139/from-io-reader-to-string-in-go">reference1</a><br><a target="_blank" rel="noopener" href="https://www.datadoghq.com/blog/crossing-streams-love-letter-gos-io-reader/">reference2</a></p>
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Corss-compile"><span class="toc-number">1.</span> <span class="toc-text">Corss compile</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#runtime-x2F-pprof-example"><span class="toc-number">2.</span> <span class="toc-text">runtime&#x2F;pprof example</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bitwise-operators-example"><span class="toc-number">3.</span> <span class="toc-text">bitwise operators example</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#string-to-reader"><span class="toc-number">4.</span> <span class="toc-text">string to reader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ouput-to-stdout"><span class="toc-number">5.</span> <span class="toc-text">Ouput to stdout</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2019/10/10/golang/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2019/10/10/golang/&text=golang"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2019/10/10/golang/&title=golang"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2019/10/10/golang/&is_video=false&description=golang"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=golang&body=Check out this article: http://example.com/2019/10/10/golang/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2019/10/10/golang/&title=golang"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2019/10/10/golang/&title=golang"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2019/10/10/golang/&title=golang"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2019/10/10/golang/&title=golang"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2019/10/10/golang/&name=golang&description=&lt;h3 id=&#34;Corss-compile&#34;&gt;&lt;a href=&#34;#Corss-compile&#34; class=&#34;headerlink&#34; title=&#34;Corss compile&#34;&gt;&lt;/a&gt;Corss compile&lt;/h3&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ go tool dist list | grep linux&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;linux/386&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;linux/amd64&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;linux/arm&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;linux/arm64&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;linux/mips&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;linux/mips64&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;linux/mips64le&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;linux/mipsle&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;linux/ppc64&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;linux/ppc64le&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;linux/riscv64&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;linux/s390x&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#!/usr/bin/bash&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;archs=(amd64 arm64 ppc64le ppc64 s390x)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;built_in&#34;&gt;arch&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;variable&#34;&gt;$&amp;#123;archs[@]&amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;do&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;built_in&#34;&gt;env&lt;/span&gt; GOOS=linux GOARCH=&lt;span class=&#34;variable&#34;&gt;$&amp;#123;arch&amp;#125;&lt;/span&gt; go build -o prepnode_&lt;span class=&#34;variable&#34;&gt;$&amp;#123;arch&amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;done&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h3 id=&#34;runtime-x2F-pprof-example&#34;&gt;&lt;a href=&#34;#runtime-x2F-pprof-example&#34; class=&#34;headerlink&#34; title=&#34;runtime&amp;#x2F;pprof example&#34;&gt;&lt;/a&gt;runtime&amp;#x2F;pprof example&lt;/h3&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2019/10/10/golang/&t=golang"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    John Doe
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = '67e8c052/67e8c052.github.io';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'blog-comments';
+      var utterances_theme = 'github-dark';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>
