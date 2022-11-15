@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Linux system calls&#x2F;usr&#x2F;include&#x2F;asm-generic&#x2F;errno.h&#x2F;usr&#x2F;include&#x2F;asm-generic&#x2F;errno-base.h&#x2F;usr&#x2F;include&#x2F;linux&#x2F;syscalls.h 123#include &lt;sys&#x2F;typ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux system calls">
+<meta property="og:url" content="http://example.com/2017/11/21/linux_calls/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Linux system calls&#x2F;usr&#x2F;include&#x2F;asm-generic&#x2F;errno.h&#x2F;usr&#x2F;include&#x2F;asm-generic&#x2F;errno-base.h&#x2F;usr&#x2F;include&#x2F;linux&#x2F;syscalls.h 123#include &lt;sys&#x2F;typ">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-11-21T06:03:54.000Z">
+<meta property="article:modified_time" content="2022-11-15T01:49:02.418Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="syscall">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Linux system calls</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2018/04/12/ansible/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2016/09/04/kcptun/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2017/11/21/linux_calls/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2017/11/21/linux_calls/&text=Linux system calls"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2017/11/21/linux_calls/&title=Linux system calls"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2017/11/21/linux_calls/&is_video=false&description=Linux system calls"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Linux system calls&body=Check out this article: http://example.com/2017/11/21/linux_calls/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2017/11/21/linux_calls/&title=Linux system calls"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2017/11/21/linux_calls/&title=Linux system calls"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2017/11/21/linux_calls/&title=Linux system calls"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2017/11/21/linux_calls/&title=Linux system calls"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2017/11/21/linux_calls/&name=Linux system calls&description=&lt;h3 id=&#34;Linux-system-calls&#34;&gt;&lt;a href=&#34;#Linux-system-calls&#34; class=&#34;headerlink&#34; title=&#34;Linux system calls&#34;&gt;&lt;/a&gt;Linux system calls&lt;/h3&gt;&lt;p&gt;&amp;#x2F;usr&amp;#x2F;include&amp;#x2F;asm-generic&amp;#x2F;errno.h&lt;br&gt;&amp;#x2F;usr&amp;#x2F;include&amp;#x2F;asm-generic&amp;#x2F;errno-base.h&lt;br&gt;&amp;#x2F;usr&amp;#x2F;include&amp;#x2F;linux&amp;#x2F;syscalls.h&lt;/p&gt;
+&lt;figure class=&#34;highlight c&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;lt;sys/types.h&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;lt;sys/stat.h&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;lt;errno.h&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+
+
+&lt;h4 id=&#34;Get-these-names-from-syscalls-h&#34;&gt;&lt;a href=&#34;#Get-these-names-from-syscalls-h&#34; class=&#34;headerlink&#34; title=&#34;Get these names from syscalls.h&#34;&gt;&lt;/a&gt;Get these names from &lt;a href=&#34;https://github.com/torvalds/linux/blob/master/include/linux/syscalls.h&#34;&gt;syscalls.h&lt;/a&gt;&lt;/h4&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2017/11/21/linux_calls/&t=Linux system calls"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux-system-calls"><span class="toc-number">1.</span> <span class="toc-text">Linux system calls</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Get-these-names-from-syscalls-h"><span class="toc-number">1.1.</span> <span class="toc-text">Get these names from syscalls.h</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#getaddrinfo"><span class="toc-number">1.1.1.</span> <span class="toc-text">getaddrinfo</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux-error"><span class="toc-number">1.2.</span> <span class="toc-text">Linux error</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IO"><span class="toc-number">2.</span> <span class="toc-text">IO</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#context"><span class="toc-number">3.</span> <span class="toc-text">context</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MDS-is-waitting-OSS"><span class="toc-number">4.</span> <span class="toc-text">MDS is waitting OSS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#page-fault"><span class="toc-number">5.</span> <span class="toc-text">page fault</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Linux system calls
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">John Doe</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-11-21T06:03:54.000Z" itemprop="datePublished">2017-11-21</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/OS/">OS</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/syscall/" rel="tag">syscall</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="Linux-system-calls"><a href="#Linux-system-calls" class="headerlink" title="Linux system calls"></a>Linux system calls</h3><p>&#x2F;usr&#x2F;include&#x2F;asm-generic&#x2F;errno.h<br>&#x2F;usr&#x2F;include&#x2F;asm-generic&#x2F;errno-base.h<br>&#x2F;usr&#x2F;include&#x2F;linux&#x2F;syscalls.h</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;errno.h&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Get-these-names-from-syscalls-h"><a href="#Get-these-names-from-syscalls-h" class="headerlink" title="Get these names from syscalls.h"></a>Get these names from <a target="_blank" rel="noopener" href="https://github.com/torvalds/linux/blob/master/include/linux/syscalls.h">syscalls.h</a></h4><span id="more"></span>
+
+<h5 id="getaddrinfo"><a href="#getaddrinfo" class="headerlink" title="getaddrinfo"></a>getaddrinfo</h5><p>The getaddrinfo() and getnameinfo() functions are part of the POSIX standard application programming interface (API) for converting domain name system (DNS) hostnames and IP addresses between their human-readable text representations and structured binary formats for the operating system’s networking API.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"># /usr/src/debug/glibc-2.17-c758a686/sysdeps/posix/getaddrinfo.c</span><br><span class="line"></span><br><span class="line">getaddrinfo (const char *name, const char *service,</span><br><span class="line">             const struct addrinfo *hints, struct addrinfo **pai)</span><br><span class="line">&#123;</span><br><span class="line">  int i = 0, last_i = 0;</span><br><span class="line">  int nresults = 0;</span><br><span class="line">  struct addrinfo *p = NULL;</span><br><span class="line">  struct gaih_service gaih_service, *pservice;</span><br><span class="line">  struct addrinfo local_hints;</span><br><span class="line"></span><br><span class="line">  if (name != NULL &amp;&amp; name[0] == &#x27;*&#x27; &amp;&amp; name[1] == 0)</span><br><span class="line">    name = NULL;</span><br><span class="line"></span><br><span class="line">  if (service != NULL &amp;&amp; service[0] == &#x27;*&#x27; &amp;&amp; service[1] == 0)</span><br><span class="line">    service = NULL;</span><br><span class="line"></span><br><span class="line">  if (name == NULL &amp;&amp; service == NULL)</span><br><span class="line"></span><br><span class="line">......</span><br><span class="line">int getaddrinfo(const char *node,</span><br><span class="line">                const char *service,</span><br><span class="line">                const struct addrinfo *hints,</span><br><span class="line">                struct addrinfo **res);</span><br></pre></td></tr></table></figure>
+
+<h4 id="Linux-error"><a href="#Linux-error" class="headerlink" title="Linux error"></a>Linux error</h4><p>&#x2F;usr&#x2F;include&#x2F;asm-generic&#x2F;errno.h</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#ifndef _ASM_GENERIC_ERRNO_H</span></span><br><span class="line"><span class="comment">#define _ASM_GENERIC_ERRNO_H</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#include &lt;asm-generic/errno-base.h&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#define	EDEADLK		35	/* Resource deadlock would occur */</span></span><br><span class="line"><span class="comment">#define	ENAMETOOLONG	36	/* File name too long */</span></span><br><span class="line"><span class="comment">#define	ENOLCK		37	/* No record locks available */</span></span><br><span class="line"><span class="comment">#define	ENOSYS		38	/* Function not implemented */</span></span><br><span class="line"><span class="comment">#define	ENOTEMPTY	39	/* Directory not empty */</span></span><br><span class="line"><span class="comment">#define	ELOOP		40	/* Too many symbolic links encountered */</span></span><br><span class="line"><span class="comment">#define	EWOULDBLOCK	EAGAIN	/* Operation would block */</span></span><br><span class="line"><span class="comment">#define	ENOMSG		42	/* No message of desired type */</span></span><br><span class="line"><span class="comment">#define	EIDRM		43	/* Identifier removed */</span></span><br><span class="line"><span class="comment">#define	ECHRNG		44	/* Channel number out of range */</span></span><br><span class="line"><span class="comment">#define	EL2NSYNC	45	/* Level 2 not synchronized */</span></span><br><span class="line"><span class="comment">#define	EL3HLT		46	/* Level 3 halted */</span></span><br><span class="line"><span class="comment">#define	EL3RST		47	/* Level 3 reset */</span></span><br><span class="line"><span class="comment">#define	ELNRNG		48	/* Link number out of range */</span></span><br><span class="line"><span class="comment">#define	EUNATCH		49	/* Protocol driver not attached */</span></span><br><span class="line"><span class="comment">#define	ENOCSI		50	/* No CSI structure available */</span></span><br><span class="line"><span class="comment">#define	EL2HLT		51	/* Level 2 halted */</span></span><br><span class="line"><span class="comment">#define	EBADE		52	/* Invalid exchange */</span></span><br><span class="line"><span class="comment">#define	EBADR		53	/* Invalid request descriptor */</span></span><br><span class="line"><span class="comment">#define	EXFULL		54	/* Exchange full */</span></span><br><span class="line"><span class="comment">#define	ENOANO		55	/* No anode */</span></span><br><span class="line"><span class="comment">#define	EBADRQC		56	/* Invalid request code */</span></span><br><span class="line"><span class="comment">#define	EBADSLT		57	/* Invalid slot */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#define	EDEADLOCK	EDEADLK</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#define	EBFONT		59	/* Bad font file format */</span></span><br><span class="line"><span class="comment">#define	ENOSTR		60	/* Device not a stream */</span></span><br><span class="line"><span class="comment">#define	ENODATA		61	/* No data available */</span></span><br><span class="line"><span class="comment">#define	ETIME		62	/* Timer expired */</span></span><br><span class="line"><span class="comment">#define	ENOSR		63	/* Out of streams resources */</span></span><br><span class="line"><span class="comment">#define	ENONET		64	/* Machine is not on the network */</span></span><br><span class="line"><span class="comment">#define	ENOPKG		65	/* Package not installed */</span></span><br><span class="line"><span class="comment">#define	EREMOTE		66	/* Object is remote */</span></span><br><span class="line"><span class="comment">#define	ENOLINK		67	/* Link has been severed */</span></span><br><span class="line"><span class="comment">#define	EADV		68	/* Advertise error */</span></span><br><span class="line"><span class="comment">#define	ESRMNT		69	/* Srmount error */</span></span><br><span class="line"><span class="comment">#define	ECOMM		70	/* Communication error on send */</span></span><br><span class="line"><span class="comment">#define	EPROTO		71	/* Protocol error */</span></span><br><span class="line"><span class="comment">#define	EMULTIHOP	72	/* Multihop attempted */</span></span><br><span class="line"><span class="comment">#define	EDOTDOT		73	/* RFS specific error */</span></span><br><span class="line"><span class="comment">#define	EBADMSG		74	/* Not a data message */</span></span><br><span class="line"><span class="comment">#define	EOVERFLOW	75	/* Value too large for defined data type */</span></span><br><span class="line"><span class="comment">#define	ENOTUNIQ	76	/* Name not unique on network */</span></span><br><span class="line"><span class="comment">#define	EBADFD		77	/* File descriptor in bad state */</span></span><br><span class="line"><span class="comment">#define	EREMCHG		78	/* Remote address changed */</span></span><br><span class="line"><span class="comment">#define	ELIBACC		79	/* Can not access a needed shared library */</span></span><br><span class="line"><span class="comment">#define	ELIBBAD		80	/* Accessing a corrupted shared library */</span></span><br><span class="line"><span class="comment">#define	ELIBSCN		81	/* .lib section in a.out corrupted */</span></span><br><span class="line"><span class="comment">#define	ELIBMAX		82	/* Attempting to link in too many shared libraries */</span></span><br><span class="line"><span class="comment">#define	ELIBEXEC	83	/* Cannot exec a shared library directly */</span></span><br><span class="line"><span class="comment">#define	EILSEQ		84	/* Illegal byte sequence */</span></span><br><span class="line"><span class="comment">#define	ERESTART	85	/* Interrupted system call should be restarted */</span></span><br><span class="line"><span class="comment">#define	ESTRPIPE	86	/* Streams pipe error */</span></span><br><span class="line"><span class="comment">#define	EUSERS		87	/* Too many users */</span></span><br><span class="line"><span class="comment">#define	ENOTSOCK	88	/* Socket operation on non-socket */</span></span><br><span class="line"><span class="comment">#define	EDESTADDRREQ	89	/* Destination address required */</span></span><br><span class="line"><span class="comment">#define	EMSGSIZE	90	/* Message too long */</span></span><br><span class="line"><span class="comment">#define	EPROTOTYPE	91	/* Protocol wrong type for socket */</span></span><br><span class="line"><span class="comment">#define	ENOPROTOOPT	92	/* Protocol not available */</span></span><br><span class="line"><span class="comment">#define	EPROTONOSUPPORT	93	/* Protocol not supported */</span></span><br><span class="line"><span class="comment">#define	ESOCKTNOSUPPORT	94	/* Socket type not supported */</span></span><br><span class="line"><span class="comment">#define	EOPNOTSUPP	95	/* Operation not supported on transport endpoint */</span></span><br><span class="line"><span class="comment">#define	EPFNOSUPPORT	96	/* Protocol family not supported */</span></span><br><span class="line"><span class="comment">#define	EAFNOSUPPORT	97	/* Address family not supported by protocol */</span></span><br><span class="line"><span class="comment">#define	EADDRINUSE	98	/* Address already in use */</span></span><br><span class="line"><span class="comment">#define	EADDRNOTAVAIL	99	/* Cannot assign requested address */</span></span><br><span class="line"><span class="comment">#define	ENETDOWN	100	/* Network is down */</span></span><br><span class="line"><span class="comment">#define	ENETUNREACH	101	/* Network is unreachable */</span></span><br><span class="line"><span class="comment">#define	ENETRESET	102	/* Network dropped connection because of reset */</span></span><br><span class="line"><span class="comment">#define	ECONNABORTED	103	/* Software caused connection abort */</span></span><br><span class="line"><span class="comment">#define	ECONNRESET	104	/* Connection reset by peer */</span></span><br><span class="line"><span class="comment">#define	ENOBUFS		105	/* No buffer space available */</span></span><br><span class="line"><span class="comment">#define	EISCONN		106	/* Transport endpoint is already connected */</span></span><br><span class="line"><span class="comment">#define	ENOTCONN	107	/* Transport endpoint is not connected */</span></span><br><span class="line"><span class="comment">#define	ESHUTDOWN	108	/* Cannot send after transport endpoint shutdown */</span></span><br><span class="line"><span class="comment">#define	ETOOMANYREFS	109	/* Too many references: cannot splice */</span></span><br><span class="line"><span class="comment">#define	ETIMEDOUT	110	/* Connection timed out */</span></span><br><span class="line"><span class="comment">#define	ECONNREFUSED	111	/* Connection refused */</span></span><br><span class="line"><span class="comment">#define	EHOSTDOWN	112	/* Host is down */</span></span><br><span class="line"><span class="comment">#define	EHOSTUNREACH	113	/* No route to host */</span></span><br><span class="line"><span class="comment">#define	EALREADY	114	/* Operation already in progress */</span></span><br><span class="line"><span class="comment">#define	EINPROGRESS	115	/* Operation now in progress */</span></span><br><span class="line"><span class="comment">#define	ESTALE		116	/* Stale file handle */</span></span><br><span class="line"><span class="comment">#define	EUCLEAN		117	/* Structure needs cleaning */</span></span><br><span class="line"><span class="comment">#define	ENOTNAM		118	/* Not a XENIX named type file */</span></span><br><span class="line"><span class="comment">#define	ENAVAIL		119	/* No XENIX semaphores available */</span></span><br><span class="line"><span class="comment">#define	EISNAM		120	/* Is a named type file */</span></span><br><span class="line"><span class="comment">#define	EREMOTEIO	121	/* Remote I/O error */</span></span><br><span class="line"><span class="comment">#define	EDQUOT		122	/* Quota exceeded */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#define	ENOMEDIUM	123	/* No medium found */</span></span><br><span class="line"><span class="comment">#define	EMEDIUMTYPE	124	/* Wrong medium type */</span></span><br><span class="line"><span class="comment">#define	ECANCELED	125	/* Operation Canceled */</span></span><br><span class="line"><span class="comment">#define	ENOKEY		126	/* Required key not available */</span></span><br><span class="line"><span class="comment">#define	EKEYEXPIRED	127	/* Key has expired */</span></span><br><span class="line"><span class="comment">#define	EKEYREVOKED	128	/* Key has been revoked */</span></span><br><span class="line"><span class="comment">#define	EKEYREJECTED	129	/* Key was rejected by service */</span></span><br><span class="line"></span><br><span class="line">/* <span class="keyword">for</span> robust mutexes */</span><br><span class="line"><span class="comment">#define	EOWNERDEAD	130	/* Owner died */</span></span><br><span class="line"><span class="comment">#define	ENOTRECOVERABLE	131	/* State not recoverable */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#define ERFKILL		132	/* Operation not possible due to RF-kill */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#define EHWPOISON	133	/* Memory page has hardware error */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#endif</span></span><br></pre></td></tr></table></figure>
+
+<p>&#x2F;usr&#x2F;include&#x2F;asm-generic&#x2F;errno-base.h</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#ifndef _ASM_GENERIC_ERRNO_BASE_H</span></span><br><span class="line"><span class="comment">#define _ASM_GENERIC_ERRNO_BASE_H</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#define	EPERM		 1	/* Operation not permitted */</span></span><br><span class="line"><span class="comment">#define	ENOENT		 2	/* No such file or directory */</span></span><br><span class="line"><span class="comment">#define	ESRCH		 3	/* No such process */</span></span><br><span class="line"><span class="comment">#define	EINTR		 4	/* Interrupted system call */</span></span><br><span class="line"><span class="comment">#define	EIO		 5	/* I/O error */</span></span><br><span class="line"><span class="comment">#define	ENXIO		 6	/* No such device or address */</span></span><br><span class="line"><span class="comment">#define	E2BIG		 7	/* Argument list too long */</span></span><br><span class="line"><span class="comment">#define	ENOEXEC		 8	/* Exec format error */</span></span><br><span class="line"><span class="comment">#define	EBADF		 9	/* Bad file number */</span></span><br><span class="line"><span class="comment">#define	ECHILD		10	/* No child processes */</span></span><br><span class="line"><span class="comment">#define	EAGAIN		11	/* Try again */</span></span><br><span class="line"><span class="comment">#define	ENOMEM		12	/* Out of memory */</span></span><br><span class="line"><span class="comment">#define	EACCES		13	/* Permission denied */</span></span><br><span class="line"><span class="comment">#define	EFAULT		14	/* Bad address */</span></span><br><span class="line"><span class="comment">#define	ENOTBLK		15	/* Block device required */</span></span><br><span class="line"><span class="comment">#define	EBUSY		16	/* Device or resource busy */</span></span><br><span class="line"><span class="comment">#define	EEXIST		17	/* File exists */</span></span><br><span class="line"><span class="comment">#define	EXDEV		18	/* Cross-device link */</span></span><br><span class="line"><span class="comment">#define	ENODEV		19	/* No such device */</span></span><br><span class="line"><span class="comment">#define	ENOTDIR		20	/* Not a directory */</span></span><br><span class="line"><span class="comment">#define	EISDIR		21	/* Is a directory */</span></span><br><span class="line"><span class="comment">#define	EINVAL		22	/* Invalid argument */</span></span><br><span class="line"><span class="comment">#define	ENFILE		23	/* File table overflow */</span></span><br><span class="line"><span class="comment">#define	EMFILE		24	/* Too many open files */</span></span><br><span class="line"><span class="comment">#define	ENOTTY		25	/* Not a typewriter */</span></span><br><span class="line"><span class="comment">#define	ETXTBSY		26	/* Text file busy */</span></span><br><span class="line"><span class="comment">#define	EFBIG		27	/* File too large */</span></span><br><span class="line"><span class="comment">#define	ENOSPC		28	/* No space left on device */</span></span><br><span class="line"><span class="comment">#define	ESPIPE		29	/* Illegal seek */</span></span><br><span class="line"><span class="comment">#define	EROFS		30	/* Read-only file system */</span></span><br><span class="line"><span class="comment">#define	EMLINK		31	/* Too many links */</span></span><br><span class="line"><span class="comment">#define	EPIPE		32	/* Broken pipe */</span></span><br><span class="line"><span class="comment">#define	EDOM		33	/* Math argument out of domain of func */</span></span><br><span class="line"><span class="comment">#define	ERANGE		34	/* Math result not representable */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#endif</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="IO"><a href="#IO" class="headerlink" title="IO"></a><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/44608189">IO</a></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">fsync(int fd)(位于fs/sync.c中)</span><br><span class="line">    ---&gt;do_fsync(fd, 0)（位于fs/sync.c中）</span><br><span class="line">        ---&gt;vfs_fsync(file, datasync)（位于fs/sync.c中）</span><br><span class="line">            ---&gt;vfs_fsync_range(file, 0, LLONG_MAX, datasync)（位于fs/sync.c中）</span><br><span class="line">                ---&gt;filemap_write_and_wait_range(mapping,start, end)（位于mm/filemap.c中）</span><br><span class="line">                    ---&gt;__filemap_fdatawrite_range(mapping,lstart, lend,WB_SYNC_ALL)（位于mm/filemap.c中）</span><br><span class="line">                        ---&gt;filemap_fdatawait_range(mapping,lstart,lend)（位于mm/filemap.c中）</span><br><span class="line">                            ---&gt;ext2_fsync(struct file*file, int datasync)（针对ext2文件系统，位于fs/ext2/file.c）</span><br><span class="line">                                ---&gt;generic_file_fsync(file, datasync)（位于fs/libfs.c中）</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (dirty &amp; (I_DIRTY_SYNC |I_DIRTY_DATASYNC))</span><br><span class="line">I_DIRTY_SYNC：代表inode被弄脏，但这种弄脏并不是由文件数据被修改而导致的，典型的如文件的访问时间被修改，此时文件数据没有被修改；</span><br><span class="line">I_DIRTY_DATASYNC：表示由于文件数据被修改而导致文件inode变脏；</span><br><span class="line">I_DIRTY_PAGES：表示仅仅文件数据被修改，但并未导致文件inode被改动，此时是不需要同步文件元数据的。</span><br><span class="line"></span><br><span class="line">struct writeback_control wbc = &#123;</span><br><span class="line">    .sync_mode = WB_SYNC_ALL, //表示数据完整性写入，一定等到同步完成才可以返回</span><br><span class="line">    .nr_to_write = 0, //要写入的页面数，因为目前文件的所有脏页面已经全部同步，因此在回写inode的时候没有必要再同步文件脏数据页面</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">fdatasync(intfd)(位于fs/sync.c中)</span><br><span class="line">    ---&gt;do_fsync(fd, 1)（位于fs/sync.c中）</span><br><span class="line">        ---&gt;vfs_fsync(file, datasync)（位于fs/sync.c中）</span><br><span class="line">            ---&gt;vfs_fsync_range(file, 0, LLONG_MAX, datasync)（位于fs/sync.c中）</span><br><span class="line">                ---&gt;filemap_write_and_wait_range(mapping, start, end)（位于mm/filemap.c中）</span><br><span class="line">                    ---&gt;__filemap_fdatawrite_range(mapping,lstart, lend,WB_SYNC_ALL)（位于mm/filemap.c中）</span><br><span class="line">                        ---&gt;filemap_fdatawait_range(mapping,lstart,lend)（位于mm/filemap.c中）</span><br><span class="line">                            ---&gt;ext2_fsync(struct file*file, int datasync)（针对ext2文件系统，位于fs/ext2/file.c）</span><br><span class="line">                                ---&gt;generic_file_fsync(file, datasync)（位于fs/libfs.c中）</span><br></pre></td></tr></table></figure>
+
+<h3 id="context"><a href="#context" class="headerlink" title="context"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/b-sfGCbR6Rp5CNI-3_S1cA">context</a></h3><p>进程上下文是进程执行活动全过程的静态描述。我们把已执行过的进程指令和数据在相关寄存器与堆栈中的内容称为进程上文，把正在执行的指令和数据在寄存器与堆栈中的内容称为进程正文，把待执行的指令和数据在寄存器与堆栈中的内容称为进程下文。<br>实际上linux内核中，进程上下文包括进程的虚拟地址空间和硬件上下文。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">__schedule   // kernel/sched/core.c</span><br><span class="line">-&gt;context_switch</span><br><span class="line">  -&gt;switch_mm_irqs_off   //进程地址空间切换</span><br><span class="line">  -&gt;switch_to //处理器状态切换</span><br></pre></td></tr></table></figure>
+
+<h3 id="MDS-is-waitting-OSS"><a href="#MDS-is-waitting-OSS" class="headerlink" title="MDS is waitting OSS"></a>MDS is waitting OSS</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[&lt;ffffffff81326d77&gt;] call_rwsem_down_write_failed+0x17/0x30</span><br><span class="line">[&lt;ffffffffa1393b07&gt;] lod_alloc_qos.constprop.15+0x187/0x1400 [lod]</span><br><span class="line">[&lt;ffffffffa139675d&gt;] lod_qos_prep_create+0x10cd/0x1fbc [lod]</span><br><span class="line">[&lt;ffffffffa138ff3d&gt;] lod_declare_striped_object+0x1fd/0x810 [lod]</span><br><span class="line">[&lt;ffffffffa13915c1&gt;] lod_declare_object_create+0x231/0x4b0 [lod]</span><br><span class="line">[&lt;ffffffffa12f96af&gt;] mdd_declare_object_create_internal+0xdf/0x2f0 [mdd]</span><br><span class="line">[&lt;ffffffffa12ee038&gt;] mdd_declare_create+0x48/0xef0 [mdd]</span><br><span class="line">[&lt;ffffffffa12ef669&gt;] mdd_create+0x789/0x12a0 [mdd]</span><br><span class="line">[&lt;ffffffffa124f8c2&gt;] mdt_reint_open+0x1f92/0x2e00 [mdt]</span><br><span class="line">[&lt;ffffffffa1242ab0&gt;] mdt_reint_rec+0x80/0x210 [mdt]</span><br><span class="line">[&lt;ffffffffa12236d1&gt;] mdt_reint_internal+0x5e1/0xb20 [mdt]</span><br><span class="line">[&lt;ffffffffa1223d72&gt;] mdt_intent_reint+0x162/0x420 [mdt]</span><br><span class="line">[&lt;ffffffffa122776d&gt;] mdt_intent_opc+0x20d/0xa10 [mdt]</span><br><span class="line">[&lt;ffffffffa122f128&gt;] mdt_intent_policy+0x138/0x320 [mdt]</span><br><span class="line">[&lt;ffffffffa0e2e1f7&gt;] ldlm_lock_enqueue+0x357/0x9c0 [ptlrpc]</span><br><span class="line">[&lt;ffffffffa0e547e2&gt;] ldlm_handle_enqueue0+0x4f2/0x16f0 [ptlrpc]</span><br><span class="line">[&lt;ffffffffa0ee1d32&gt;] tgt_enqueue+0x62/0x210 [ptlrpc]</span><br><span class="line">[&lt;ffffffffa0ee5adb&gt;] tgt_request_handle+0x8fb/0x11f0 [ptlrpc]</span><br><span class="line">[&lt;ffffffffa0e89b7b&gt;] ptlrpc_server_handle_request+0x21b/0xa90 [ptlrpc]</span><br><span class="line">[&lt;ffffffffa0e8d4a0&gt;] ptlrpc_main+0xc00/0x1f60 [ptlrpc]</span><br><span class="line">[&lt;ffffffff810b052f&gt;] kthread+0xcf/0xe0</span><br><span class="line">[&lt;ffffffff81696658&gt;] ret_from_fork+0x58/0x90</span><br><span class="line">[&lt;ffffffffffffffff&gt;] 0xffffffffffffffff</span><br></pre></td></tr></table></figure>
+
+<h3 id="page-fault"><a href="#page-fault" class="headerlink" title="page fault"></a><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/64375923/what-cause-kernel-to-eat-cpu-on-page-fault">page fault</a></h3><p>AMD EPYC2 easy to trigger hang than intel in the memory full status     </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">__list_del_entry </span><br><span class="line">isolate_lru_pages.isra.48 </span><br><span class="line">shrink_inactive_list </span><br><span class="line">shrink_node_memcg </span><br><span class="line">shrink_node node_reclaim </span><br><span class="line">get_page_from_freelist </span><br><span class="line">enqueue_task_fair </span><br><span class="line">sched_clock __alloc_pages_nodemask </span><br><span class="line">alloc_pages_vma </span><br><span class="line">handle_mm_fault </span><br><span class="line">__do_page_fault page_fault</span><br><span class="line"></span><br><span class="line">https://www.kernel.org/doc/html/latest/admin-guide/mm/concepts.html#reclaim</span><br><span class="line"></span><br><span class="line">The process of freeing the reclaimable physical memory pages and repurposing them is called (surprise!) reclaim. Linux can reclaim pages either asynchronously or synchronously, depending on the state of the system. When the system is not loaded, most of the memory is free and allocation requests will be satisfied immediately from the free pages supply. As the load increases, the amount of the free pages goes down and when it reaches a certain threshold (high watermark), an allocation request will awaken the kswapd daemon. It will asynchronously scan memory pages and either just free them if the data they contain is available elsewhere, or evict to the backing storage device (remember those dirty pages?). As memory usage increases even more and reaches another threshold - min watermark - an allocation will trigger direct reclaim. In this case allocation is stalled until enough memory pages are reclaimed to satisfy the request.</span><br></pre></td></tr></table></figure>
+
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux-system-calls"><span class="toc-number">1.</span> <span class="toc-text">Linux system calls</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Get-these-names-from-syscalls-h"><span class="toc-number">1.1.</span> <span class="toc-text">Get these names from syscalls.h</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#getaddrinfo"><span class="toc-number">1.1.1.</span> <span class="toc-text">getaddrinfo</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux-error"><span class="toc-number">1.2.</span> <span class="toc-text">Linux error</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IO"><span class="toc-number">2.</span> <span class="toc-text">IO</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#context"><span class="toc-number">3.</span> <span class="toc-text">context</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MDS-is-waitting-OSS"><span class="toc-number">4.</span> <span class="toc-text">MDS is waitting OSS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#page-fault"><span class="toc-number">5.</span> <span class="toc-text">page fault</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2017/11/21/linux_calls/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2017/11/21/linux_calls/&text=Linux system calls"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2017/11/21/linux_calls/&title=Linux system calls"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2017/11/21/linux_calls/&is_video=false&description=Linux system calls"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Linux system calls&body=Check out this article: http://example.com/2017/11/21/linux_calls/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2017/11/21/linux_calls/&title=Linux system calls"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2017/11/21/linux_calls/&title=Linux system calls"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2017/11/21/linux_calls/&title=Linux system calls"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2017/11/21/linux_calls/&title=Linux system calls"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2017/11/21/linux_calls/&name=Linux system calls&description=&lt;h3 id=&#34;Linux-system-calls&#34;&gt;&lt;a href=&#34;#Linux-system-calls&#34; class=&#34;headerlink&#34; title=&#34;Linux system calls&#34;&gt;&lt;/a&gt;Linux system calls&lt;/h3&gt;&lt;p&gt;&amp;#x2F;usr&amp;#x2F;include&amp;#x2F;asm-generic&amp;#x2F;errno.h&lt;br&gt;&amp;#x2F;usr&amp;#x2F;include&amp;#x2F;asm-generic&amp;#x2F;errno-base.h&lt;br&gt;&amp;#x2F;usr&amp;#x2F;include&amp;#x2F;linux&amp;#x2F;syscalls.h&lt;/p&gt;
+&lt;figure class=&#34;highlight c&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;lt;sys/types.h&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;lt;sys/stat.h&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;lt;errno.h&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+
+
+&lt;h4 id=&#34;Get-these-names-from-syscalls-h&#34;&gt;&lt;a href=&#34;#Get-these-names-from-syscalls-h&#34; class=&#34;headerlink&#34; title=&#34;Get these names from syscalls.h&#34;&gt;&lt;/a&gt;Get these names from &lt;a href=&#34;https://github.com/torvalds/linux/blob/master/include/linux/syscalls.h&#34;&gt;syscalls.h&lt;/a&gt;&lt;/h4&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2017/11/21/linux_calls/&t=Linux system calls"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    John Doe
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = '67e8c052/67e8c052.github.io';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'blog-comments';
+      var utterances_theme = 'github-dark';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>
