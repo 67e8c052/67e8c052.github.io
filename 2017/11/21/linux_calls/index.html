@@ -14,7 +14,7 @@
 <meta property="og:description" content="Linux system calls123456789101112&#x2F;usr&#x2F;include&#x2F;asm-generic&#x2F;errno.h&#x2F;usr&#x2F;include&#x2F;asm-generic&#x2F;errno-base.h&#x2F;usr&#x2F;include&#x2F;linux&#x2F;syscalls.hgithub.com&#x2F;torvalds&#x2F;linux&#x2F;blob&#x2F;master&#x2F;include&#x2F;linux&#x2F;syscalls.hhttps:&#x2F;">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2017-11-21T06:03:54.000Z">
-<meta property="article:modified_time" content="2022-11-15T07:04:00.727Z">
+<meta property="article:modified_time" content="2022-12-06T08:14:26.794Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="syscall">
 <meta name="twitter:card" content="summary">
@@ -201,11 +201,7 @@
 <li> *&#x2F;</li>
 </ul>
 <p><a target="_blank" rel="noopener" href="https://elixir.bootlin.com/linux/v3.10.108/source/include/linux/writeback.h#L34">https://elixir.bootlin.com/linux/v3.10.108/source/include/linux/writeback.h#L34</a></p>
-<pre><code>enum writeback_sync_modes &#123;
-        WB_SYNC_NONE,   /* Don&#39;t wait on anything */
-        WB_SYNC_ALL,    /* Wait on every mapping */
-&#125;;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">enum writeback_sync_modes &#123;</span><br><span class="line">        WB_SYNC_NONE,   /* Don&#x27;t wait on anything */</span><br><span class="line">        WB_SYNC_ALL,    /* Wait on every mapping */</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### CDB err and mpt3sas error</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">drivers/message/fusion/lsi/mpi_log_sas.h</span><br><span class="line">#define PL_LOGINFO_SUB_CODE_WRONG_REL_OFF_OR_FRAME_LENGTH    (0x00000300)</span><br><span class="line"></span><br><span class="line">mpt3sas_cm0: log_info(0x31120303): originator(PL), code(0x12), sub_code(0x0303)</span><br><span class="line">sd 0:0:264:0: [sdbx] tag#1 FAILED Result: hostbyte=DID_SOFT_ERROR driverbyte=DRIVER_OK cmd_age=0s</span><br><span class="line">sd 0:0:264:0: [sdbx] tag#1 CDB: Write(16) 8a 00 00 00 00 01 02 69 1b 48 00 00 00 ed 00 00</span><br><span class="line">blk_update_request: I/O error, dev sdbx, sector 4335409992</span><br><span class="line"></span><br><span class="line">    case SAS_QUEUE_FULL:</span><br><span class="line">        hs = DID_SOFT_ERROR; /* retry */</span><br><span class="line">        break;</span><br><span class="line">https://github.com/torvalds/linux/blob/c6dd78fcb8eefa15dd861889e0f59d301cb5230c/drivers/scsi/libsas/sas_scsi_host.c#L63</span><br><span class="line">#define DID_SOFT_ERROR  0x0b    /* The low level driver just wish a retry  */</span><br><span class="line"></span><br><span class="line">https://github.com/AnggaR96s/stable-queue/blob/b62ac42b6ae2160e12e2334a2c80ab7797868e7a/releases/3.10.48/sym53c8xx_2-set-did_requeue-return-code-when-aborting-squeue.patch</span><br><span class="line">+#ifdef SYM_OPT_HANDLE_DEVICE_QUEUEING</span><br><span class="line"> 			sym_set_cam_status(cp-&gt;cmd, DID_SOFT_ERROR);</span><br><span class="line">+#else</span><br><span class="line">+			sym_set_cam_status(cp-&gt;cmd, DID_REQUEUE);</span><br><span class="line">+#endif</span><br></pre></td></tr></table></figure>
 
   </div>
 </article>
