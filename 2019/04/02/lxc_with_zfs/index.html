@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Create bridge1234567891011121314151617181920212223242526272829303132333435363738394041$ brctl showbridge name	bridge id		STP enabled	interfacesbr0		8000.ba02751fd447	no		eno2$ cat &#x2F;etc&#x2F;netplan&#x2F;50-clou">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux container with zfs">
+<meta property="og:url" content="http://example.com/2019/04/02/lxc_with_zfs/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Create bridge1234567891011121314151617181920212223242526272829303132333435363738394041$ brctl showbridge name	bridge id		STP enabled	interfacesbr0		8000.ba02751fd447	no		eno2$ cat &#x2F;etc&#x2F;netplan&#x2F;50-clou">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-04-02T03:17:51.000Z">
+<meta property="article:modified_time" content="2022-12-11T13:06:23.009Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="zfs">
+<meta property="article:tag" content="lxc">
+<meta property="article:tag" content="ubuntu">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>linux container with zfs</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2019/10/10/golang/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2018/12/11/bash/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2019/04/02/lxc_with_zfs/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2019/04/02/lxc_with_zfs/&text=linux container with zfs"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2019/04/02/lxc_with_zfs/&title=linux container with zfs"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2019/04/02/lxc_with_zfs/&is_video=false&description=linux container with zfs"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=linux container with zfs&body=Check out this article: http://example.com/2019/04/02/lxc_with_zfs/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2019/04/02/lxc_with_zfs/&title=linux container with zfs"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2019/04/02/lxc_with_zfs/&title=linux container with zfs"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2019/04/02/lxc_with_zfs/&title=linux container with zfs"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2019/04/02/lxc_with_zfs/&title=linux container with zfs"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2019/04/02/lxc_with_zfs/&name=linux container with zfs&description=&lt;h3 id=&#34;Create-bridge&#34;&gt;&lt;a href=&#34;#Create-bridge&#34; class=&#34;headerlink&#34; title=&#34;Create bridge&#34;&gt;&lt;/a&gt;Create bridge&lt;/h3&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;39&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;40&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;41&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ brctl show&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;bridge name	bridge &lt;span class=&#34;built_in&#34;&gt;id&lt;/span&gt;		STP enabled	interfaces&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;br0		8000.ba02751fd447	no		eno2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ &lt;span class=&#34;built_in&#34;&gt;cat&lt;/span&gt; /etc/netplan/50-cloud-init.yaml&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# This file is generated from information provided by&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# the datasource.  Changes to it will not persist across an instance.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# To disable cloud-init&amp;#x27;s network configuration capabilities, write a file&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# network: &amp;#123;config: disabled&amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;network:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    version: 2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    ethernets:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        eno1:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            addresses: []&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            dhcp4: &lt;span class=&#34;literal&#34;&gt;false&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            dhcp6: &lt;span class=&#34;literal&#34;&gt;false&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        eno2:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            addresses: []&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            dhcp4: &lt;span class=&#34;literal&#34;&gt;false&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            dhcp6: &lt;span class=&#34;literal&#34;&gt;false&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        eno3:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            addresses: [AA.AA.AA.AA/BB]&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            dhcp4: &lt;span class=&#34;literal&#34;&gt;false&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            dhcp6: &lt;span class=&#34;literal&#34;&gt;false&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        eno4:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            addresses: [BB.BB.BB.BB/CC]&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            &lt;span class=&#34;comment&#34;&gt;#gateway4: your.gatway&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            &lt;span class=&#34;comment&#34;&gt;#nameservers:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            &lt;span class=&#34;comment&#34;&gt;#    addresses:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            &lt;span class=&#34;comment&#34;&gt;#    - your.dns.addr&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            &lt;span class=&#34;comment&#34;&gt;#    search: []&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    bridges:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      br0:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        interfaces: [eno2]&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        dhcp4: &lt;span class=&#34;literal&#34;&gt;true&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        dhcp6: &lt;span class=&#34;literal&#34;&gt;false&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        addresses: [CC.CC.CC.CC/DD]&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        gateway4: your.gatway&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        nameservers:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          addresses: [your.dns.addr]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2019/04/02/lxc_with_zfs/&t=linux container with zfs"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-bridge"><span class="toc-number">1.</span> <span class="toc-text">Create bridge</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Add-bridge"><span class="toc-number">2.</span> <span class="toc-text">Add bridge</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Add-zfs-zpool"><span class="toc-number">3.</span> <span class="toc-text">Add zfs zpool</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Custom-centos-7-image"><span class="toc-number">4.</span> <span class="toc-text">Custom centos 7 image</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Connect-bash-tty"><span class="toc-number">5.</span> <span class="toc-text">Connect bash tty</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Limit-the-container-resources"><span class="toc-number">6.</span> <span class="toc-text">Limit the container resources</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Show-the-expanded-config"><span class="toc-number">6.1.</span> <span class="toc-text">Show the expanded config</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Limit-root-partition"><span class="toc-number">6.2.</span> <span class="toc-text">Limit root partition</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#List-contanier-device"><span class="toc-number">6.3.</span> <span class="toc-text">List contanier device</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Clone-container-to-image"><span class="toc-number">6.4.</span> <span class="toc-text">Clone container to image</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Show-container-info"><span class="toc-number">6.5.</span> <span class="toc-text">Show container info</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Container-config-file"><span class="toc-number">7.</span> <span class="toc-text">Container config file</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Enable-the-container-support-NFS"><span class="toc-number">8.</span> <span class="toc-text">Enable the container support NFS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-profile-and-assign-the-config-to-the-container"><span class="toc-number">9.</span> <span class="toc-text">Create a new profile and assign the config to the container</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mount-host-lustre"><span class="toc-number">10.</span> <span class="toc-text">Mount host lustre</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        linux container with zfs
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">John Doe</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-04-02T03:17:51.000Z" itemprop="datePublished">2019-04-02</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Virtualization/">Virtualization</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/lxc/" rel="tag">lxc</a>, <a class="tag-link-link" href="/tags/ubuntu/" rel="tag">ubuntu</a>, <a class="tag-link-link" href="/tags/zfs/" rel="tag">zfs</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="Create-bridge"><a href="#Create-bridge" class="headerlink" title="Create bridge"></a>Create bridge</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">$ brctl show</span><br><span class="line">bridge name	bridge <span class="built_in">id</span>		STP enabled	interfaces</span><br><span class="line">br0		8000.ba02751fd447	no		eno2</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">cat</span> /etc/netplan/50-cloud-init.yaml</span><br><span class="line"><span class="comment"># This file is generated from information provided by</span></span><br><span class="line"><span class="comment"># the datasource.  Changes to it will not persist across an instance.</span></span><br><span class="line"><span class="comment"># To disable cloud-init&#x27;s network configuration capabilities, write a file</span></span><br><span class="line"><span class="comment"># /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:</span></span><br><span class="line"><span class="comment"># network: &#123;config: disabled&#125;</span></span><br><span class="line">network:</span><br><span class="line">    version: 2</span><br><span class="line">    ethernets:</span><br><span class="line">        eno1:</span><br><span class="line">            addresses: []</span><br><span class="line">            dhcp4: <span class="literal">false</span></span><br><span class="line">            dhcp6: <span class="literal">false</span></span><br><span class="line">        eno2:</span><br><span class="line">            addresses: []</span><br><span class="line">            dhcp4: <span class="literal">false</span></span><br><span class="line">            dhcp6: <span class="literal">false</span></span><br><span class="line">        eno3:</span><br><span class="line">            addresses: [AA.AA.AA.AA/BB]</span><br><span class="line">            dhcp4: <span class="literal">false</span></span><br><span class="line">            dhcp6: <span class="literal">false</span></span><br><span class="line">        eno4:</span><br><span class="line">            addresses: [BB.BB.BB.BB/CC]</span><br><span class="line">            <span class="comment">#gateway4: your.gatway</span></span><br><span class="line">            <span class="comment">#nameservers:</span></span><br><span class="line">            <span class="comment">#    addresses:</span></span><br><span class="line">            <span class="comment">#    - your.dns.addr</span></span><br><span class="line">            <span class="comment">#    search: []</span></span><br><span class="line">    bridges:</span><br><span class="line">      br0:</span><br><span class="line">        interfaces: [eno2]</span><br><span class="line">        dhcp4: <span class="literal">true</span></span><br><span class="line">        dhcp6: <span class="literal">false</span></span><br><span class="line">        addresses: [CC.CC.CC.CC/DD]</span><br><span class="line">        gateway4: your.gatway</span><br><span class="line">        nameservers:</span><br><span class="line">          addresses: [your.dns.addr]</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h3 id="Add-bridge"><a href="#Add-bridge" class="headerlink" title="Add bridge"></a>Add bridge</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ lxc init</span><br><span class="line">$ <span class="built_in">cat</span> &lt;&lt;<span class="string">EOF | lxc profile edit default</span></span><br><span class="line"><span class="string">description: Bridged networking LXD profile</span></span><br><span class="line"><span class="string">devices:</span></span><br><span class="line"><span class="string">  eth0:</span></span><br><span class="line"><span class="string">    name: eth0</span></span><br><span class="line"><span class="string">    nictype: bridged</span></span><br><span class="line"><span class="string">    parent: br0</span></span><br><span class="line"><span class="string">    type: nic</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line">$ lxc profile list</span><br><span class="line">$ lxc profile show default</span><br><span class="line"></span><br><span class="line"><span class="comment"># if you are not default</span></span><br><span class="line">$ lxc profile delete your_custom_config</span><br></pre></td></tr></table></figure>
+
+<h3 id="Add-zfs-zpool"><a href="#Add-zfs-zpool" class="headerlink" title="Add zfs zpool"></a>Add zfs zpool</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ zfs create tank/lxd</span><br><span class="line">$ lxc storage create zfs-pool zfs source=tank/lxd</span><br><span class="line"></span><br><span class="line">$ lxc profile show default</span><br><span class="line">config: &#123;&#125;</span><br><span class="line">description: Default LXD profile</span><br><span class="line">devices:</span><br><span class="line">  eth0:</span><br><span class="line">    name: eth0</span><br><span class="line">    nictype: bridged</span><br><span class="line">    parent: br0</span><br><span class="line">    type: nic</span><br><span class="line">  root:</span><br><span class="line">    path: /</span><br><span class="line">    pool: zfs-pool</span><br><span class="line">    size: &quot;0&quot;</span><br><span class="line">    type: disk</span><br><span class="line">name: default</span><br><span class="line">used_by:</span><br><span class="line">- /1.0/containers/centos7-01</span><br></pre></td></tr></table></figure>
+
+<h3 id="Custom-centos-7-image"><a href="#Custom-centos-7-image" class="headerlink" title="Custom centos 7 image"></a>Custom centos 7 image</h3><p>Found a centos 7 server</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">$ mount CentOS-7-x86_64-Everything-1804.iso /mnt -o loop</span><br><span class="line">$ <span class="built_in">cat</span> /tank/vms/lxc-images/centos7/etc/yum.repos.d/base.repo</span><br><span class="line">[base]</span><br><span class="line">gpgcheck=0</span><br><span class="line">baseurl=file:/mnt</span><br><span class="line">name=CentOS-7</span><br><span class="line"></span><br><span class="line">$ yum -y --installroot=/tank/vms/lxc-images/centos7 install systemd passwd yum redhat-release vim-minimal openssh-server screen qperf sysstat lsof nfs-utils rsync libselinux-python openssh-clients net-tools strace attr yum-utils coreutils pciutils</span><br><span class="line">$ <span class="built_in">rm</span> -f /tank/vms/lxc-images/centos7/etc/yum.repos.d/CentOS-*</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">cd</span> /tank/vms/lxc-images/centos7/</span><br><span class="line">$ tar cjvf  centos-7-x86_64.tar.gz *</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">cat</span> metadata.yaml</span><br><span class="line">architecture: <span class="string">&quot;x86_64&quot;</span></span><br><span class="line">creation_date: 1554097535 <span class="comment"># To get current date in Unix time, use `date +%s` command</span></span><br><span class="line">properties:</span><br><span class="line">architecture: <span class="string">&quot;x86_64&quot;</span></span><br><span class="line">description: <span class="string">&quot;CentOS 7.6 add openssh&quot;</span></span><br><span class="line">os: <span class="string">&quot;centos&quot;</span></span><br><span class="line">release: <span class="string">&quot;sid&quot;</span></span><br><span class="line"></span><br><span class="line">$ tar czvf metadata.tar.gz metadata.yaml</span><br><span class="line">$ lxc image import metadata.tar.gz centos-7-x86_64.tar.gz --<span class="built_in">alias</span> custom-for-centos7</span><br><span class="line"></span><br><span class="line">$ lxc image list</span><br><span class="line">+--------------------+--------------+--------+-------------+--------+----------+-----------------------------+</span><br><span class="line">|       ALIAS        | FINGERPRINT  | PUBLIC | DESCRIPTION |  ARCH  |   SIZE   |         UPLOAD DATE         |</span><br><span class="line">+--------------------+--------------+--------+-------------+--------+----------+-----------------------------+</span><br><span class="line">| custom-for-centos7 | 662e0004303e | no     |             | x86_64 | 174.80MB | Apr 1, 2019 at 5:46am (UTC) |</span><br><span class="line">+--------------------+--------------+--------+-------------+--------+----------+-----------------------------+</span><br><span class="line"></span><br><span class="line">$ lxc launch custom-for-centos7 centos-7-0</span><br><span class="line"></span><br><span class="line"><span class="comment">### You need set it to 0 before you launch the custom image</span></span><br><span class="line">$ lxc profile device <span class="built_in">set</span> default root size 0</span><br><span class="line">$ lxc launch custom-for-centos7 centos-7-0</span><br><span class="line">Creating centos-7-71</span><br><span class="line">Starting centos-7-71</span><br></pre></td></tr></table></figure>
+
+<h3 id="Connect-bash-tty"><a href="#Connect-bash-tty" class="headerlink" title="Connect bash tty"></a>Connect bash tty</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ lxc exec centos-7-0 /bin/bash</span><br><span class="line">$ yum install openssh-server</span><br></pre></td></tr></table></figure>
+
+<h3 id="Limit-the-container-resources"><a href="#Limit-the-container-resources" class="headerlink" title="Limit the container resources"></a>Limit the container resources</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ lxc config set centos-7-0 limits.cpu 4</span><br><span class="line">$ lxc config set centos-7-0 limits.cpu 0,3,7-9</span><br><span class="line">$ lxc config set centos-7-0 limits.cpu.allowance 20%</span><br><span class="line">$ lxc config set centos-7-0 limits.cpu.allowance 100ms/200ms</span><br><span class="line">$ lxc config set centos-7-0 limits.cpu.priority 5</span><br><span class="line">$ lxc config set centos-7-0 limits.memory 8GB</span><br><span class="line">$ lxc config set centos-7-0 limits.memory.swap true</span><br><span class="line">$ lxc config device set centos-7-0 root limits.read 125MB</span><br><span class="line">$ lxc config device set centos-7-0 root limits.write 125MB</span><br></pre></td></tr></table></figure>
+
+<h4 id="Show-the-expanded-config"><a href="#Show-the-expanded-config" class="headerlink" title="Show the expanded config"></a>Show the expanded config</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lxc config show --expanded centos-7-0</span><br></pre></td></tr></table></figure>
+
+<h4 id="Limit-root-partition"><a href="#Limit-root-partition" class="headerlink" title="Limit root partition"></a>Limit root partition</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ lxc config device add centos-7-0 root disk path=/ pool=zfs-pool size=200GB</span><br><span class="line">## for all root partition</span><br><span class="line">$ lxc profile device set default root size 200GB</span><br></pre></td></tr></table></figure>
+
+<h4 id="List-contanier-device"><a href="#List-contanier-device" class="headerlink" title="List contanier device"></a>List contanier device</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lxc profile device list default</span><br><span class="line">eth0</span><br><span class="line">root</span><br></pre></td></tr></table></figure>
+
+<h4 id="Clone-container-to-image"><a href="#Clone-container-to-image" class="headerlink" title="Clone container to image"></a>Clone container to image</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ lxc stop centos-7-0</span><br><span class="line">$ lxc-stop -n centos-7-0 -k <span class="comment">## force</span></span><br><span class="line">$ lxc publish centos-7-0 --<span class="built_in">alias</span>=centos-7.6-1 description=<span class="string">&quot;Test base image update1&quot;</span></span><br><span class="line">$ lxc image list</span><br><span class="line">+--------------------+--------------+--------+-------------------------+--------+----------+-----------------------------+</span><br><span class="line">|       ALIAS        | FINGERPRINT  | PUBLIC |       DESCRIPTION       |  ARCH  |   SIZE   |         UPLOAD DATE         |</span><br><span class="line">+--------------------+--------------+--------+-------------------------+--------+----------+-----------------------------+</span><br><span class="line">| centos7.6-1        | 1741cafe0ae2 | no     | Test base image update1 | x86_64 | 213.75MB | Apr 1, 2019 at 7:09am (UTC) |</span><br><span class="line">+--------------------+--------------+--------+-------------------------+--------+----------+-----------------------------+</span><br><span class="line">| custom-for-centos7 | 662e0004303e | no     |                         | x86_64 | 174.80MB | Apr 1, 2019 at 5:46am (UTC) |</span><br><span class="line">+--------------------+--------------+--------+-------------------------+--------+----------+-----------------------------+</span><br><span class="line"></span><br><span class="line">$ lxc launch centos7.6-1 centos-7-2</span><br><span class="line">$ lxc delete centos-7-0</span><br><span class="line">$ lxc info centos-7-2</span><br><span class="line"></span><br><span class="line"><span class="comment">#Show internet image</span></span><br><span class="line">lxc image list images:</span><br></pre></td></tr></table></figure>
+
+<h4 id="Show-container-info"><a href="#Show-container-info" class="headerlink" title="Show container info"></a>Show container info</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lxc list</span><br></pre></td></tr></table></figure>
+
+<h3 id="Container-config-file"><a href="#Container-config-file" class="headerlink" title="Container config file"></a>Container config file</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/var/lib/lxd/storage-pools/zfs-pool/containers/centos-7-0</span><br></pre></td></tr></table></figure>
+
+<h3 id="Enable-the-container-support-NFS"><a href="#Enable-the-container-support-NFS" class="headerlink" title="Enable the container support NFS"></a>Enable the container support NFS</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lxc config <span class="built_in">set</span> centos-7-71 security.privileged <span class="literal">true</span></span><br><span class="line"><span class="built_in">printf</span> <span class="string">&quot;mount fstype=nfs,\nmount fstype=nfs4,&quot;</span> | lxc config <span class="built_in">set</span> centos-7-71 raw.apparmor -</span><br></pre></td></tr></table></figure>
+
+<h3 id="Create-a-new-profile-and-assign-the-config-to-the-container"><a href="#Create-a-new-profile-and-assign-the-config-to-the-container" class="headerlink" title="Create a new profile and assign the config to the container"></a>Create a new profile and assign the config to the container</h3><p>&#96;&#96;<br>$ lxc profile show ipmi-manager<br>config: {}<br>description: ipmitool manager node<br>devices:<br>  eth0:<br>    name: eth0<br>    nictype: bridged<br>    parent: br1<br>    type: nic<br>  eth1:<br>    name: eth1<br>    nictype: bridged<br>    parent: br2<br>    type: nic<br>  root:<br>    path: &#x2F;<br>    pool: zfs-pool<br>    size: “0”<br>    type: disk<br>name: ipmi-manager</p>
+<p>$ lxc profile remove c1 default<br>$ lxc profile assign c1 ipmi-manager<br>$ lxc exec c1 &#x2F;bin&#x2F;bash<br>$ ls &#x2F;sys&#x2F;class&#x2F;net<br>eth0  eth1  lo</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### Auto start</span><br></pre></td></tr></table></figure>
+<p>lxc config set $container boot.autostart true<br>lxc config set $container boot.autostart.delay 10</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### mount iso</span><br><span class="line">```bash</span><br><span class="line"># in physical server</span><br><span class="line">$ lxc config device add centos7-samba-105 loop0 unix-block path=/dev/loop0</span><br><span class="line"></span><br><span class="line"># in container</span><br><span class="line">$ mknod /dev/loop0 b 7 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="Mount-host-lustre"><a href="#Mount-host-lustre" class="headerlink" title="Mount host lustre"></a><a target="_blank" rel="noopener" href="https://www.cyberciti.biz/faq/how-to-add-or-mount-directory-in-lxd-linux-container/?nsukey=eiv2/uile9LfG55dOvcg55UtqOWQ19bxIsDY+cQHH0EMOu865QP86rrt/4aONbgQSMEg8ZarwNEM4Co5kKScLxO3eE3FlG3d9V9iWG2UTcog+3x2ZWXy5itNokLMg8/1KVsyd05MctDSgYCklGPMNeT+muNtI5ICfGvH+nheN7AIRFdmDWdo6CI0/00wWjDhsgsSVRZx2qEfz1UKB1kkOA==">Mount host lustre</a></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">$ mount.lustre xx.xx.xx.xx@tcp:/lustre /mnt -o localflock,user_xattr</span><br><span class="line">$ <span class="built_in">df</span> -h <span class="comment"># make sure has mountted</span></span><br><span class="line">$ lxc list</span><br><span class="line">$ lxc config device add c1 mytestdir disk <span class="built_in">source</span>=/mnt path=/dest/</span><br><span class="line">$ lxc config device show c1</span><br><span class="line">$ lxc <span class="built_in">exec</span> c1 bash</span><br><span class="line"></span><br><span class="line"><span class="comment"># in container</span></span><br><span class="line">$ <span class="built_in">df</span> -h</span><br><span class="line">xx.xx.xx.xx@tcp:/lustre              lustre    10T  491M  10T   1% /dest</span><br><span class="line">$ umount /dest</span><br><span class="line"></span><br><span class="line"><span class="comment"># in host</span></span><br><span class="line">xx.xx.xx.xx@tcp:/lustre                        10T  491M  10T   1% /var/lib/lxd/devices/c1/disk.mytestdir.dest-</span><br><span class="line"></span><br><span class="line">$ lxc config device remove c1 mytestdir</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">cat</span> /etc/subgid /etc/subuid</span><br><span class="line"><span class="comment">#login name or UID</span></span><br><span class="line"><span class="comment">#numerical subordinate group ID</span></span><br><span class="line"><span class="comment">#numerical subordinate group ID count</span></span><br><span class="line"><span class="comment">#modify root to nobody(65534)</span></span><br><span class="line">root:100000:65534</span><br><span class="line">root:100000:65534</span><br><span class="line"></span><br><span class="line"><span class="comment">## The container root and ubuntu physical root has the same permission</span></span><br><span class="line"><span class="comment">## Lustre has the same setting with the permission</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ubuntu lustre client version</span></span><br><span class="line">$ <span class="built_in">cat</span> /sys/fs/lustre/version</span><br><span class="line">2.12.55_dirty</span><br><span class="line"></span><br><span class="line">https://gist.github.com/jeanlouisferey/15be1f421eb9f9a66f1c74d410de2675</span><br><span class="line">https://angristan.xyz/lxc-zfs-pool-lxd/</span><br><span class="line">https://blog.simos.info/how-to-make-your-lxd-containers-get-ip-addresses-from-your-lan-using-a-bridge/</span><br><span class="line">https://www.tomvanbrienen.nl/installing-and-configuring-lxd-3-on-ubuntu-18-04/</span><br><span class="line">https://tutorials.ubuntu.com/tutorial/create-custom-lxd-images<span class="comment">#4</span></span><br><span class="line">https://github.com/lxc/lxd/issues/3096</span><br><span class="line">https://cwiki.apache.org/confluence/display/CLOUDSTACK/LXC+Template+creation<span class="comment">#LXCTemplatecreation-StepstocreateminimalCentOS6containertemplate:</span></span><br><span class="line">https://blog.simos.info/using-distrobuilder-to-create-container-images-for-lxc-and-lxd/</span><br></pre></td></tr></table></figure>
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-bridge"><span class="toc-number">1.</span> <span class="toc-text">Create bridge</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Add-bridge"><span class="toc-number">2.</span> <span class="toc-text">Add bridge</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Add-zfs-zpool"><span class="toc-number">3.</span> <span class="toc-text">Add zfs zpool</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Custom-centos-7-image"><span class="toc-number">4.</span> <span class="toc-text">Custom centos 7 image</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Connect-bash-tty"><span class="toc-number">5.</span> <span class="toc-text">Connect bash tty</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Limit-the-container-resources"><span class="toc-number">6.</span> <span class="toc-text">Limit the container resources</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Show-the-expanded-config"><span class="toc-number">6.1.</span> <span class="toc-text">Show the expanded config</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Limit-root-partition"><span class="toc-number">6.2.</span> <span class="toc-text">Limit root partition</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#List-contanier-device"><span class="toc-number">6.3.</span> <span class="toc-text">List contanier device</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Clone-container-to-image"><span class="toc-number">6.4.</span> <span class="toc-text">Clone container to image</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Show-container-info"><span class="toc-number">6.5.</span> <span class="toc-text">Show container info</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Container-config-file"><span class="toc-number">7.</span> <span class="toc-text">Container config file</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Enable-the-container-support-NFS"><span class="toc-number">8.</span> <span class="toc-text">Enable the container support NFS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-profile-and-assign-the-config-to-the-container"><span class="toc-number">9.</span> <span class="toc-text">Create a new profile and assign the config to the container</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mount-host-lustre"><span class="toc-number">10.</span> <span class="toc-text">Mount host lustre</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2019/04/02/lxc_with_zfs/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2019/04/02/lxc_with_zfs/&text=linux container with zfs"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2019/04/02/lxc_with_zfs/&title=linux container with zfs"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2019/04/02/lxc_with_zfs/&is_video=false&description=linux container with zfs"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=linux container with zfs&body=Check out this article: http://example.com/2019/04/02/lxc_with_zfs/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2019/04/02/lxc_with_zfs/&title=linux container with zfs"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2019/04/02/lxc_with_zfs/&title=linux container with zfs"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2019/04/02/lxc_with_zfs/&title=linux container with zfs"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2019/04/02/lxc_with_zfs/&title=linux container with zfs"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2019/04/02/lxc_with_zfs/&name=linux container with zfs&description=&lt;h3 id=&#34;Create-bridge&#34;&gt;&lt;a href=&#34;#Create-bridge&#34; class=&#34;headerlink&#34; title=&#34;Create bridge&#34;&gt;&lt;/a&gt;Create bridge&lt;/h3&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;39&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;40&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;41&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ brctl show&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;bridge name	bridge &lt;span class=&#34;built_in&#34;&gt;id&lt;/span&gt;		STP enabled	interfaces&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;br0		8000.ba02751fd447	no		eno2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ &lt;span class=&#34;built_in&#34;&gt;cat&lt;/span&gt; /etc/netplan/50-cloud-init.yaml&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# This file is generated from information provided by&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# the datasource.  Changes to it will not persist across an instance.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# To disable cloud-init&amp;#x27;s network configuration capabilities, write a file&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# network: &amp;#123;config: disabled&amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;network:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    version: 2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    ethernets:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        eno1:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            addresses: []&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            dhcp4: &lt;span class=&#34;literal&#34;&gt;false&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            dhcp6: &lt;span class=&#34;literal&#34;&gt;false&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        eno2:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            addresses: []&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            dhcp4: &lt;span class=&#34;literal&#34;&gt;false&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            dhcp6: &lt;span class=&#34;literal&#34;&gt;false&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        eno3:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            addresses: [AA.AA.AA.AA/BB]&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            dhcp4: &lt;span class=&#34;literal&#34;&gt;false&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            dhcp6: &lt;span class=&#34;literal&#34;&gt;false&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        eno4:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            addresses: [BB.BB.BB.BB/CC]&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            &lt;span class=&#34;comment&#34;&gt;#gateway4: your.gatway&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            &lt;span class=&#34;comment&#34;&gt;#nameservers:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            &lt;span class=&#34;comment&#34;&gt;#    addresses:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            &lt;span class=&#34;comment&#34;&gt;#    - your.dns.addr&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            &lt;span class=&#34;comment&#34;&gt;#    search: []&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    bridges:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      br0:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        interfaces: [eno2]&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        dhcp4: &lt;span class=&#34;literal&#34;&gt;true&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        dhcp6: &lt;span class=&#34;literal&#34;&gt;false&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        addresses: [CC.CC.CC.CC/DD]&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        gateway4: your.gatway&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        nameservers:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          addresses: [your.dns.addr]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2019/04/02/lxc_with_zfs/&t=linux container with zfs"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    John Doe
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = '67e8c052/67e8c052.github.io';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'blog-comments';
+      var utterances_theme = 'github-dark';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>
