@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="nfsstat1$ nfsiostat -d &#x2F;mount 2  NFS client12echo &quot;options sunrpc tcp_slot_table_entries&#x3D;128&quot; &gt;&gt; &#x2F;etc&#x2F;modprobe.d&#x2F;sunrpc.conf# the value default only 2  file lockThe NFS (Versions 2 and">
+    <meta name="description" content="nfsstat1234567$ nfsiostat -d &#x2F;mount 2#enable$ rpcdebug -m nfs -s all #show all flags#disable$ rpcdebug -m nfs -c all  NFS client12echo &quot;options sunrpc tcp_slot_table_entries&#x3D;128&quot; &gt;&gt; &#x2F;e">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nfs info">
 <meta property="og:url" content="http://example.com/2018/11/13/nfs/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="nfsstat1$ nfsiostat -d &#x2F;mount 2  NFS client12echo &quot;options sunrpc tcp_slot_table_entries&#x3D;128&quot; &gt;&gt; &#x2F;etc&#x2F;modprobe.d&#x2F;sunrpc.conf# the value default only 2  file lockThe NFS (Versions 2 and">
+<meta property="og:description" content="nfsstat1234567$ nfsiostat -d &#x2F;mount 2#enable$ rpcdebug -m nfs -s all #show all flags#disable$ rpcdebug -m nfs -c all  NFS client12echo &quot;options sunrpc tcp_slot_table_entries&#x3D;128&quot; &gt;&gt; &#x2F;e">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2018-11-13T01:02:56.000Z">
-<meta property="article:modified_time" content="2022-11-15T06:37:22.859Z">
+<meta property="article:modified_time" content="2023-05-06T06:08:02.150Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="nfs">
 <meta name="twitter:card" content="summary">
@@ -155,7 +155,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <h3 id="nfsstat"><a href="#nfsstat" class="headerlink" title="nfsstat"></a>nfsstat</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nfsiostat -d /mount 2</span><br></pre></td></tr></table></figure>
+    <h3 id="nfsstat"><a href="#nfsstat" class="headerlink" title="nfsstat"></a>nfsstat</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ nfsiostat -d /mount 2</span><br><span class="line"></span><br><span class="line"><span class="comment">#enable</span></span><br><span class="line">$ rpcdebug -m nfs -s all <span class="comment">#show all flags</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#disable</span></span><br><span class="line">$ rpcdebug -m nfs -c all</span><br></pre></td></tr></table></figure>
 
 <h3 id="NFS-client"><a href="#NFS-client" class="headerlink" title="NFS client"></a>NFS client</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;options sunrpc tcp_slot_table_entries=128&quot;</span> &gt;&gt; /etc/modprobe.d/sunrpc.conf</span><br><span class="line"><span class="comment"># the value default only 2</span></span><br></pre></td></tr></table></figure>
 

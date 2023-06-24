@@ -14,7 +14,7 @@
 <meta property="og:description" content="mdraid check1234&#x2F;etc&#x2F;sysconfig&#x2F;raid-check# rescanmdadm --examine --scan  grub boot failed because replace mdadm root device CentOS 7 ISO boot trouble shotting –&gt; resuce mode –&gt; 1.continue&#x2F;2">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-06-01T04:40:20.000Z">
-<meta property="article:modified_time" content="2023-03-24T08:39:06.763Z">
+<meta property="article:modified_time" content="2023-06-17T14:12:35.101Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="md">
 <meta property="article:tag" content="raid">
@@ -178,8 +178,14 @@
 <li>mount -o bind &#x2F;proc &#x2F;mnt&#x2F;sysimage&#x2F;proc</li>
 <li>mount -o bind &#x2F;sys &#x2F;mnt&#x2F;sysimage&#x2F;sys</li>
 <li>mount -o bind &#x2F;dev &#x2F;mnt&#x2F;sysimage&#x2F;dev</li>
-<li>chroot &#x2F;mnt&#x2F;sysimage</li>
+<li>chroot &#x2F;mnt&#x2F;sysimage<ul>
+<li>legacy boot mode<ul>
 <li>grub2-mkconfig -o &#x2F;boot&#x2F;efi&#x2F;EFI&#x2F;centos&#x2F;grub.cfg</li>
+<li>grub2-install &#x2F;dev&#x2F;sda(which one you replaced)</li>
+</ul>
+</li>
+</ul>
+</li>
 <li>or you could copy kernel rpm package(iso) and reinstall</li>
 </ul>
 </li>
