@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="zfs_txg_rollback When this zpool could not be imported, I backed up all raw devices and tried to import it again. I was able to roll back successfully from zfs 0.7.9, 0.7.13, and 2.1.5. However, in so">
+<meta property="og:type" content="article">
+<meta property="og:title" content="zfs rollback">
+<meta property="og:url" content="http://example.com/2016/12/04/zfs_rollback/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="zfs_txg_rollback When this zpool could not be imported, I backed up all raw devices and tried to import it again. I was able to roll back successfully from zfs 0.7.9, 0.7.13, and 2.1.5. However, in so">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-12-04T07:06:13.000Z">
+<meta property="article:modified_time" content="2023-06-24T13:14:21.079Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="zfs">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>zfs rollback</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2016/12/04/zfs/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2016/09/04/kcptun/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2016/12/04/zfs_rollback/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2016/12/04/zfs_rollback/&text=zfs rollback"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2016/12/04/zfs_rollback/&title=zfs rollback"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2016/12/04/zfs_rollback/&is_video=false&description=zfs rollback"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=zfs rollback&body=Check out this article: http://example.com/2016/12/04/zfs_rollback/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2016/12/04/zfs_rollback/&title=zfs rollback"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2016/12/04/zfs_rollback/&title=zfs rollback"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2016/12/04/zfs_rollback/&title=zfs rollback"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2016/12/04/zfs_rollback/&title=zfs rollback"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2016/12/04/zfs_rollback/&name=zfs rollback&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2016/12/04/zfs_rollback/&t=zfs rollback"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#zfs-txg-rollback"><span class="toc-number">1.</span> <span class="toc-text">zfs_txg_rollback</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rollback-by-zfs-transection-ID-re-compile-zfs-from-source-code"><span class="toc-number">2.</span> <span class="toc-text">Rollback by zfs transection ID re-compile zfs from source code</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#corrupted-zpool-status"><span class="toc-number">3.</span> <span class="toc-text">corrupted zpool status</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Try-to-dump-the-txg-id"><span class="toc-number">4.</span> <span class="toc-text">Try to dump the txg id</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Readonly-import"><span class="toc-number">5.</span> <span class="toc-text">Readonly import</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RW-import"><span class="toc-number">6.</span> <span class="toc-text">RW import</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        zfs rollback
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">John Doe</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2016-12-04T07:06:13.000Z" itemprop="datePublished">2016-12-04</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Storage/">Storage</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/zfs/" rel="tag">zfs</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="zfs-txg-rollback"><a href="#zfs-txg-rollback" class="headerlink" title="zfs_txg_rollback"></a>zfs_txg_rollback</h3><ul>
+<li>When this zpool could not be imported, I backed up all raw devices and tried to import it again. I was able to roll back successfully from zfs 0.7.9, 0.7.13, and 2.1.5. However, in some critically cases, the lost data is gone and cannot be found back.       <ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/openzfs/zfs/issues/2831">reference 2831</a>    </li>
+<li><a target="_blank" rel="noopener" href="https://github.com/openzfs/zfs/issues/2452#issuecomment-61020758">reference 2452</a>    </li>
+<li><a target="_blank" rel="noopener" href="https://github.com/openzfs/zfs/issues/6497">reference 6497</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="Rollback-by-zfs-transection-ID-re-compile-zfs-from-source-code"><a href="#Rollback-by-zfs-transection-ID-re-compile-zfs-from-source-code" class="headerlink" title="Rollback by zfs transection ID re-compile zfs from source code"></a>Rollback by zfs transection ID re-compile zfs from source code</h3><ul>
+<li>corrupted version: 2.1.5</li>
+<li>re-compile version: 2.1.11</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ diff -u  module/zfs/vdev_label.c module/zfs/vdev_label.T.c</span><br><span class="line">--- module/zfs/vdev_label.c	<span class="number">2023</span><span class="number">-04</span><span class="number">-20</span> <span class="number">07</span>:<span class="number">46</span>:<span class="number">21.727725852</span> +<span class="number">0800</span></span><br><span class="line">+++ module/zfs/vdev_label.T.c	<span class="number">2023</span><span class="number">-05</span><span class="number">-26</span> <span class="number">17</span>:<span class="number">06</span>:<span class="number">16.271708601</span> +<span class="number">0800</span></span><br><span class="line">@@ <span class="number">-810</span>,<span class="number">7</span> +<span class="number">810</span>,<span class="number">7</span> @@</span><br><span class="line"> 				<span class="keyword">for</span> (l++; l &lt; VDEV_LABELS; l++)</span><br><span class="line"> 					zio_wait(zio[l]);</span><br><span class="line"> 				<span class="keyword">break</span>;</span><br><span class="line">-			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (label_txg &lt;= txg &amp;&amp; label_txg &gt; best_txg) &#123;</span><br><span class="line">+                                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (label_txg &gt; best_txg) &#123;</span><br><span class="line"> 				best_txg = label_txg;</span><br><span class="line"> 				nvlist_free(config);</span><br><span class="line"> 				config = fnvlist_dup(label);</span><br><span class="line"></span><br><span class="line">$ mv -f module/zfs/vdev_label.T.c module/zfs/vdev_label.c</span><br><span class="line">$ sh autogen.sh</span><br><span class="line">$ ./configure</span><br><span class="line">$ make rpms</span><br><span class="line">$ rpm -Uvh --force kmod-zfs-*rpm lib*rpm python3-pyzfs<span class="number">-2.1</span><span class="number">.11</span><span class="number">-1.</span>el8.noarch.rpm zfs<span class="number">-2.1</span><span class="number">.11</span><span class="number">-1.</span>el8.x86_64.rpm zfs-debuginfo<span class="number">-2.1</span><span class="number">.11</span><span class="number">-1.</span>el8.x86_64.rpm zfs-debugsource<span class="number">-2.1</span><span class="number">.11</span><span class="number">-1.</span>el8.x86_64.rpm zfs-kmod-debugsource<span class="number">-2.1</span><span class="number">.11</span><span class="number">-1.</span>el8.x86_64.rpm zfs-test<span class="number">-2.1</span><span class="number">.11</span><span class="number">-1.</span>el8.x86_64.rpm zfs-test-debuginfo<span class="number">-2.1</span><span class="number">.11</span><span class="number">-1.</span>el8.x86_64.rpm</span><br></pre></td></tr></table></figure>
+
+<h3 id="corrupted-zpool-status"><a href="#corrupted-zpool-status" class="headerlink" title="corrupted zpool status"></a>corrupted zpool status</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">zpool import</span><br><span class="line"></span><br><span class="line">   pool: test_ost_9</span><br><span class="line">     id: 2501144316401273768</span><br><span class="line">  state: FAULTED</span><br><span class="line">status: The pool metadata is corrupted.</span><br><span class="line"> action: The pool cannot be imported due to damaged devices or data.</span><br><span class="line">	The pool may be active on another system, but can be imported using</span><br><span class="line">	the &#x27;-f&#x27; flag.</span><br><span class="line">   see: https://openzfs.github.io/openzfs-docs/msg/ZFS-8000-72</span><br><span class="line"> config:</span><br><span class="line"></span><br><span class="line">	test_ost_9  FAULTED  corrupted data</span><br><span class="line">	  mirror-0  ONLINE</span><br><span class="line">	    sdbd1   ONLINE</span><br><span class="line">	    sdbc1   ONLINE</span><br><span class="line">	  mirror-1  ONLINE</span><br><span class="line">	    sdba1   ONLINE</span><br><span class="line">	    sdbb1   ONLINE</span><br><span class="line">	  mirror-2  ONLINE</span><br><span class="line">	    sdbe1   ONLINE</span><br><span class="line">	    sdbh1   ONLINE</span><br><span class="line">	  mirror-3  ONLINE</span><br><span class="line">	    sdbg1   ONLINE</span><br><span class="line">	    sdbf1   ONLINE</span><br></pre></td></tr></table></figure>
+
+<h3 id="Try-to-dump-the-txg-id"><a href="#Try-to-dump-the-txg-id" class="headerlink" title="Try to dump the txg id"></a>Try to dump the txg id</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">pool=<span class="string">&quot;test_ost_9&quot;</span></span><br><span class="line"><span class="keyword">for</span> zpool_dev <span class="keyword">in</span> sdbd1 sdbc1 sdba1 sdbb1 sdbe1 sdbh1 sdbg1 sdbf1</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  <span class="keyword">if</span> [[ -b  /dev/<span class="variable">$zpool_dev</span> ]]</span><br><span class="line">  <span class="keyword">then</span></span><br><span class="line">    local_dev_txg=$(zdb -lu /dev/<span class="variable">$zpool_dev</span> | awk <span class="string">&#x27;$0!~/checkpoint/ &amp;&amp; $0~/txg/ &#123;print $3&#125;&#x27;</span>)</span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">  <span class="keyword">while</span> <span class="built_in">read</span> txg_no;</span><br><span class="line">  <span class="keyword">do</span></span><br><span class="line">    <span class="keyword">if</span> [[ -n <span class="variable">$txg_no</span> ]] &amp;&amp; zdb -e <span class="variable">$pool</span> -d -t <span class="variable">$txg_no</span> &gt; /dev/null</span><br><span class="line">    <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$pool</span> <span class="variable">$txg_no</span>&quot;</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">  <span class="keyword">done</span> &lt;&lt;&lt;<span class="string">&quot;<span class="variable">$local_dev_txg</span>&quot;</span></span><br><span class="line"><span class="keyword">done</span> | awk <span class="string">&#x27;&#123;a[$2]++; PROCINFO[&quot;sorted_in&quot;] = &quot;@val_num_desc&quot;;PROCINFO[&quot;sorted_in&quot;] = &quot;@val_num_desc&quot;&#125; END&#123;for (i in a) &#123;print i,a[i]&#125; &#125;&#x27;</span></span><br><span class="line"></span><br><span class="line">output:</span><br><span class="line">zdb: can<span class="string">&#x27;t open &#x27;</span>test_ost_9<span class="string">&#x27;: Invalid exchange</span></span><br><span class="line"><span class="string">zdb: can&#x27;</span>t open <span class="string">&#x27;test_ost_9&#x27;</span>: Invalid exchange</span><br><span class="line">zdb: can<span class="string">&#x27;t open &#x27;</span>test_ost_9<span class="string">&#x27;: Invalid exchange</span></span><br><span class="line"><span class="string">zdb: can&#x27;</span>t open <span class="string">&#x27;test_ost_9&#x27;</span>: Invalid exchange</span><br><span class="line">zdb: can<span class="string">&#x27;t open &#x27;</span>test_ost_9<span class="string">&#x27;: Input/output error</span></span><br><span class="line"><span class="string">zdb: can&#x27;</span>t open <span class="string">&#x27;test_ost_9&#x27;</span>: Input/output error</span><br><span class="line">zdb: can<span class="string">&#x27;t open &#x27;</span>test_ost_9<span class="string">&#x27;: Input/output error</span></span><br><span class="line"><span class="string">zdb: can&#x27;</span>t open <span class="string">&#x27;test_ost_9&#x27;</span>: Input/output error</span><br><span class="line">zdb: can<span class="string">&#x27;t open &#x27;</span>test_ost_9<span class="string">&#x27;: Input/output error</span></span><br><span class="line"><span class="string">zdb: can&#x27;</span>t open <span class="string">&#x27;test_ost_9&#x27;</span>: Input/output error</span><br><span class="line">zdb: can<span class="string">&#x27;t open &#x27;</span>test_ost_9<span class="string">&#x27;: Input/output error</span></span><br><span class="line"><span class="string">zdb: can&#x27;</span>t open <span class="string">&#x27;test_ost_9&#x27;</span>: Input/output error</span><br><span class="line">.......</span><br><span class="line">122787 4 </span><br><span class="line">122788 4</span><br><span class="line">122790 4  &lt;------import txg <span class="built_in">id</span> from here, <span class="keyword">if</span> fail, try the next txg <span class="built_in">id</span></span><br><span class="line">122789 3</span><br><span class="line">122730 2</span><br><span class="line">122731 2</span><br><span class="line">122748 2</span><br><span class="line">122751 2</span><br><span class="line">123983 2</span><br><span class="line">123984 2</span><br><span class="line">122457 1</span><br><span class="line">122458 1</span><br><span class="line">122461 1</span><br><span class="line">122506 1</span><br><span class="line">122514 1</span><br><span class="line">122522 1</span><br><span class="line">122524 1</span><br><span class="line">122530 1</span><br><span class="line">122531 1</span><br><span class="line">122532 1</span><br><span class="line">122533 1</span><br><span class="line">122534 1</span><br><span class="line">.......</span><br></pre></td></tr></table></figure>
+
+<h3 id="Readonly-import"><a href="#Readonly-import" class="headerlink" title="Readonly import"></a>Readonly import</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">$ echo 0 &gt; /sys/module/zfs/parameters/spa_load_verify_metadata</span><br><span class="line">$ old_txg=122790 ;</span><br><span class="line">$ zdb -c -e $pool -d -t $old_txg</span><br><span class="line">$ zpool import -o readonly=on -d /dev/disk/by-id -F -T $old_txg test_ost_9</span><br><span class="line"></span><br><span class="line">$ zpool status test_ost_9</span><br><span class="line">  pool: test_ost_9</span><br><span class="line"> state: ONLINE</span><br><span class="line">config:</span><br><span class="line"></span><br><span class="line">	NAME                              STATE     READ WRITE CKSUM</span><br><span class="line">	test_ost_9                        ONLINE       0     0     0</span><br><span class="line">	  mirror-0                        ONLINE       0     0     0</span><br><span class="line">	    wwn-0x5000cca291403954-part1  ONLINE       0     0     0</span><br><span class="line">	    wwn-0x5000cca2913f7990-part1  ONLINE       0     0     0</span><br><span class="line">	  mirror-1                        ONLINE       0     0     0</span><br><span class="line">	    wwn-0x5000cca2913fffcc-part1  ONLINE       0     0     0</span><br><span class="line">	    wwn-0x5000cca2914037b8-part1  ONLINE       0     0     0</span><br><span class="line">	  mirror-2                        ONLINE       0     0     0</span><br><span class="line">	    wwn-0x5000cca29140161c-part1  ONLINE       0     0     0</span><br><span class="line">	    wwn-0x5000cca29140449c-part1  ONLINE       0     0     0</span><br><span class="line">	  mirror-3                        ONLINE       0     0     0</span><br><span class="line">	    wwn-0x5000cca2913ffea0-part1  ONLINE       0     0     0</span><br><span class="line">	    wwn-0x5000cca291403934-part1  ONLINE       0     0     0</span><br><span class="line"></span><br><span class="line">errors: No known data errors</span><br><span class="line"></span><br><span class="line">#check the lustre dataset</span><br><span class="line">$ zfs get all test_ost_9/test_ost_9</span><br><span class="line">NAME                   PROPERTY              VALUE                              SOURCE</span><br><span class="line">test_ost_9/test_ost_9  type                  filesystem                         -</span><br><span class="line">test_ost_9/test_ost_9  creation              Wed May 24 17:15 2023              -</span><br><span class="line">test_ost_9/test_ost_9  used                  666G                               -</span><br><span class="line">test_ost_9/test_ost_9  available             42.8T                              -</span><br><span class="line">test_ost_9/test_ost_9  referenced            666G                               -</span><br><span class="line">test_ost_9/test_ost_9  compressratio         1.00x                              -</span><br><span class="line">test_ost_9/test_ost_9  mounted               no                                 -</span><br><span class="line">test_ost_9/test_ost_9  quota                 none                               default</span><br><span class="line">.....   </span><br></pre></td></tr></table></figure>
+<p><code>Backup data as soon as possible.</code>    </p>
+<h3 id="RW-import"><a href="#RW-import" class="headerlink" title="RW import"></a>RW import</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">$ old_txg=122790 ;zpool import -d /dev/disk/by-id -F -T $old_txg test_ost_9</span><br><span class="line">$ zpool scrub test_ost_9</span><br><span class="line">$ zpool status</span><br><span class="line">  pool: test_ost_9</span><br><span class="line"> state: ONLINE</span><br><span class="line">status: One or more devices has experienced an error resulting in data</span><br><span class="line">	corruption.  Applications may be affected.</span><br><span class="line">action: Restore the file in question if possible.  Otherwise restore the</span><br><span class="line">	entire pool from backup.</span><br><span class="line">   see: https://openzfs.github.io/openzfs-docs/msg/ZFS-8000-8A</span><br><span class="line">  scan: scrub repaired 336K in 00:00:02 with 1 errors on Fri May 26 17:44:11 2023</span><br><span class="line">config:</span><br><span class="line"></span><br><span class="line">	NAME                              STATE     READ WRITE CKSUM</span><br><span class="line">	test_ost_9                        ONLINE       0     0     0</span><br><span class="line">	  mirror-0                        ONLINE       0     0     0</span><br><span class="line">	    wwn-0x5000cca291403954-part1  ONLINE       0     0    11</span><br><span class="line">	    wwn-0x5000cca2913f7990-part1  ONLINE       0     0    11</span><br><span class="line">	  mirror-1                        ONLINE       0     0     0</span><br><span class="line">	    wwn-0x5000cca2913fffcc-part1  ONLINE       0     0     6</span><br><span class="line">	    wwn-0x5000cca2914037b8-part1  ONLINE       0     0     6</span><br><span class="line">	  mirror-2                        ONLINE       0     0     0</span><br><span class="line">	    wwn-0x5000cca29140161c-part1  ONLINE       0     0     4</span><br><span class="line">	    wwn-0x5000cca29140449c-part1  ONLINE       0     0     4</span><br><span class="line">	  mirror-3                        ONLINE       0     0     0</span><br><span class="line">	    wwn-0x5000cca2913ffea0-part1  ONLINE       0     0     2</span><br><span class="line">	    wwn-0x5000cca291403934-part1  ONLINE       0     0     2</span><br><span class="line"></span><br><span class="line">errors: Permanent errors have been detected in the following files:</span><br><span class="line"></span><br><span class="line">        test_ost_9/test_ost_9:/O/0/d3/227</span><br></pre></td></tr></table></figure>
+<p>n this case, all 5 corrupted zpool imports were successful in the test env, but some files were lost.</p>
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#zfs-txg-rollback"><span class="toc-number">1.</span> <span class="toc-text">zfs_txg_rollback</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rollback-by-zfs-transection-ID-re-compile-zfs-from-source-code"><span class="toc-number">2.</span> <span class="toc-text">Rollback by zfs transection ID re-compile zfs from source code</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#corrupted-zpool-status"><span class="toc-number">3.</span> <span class="toc-text">corrupted zpool status</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Try-to-dump-the-txg-id"><span class="toc-number">4.</span> <span class="toc-text">Try to dump the txg id</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Readonly-import"><span class="toc-number">5.</span> <span class="toc-text">Readonly import</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RW-import"><span class="toc-number">6.</span> <span class="toc-text">RW import</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2016/12/04/zfs_rollback/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2016/12/04/zfs_rollback/&text=zfs rollback"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2016/12/04/zfs_rollback/&title=zfs rollback"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2016/12/04/zfs_rollback/&is_video=false&description=zfs rollback"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=zfs rollback&body=Check out this article: http://example.com/2016/12/04/zfs_rollback/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2016/12/04/zfs_rollback/&title=zfs rollback"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2016/12/04/zfs_rollback/&title=zfs rollback"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2016/12/04/zfs_rollback/&title=zfs rollback"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2016/12/04/zfs_rollback/&title=zfs rollback"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2016/12/04/zfs_rollback/&name=zfs rollback&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2016/12/04/zfs_rollback/&t=zfs rollback"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2023
+    John Doe
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = '67e8c052/67e8c052.github.io';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'blog-comments';
+      var utterances_theme = 'github-dark';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>
