@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="BUGS infiniband mlx5_0: create_qp:3206:(pid 698661): Create QP type 2 failed upgrade mlx5 dev firmware    Packages loss">
+    <meta name="description" content="RDMA RoCEv2 key feature zero-copy (FC not support) bypass-kernel (FC support) lossless network PFC(Priority-based Flow Control) over shreshold and send the “PFC pause frame”, until the value lower “sh">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RDMA">
 <meta property="og:url" content="http://example.com/2022/11/13/rdma/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="BUGS infiniband mlx5_0: create_qp:3206:(pid 698661): Create QP type 2 failed upgrade mlx5 dev firmware    Packages loss">
+<meta property="og:description" content="RDMA RoCEv2 key feature zero-copy (FC not support) bypass-kernel (FC support) lossless network PFC(Priority-based Flow Control) over shreshold and send the “PFC pause frame”, until the value lower “sh">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-11-13T07:49:55.000Z">
-<meta property="article:modified_time" content="2024-01-03T00:50:07.377Z">
+<meta property="article:modified_time" content="2024-02-26T02:37:27.036Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="network">
 <meta property="article:tag" content="rdma">
@@ -101,10 +101,156 @@
   <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2022/11/13/rdma/&title=RDMA"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2022/11/13/rdma/&title=RDMA"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2022/11/13/rdma/&title=RDMA"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2022/11/13/rdma/&name=RDMA&description=&lt;h3 id=&#34;BUGS&#34;&gt;&lt;a href=&#34;#BUGS&#34; class=&#34;headerlink&#34; title=&#34;BUGS&#34;&gt;&lt;/a&gt;BUGS&lt;/h3&gt;&lt;ul&gt;
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2022/11/13/rdma/&name=RDMA&description=&lt;h3 id=&#34;RDMA&#34;&gt;&lt;a href=&#34;#RDMA&#34; class=&#34;headerlink&#34; title=&#34;RDMA&#34;&gt;&lt;/a&gt;&lt;a href=&#34;https://hustcat.github.io/queue-pair-in-rdma/&#34;&gt;RDMA&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;RoCEv2 key feature&lt;ul&gt;
+&lt;li&gt;zero-copy (FC not support)&lt;/li&gt;
+&lt;li&gt;bypass-kernel (FC support)&lt;/li&gt;
+&lt;li&gt;lossless network&lt;/li&gt;
+&lt;li&gt;PFC(Priority-based Flow Control)&lt;ul&gt;
+&lt;li&gt;over shreshold and send the “PFC pause frame”, until the value lower “shreshold” and send the “pause with zero duration”&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://community.mellanox.com/docs/DOC-2022&#34;&gt;PFC class (diff level)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;coarse-grained, influence a lot&lt;/li&gt;
+&lt;li&gt;VLAN-based PFC&lt;ul&gt;
+&lt;li&gt;VLAN tag&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://community.mellanox.com/docs/DOC-1415&#34;&gt;HowTo Run RoCE and TCP over L2 Enabled with PFC&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;VLAN PFC 2 issues&lt;ul&gt;
+&lt;li&gt;trunk mode for switch&lt;/li&gt;
+&lt;li&gt;VLAN PCP could not transmit to L3, VLAN work in L2, try to import DSCP-based PFC&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;DSCP-based PFC&lt;ul&gt;
+&lt;li&gt;DSCP-based PFC requires both NICs and switches to classify and queue packets based on the DSCP value instead of the VLAN tag&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;DSCP vs TOS&lt;ul&gt;
+&lt;li&gt;The type of service (ToS) field in the IPv4 header has had various purposes over the years, and has been defined in different ways by five RFCs. The modern redefinition of the ToS field is a six-bit Differentiated Services Code Point (DSCP) field and a two-bit Explicit Congestion Notification (ECN) field. While Differentiated Services is somewhat backwards compatible with ToS, ECN is not.&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Type_of_service&#34;&gt;reference1&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Differentiated_services&#34;&gt;reference2&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;RDMA PFC issues&lt;ul&gt;
+&lt;li&gt;RDMA transport livelock&lt;ul&gt;
+&lt;li&gt;尽管PFC可以避免buffer overflow导致的丢包，但是，其它一些原因，比如FCS错误，也可能导致网络丢包。RDMA的go-back-0算法，每次出现丢包，都会导致整个message的所有packet都会重传，从而导致livelock。TCP有SACK算法，由于RDMA传输层在NIC实现，受限于硬件资源，NIC很难实现SACK算法。可以使用go-back-N算法来避免这个问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;PFC Deadlock&lt;ul&gt;
+&lt;li&gt;当PFC机制与Ethernet的广播机制工作时，可能导致出现PFC Deadlock。简单来说，就是PFC机制会导致相应的port停止发包，而Ethernet的广播包可能引起新的PFC pause依赖（比如port对端的server down掉)，从而引起循环依赖。广播和多播对于loseless是非常危险的，建议不要将其归于loseless classes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;NIC PFC pause frame storm&lt;ul&gt;
+&lt;li&gt;由于PFC pause是传递的，所以很容器引起pause frame storm。比如，NIC因为bug导致接收缓冲区填满，NIC会一直对外发送pause frame。需要在NIC端和交换机端使用watchdog机制来防止pause storm&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;The Slow-receiver symptom&lt;ul&gt;
+&lt;li&gt;由于NIC的资源有限，它将大部分数据结构，比如QPC(Queue Pair Context) 和WQE (Work Queue Element)都放在host memory。而NIC只会缓存部分数据对象，一旦出现cache miss，NIC的处理速度就会下降&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;32&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;## 将skb prio 0~7 映射到vlan prio 3&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;for&lt;/span&gt; i &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; &amp;#123;0..7&amp;#125;; &lt;span class=&#34;keyword&#34;&gt;do&lt;/span&gt; ip &lt;span class=&#34;built_in&#34;&gt;link&lt;/span&gt; &lt;span class=&#34;built_in&#34;&gt;set&lt;/span&gt; dev eth1.100 &lt;span class=&#34;built_in&#34;&gt;type&lt;/span&gt; vlan egress-qos-map &lt;span class=&#34;variable&#34;&gt;$i&lt;/span&gt;:3 ; &lt;span class=&#34;keyword&#34;&gt;done&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;## enable PFC on TC3&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;mlnx_qos -i eth1 -f 0,0,0,1,0,0,0,0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;[root@node1 ~]&lt;span class=&#34;comment&#34;&gt;# cat /proc/net/vlan/eth1.100 &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;eth1.100  VID: 100       REORDER_HDR: 1  dev-&amp;gt;priv_flags: 1001&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;         total frames received            0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          total bytes received            0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      Broadcast/Multicast Rcvd            0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      total frames transmitted            0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;       total bytes transmitted            0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Device: eth1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;INGRESS priority mappings: 0:0  1:0  2:0  3:0  4:0  5:0  6:0 7:0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; EGRESS priority mappings: &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;[root@node1 ~]&lt;span class=&#34;comment&#34;&gt;# for i in &amp;#123;0..7&amp;#125;; do ip link set dev eth1.100 type vlan egress-qos-map $i:3 ; done&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;[root@node1 ~]&lt;span class=&#34;comment&#34;&gt;# cat /proc/net/vlan/eth1.100                                                      &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;eth1.100  VID: 100       REORDER_HDR: 1  dev-&amp;gt;priv_flags: 1001&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;         total frames received            0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          total bytes received            0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      Broadcast/Multicast Rcvd            0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      total frames transmitted            0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;       total bytes transmitted            0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Device: eth1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;INGRESS priority mappings: 0:0  1:0  2:0  3:0  4:0  5:0  6:0 7:0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; EGRESS priority mappings: 0:3 1:3 2:3 3:3 4:3 5:3 6:3 7:3 &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;HowTo Set Egress Priority VLAN on Linux&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;https://community.mellanox.com/docs/DOC-2311&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Congestion Control (DCQCN)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;base Explicit Congestion Notification (ECN)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://community.mellanox.com/docs/DOC-2321&#34;&gt;Understanding RoCEv2 Congestion Management&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;ECN in RoCEv2&lt;ul&gt;
+&lt;li&gt;RoCEv2引入了ECN机制来实现拥塞控制，即RoCEv2 Congestion Management (RCM)。通过RCM，一旦网络发生拥塞，就会通知发送端降低发送速率。与TCP类似，RoCEv2使用传输层头部Base Transport Header (BTH)的FECN标志位来标识拥塞&lt;/li&gt;
+&lt;li&gt;如果收到IP.ECN为11的包，HCA生成一个RoCEv2 CNP(Congestion Notification Packet)包，返回给发送端&lt;/li&gt;
+&lt;li&gt;如果收到RoCEv2 CNP包，则降低对应QP的发送速率&lt;/li&gt;
+&lt;li&gt;从上一次收到RoCEv2 CNP后，经过配置的时间或者字节数，HCA可以增加对应QP的发送速率&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;RP (Injector)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Reaction Point - the end node that performs rate limitation to prevent congestion&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;NP&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Notification Point - the end node that receives the packets from the injector and sends back notifications to the injector for indications regarding the congestion situation&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;CP&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Congestion Point - the switch queue in which congestion happens&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;CNP&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The RoCEv2 Congestion Notification Packet - The notification message an NP sends to the RP when it receives CE marked packets&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;[Congestion Control Loop](&lt;a href=&#34;https://community.mellanox.com/docs/DOC-2321#jive_content_id_Congestion_Control_Loop]&#34;&gt;https://community.mellanox.com/docs/DOC-2321#jive_content_id_Congestion_Control_Loop]&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://community.mellanox.com/docs/DOC-2733&#34;&gt;How To Configure RoCE over a Lossless Fabric (PFC + ECN) End-to-End Using ConnectX-4 and Spectrum (Trust L2)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;ECN with TCP&amp;#x2F;IP&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ECN是一个端到端的拥塞通知机制，而不需要丢包。ECN是可选的特性，它需要端点开启ECN支持，同时底层的网络也需要支持。&lt;/li&gt;
+&lt;li&gt;传统的TCP&amp;#x2F;IP网络，通过丢包来表明网络拥塞，router&amp;#x2F;switch&amp;#x2F;server都会这么做。而对于支持ECN的路由器，当发生网络拥塞时，会设置IP头部的ECN(2bits)标志位，而接收端会给发送端返回拥塞的通知(echo of the congestion indication)，然后发送端降低发送速率。由于发送速率由传输层(TCP)控制，所以，ECN需要TCP和IP层同时配合。rfc3168定义了ECN for TCP&amp;#x2F;IP。&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;ECN with IP&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;IP头部有2个bit的ECN标志位：&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;00 – Non ECN-Capable Transport, Non-ECT&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10 – ECN Capable Transport, ECT(0)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;01 – ECN Capable Transport, ECT(1)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11 – Congestion Encountered, CE.&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;ECN with TCP&lt;ul&gt;
+&lt;li&gt;为了支持ECN，TCP使用了TCP头部的3个标志位：Nonce Sum (NS)，ECN-Echo (ECE)和Congestion Window Reduced (CWR)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://community.mellanox.com/docs/DOC-2894&#34;&gt;IP&amp;#x2F;Ethernet&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;By using PCP bits on the VLAN header&lt;/li&gt;
+&lt;li&gt;By using DSCP bits on the IP header&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;CA(Channel Adapter)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;CM(Communication Manager)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;QP&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Send Queue(SQ)&lt;/li&gt;
+&lt;li&gt;Receive Queue(RQ)&lt;/li&gt;
+&lt;li&gt;RC (Reliable Connected)&lt;/li&gt;
+&lt;li&gt;struct ibv_qp *ibv_create_qp&lt;/li&gt;
+&lt;li&gt;struct ib_qp&lt;/li&gt;
+&lt;li&gt;struct mlx4_ib_qp&lt;/li&gt;
+&lt;li&gt;QP status&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/hustcat/rdma-core/blob/v15/libibverbs/verbs.h#L842&#34;&gt;https://github.com/hustcat/rdma-core/blob/v15/libibverbs/verbs.h#L842&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/hustcat/rdma-core/blob/v15/libibverbs/verbs.h#L2131&#34;&gt;https://github.com/hustcat/rdma-core/blob/v15/libibverbs/verbs.h#L2131&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;RESET  Newly created, queues empty.&lt;/li&gt;
+&lt;li&gt;INIT   Basic information set. Ready for posting to receive queue.&lt;/li&gt;
+&lt;li&gt;RTR    Ready to Receive. Remote address info set for connected QPs, QP may now receive packets.&lt;/li&gt;
+&lt;li&gt;RTS    Ready to Send. Timeout and retry parameters set, QP may now send packets.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;BUGS&#34;&gt;&lt;a href=&#34;#BUGS&#34; class=&#34;headerlink&#34; title=&#34;BUGS&#34;&gt;&lt;/a&gt;BUGS&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://forums.developer.nvidia.com/t/mlnx-ofed-linux-5-7-1-mlx5-2-create-qp-pid-19774-create-qp-type-2-failed/232369&#34;&gt;infiniband mlx5_0: create_qp:3206:(pid 698661): Create QP type 2 failed&lt;/a&gt;&lt;ul&gt;
 &lt;li&gt;upgrade mlx5 dev firmware&lt;/li&gt;
 &lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;&#34;&gt;&lt;a href=&#34;#&#34; class=&#34;headerlink&#34; title=&#34;&#34;&gt;&lt;/a&gt;&lt;a href=&#34;https://www.snia.org/sites/default/files/ESF/Optimizing-NVMe-Over-Fabrics-Performance-Final.pdf&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Default MTU is 1500B, Ethernet frame adds 18B, if not tagged, to make it 1518B maximum Ethernet frame&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;If Jumbo Frame is supported, maximum Ethernet frame can be 9000B&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Many modern OSes force the MTU transmission, regardless of upper level data size, for efficiency&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Caveat: Jumbo Frame needs to be enabled on both Initiator, Target and all network devices along the path&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://docs.nvidia.com/networking/display/mlnxofedv543580/rdma+over+converged+ethernet+(roce)#src-96900067_safe-id-UkRNQW92ZXJDb252ZXJnZWRFdGhlcm5ldChSb0NFKS1TZXR0aW5ndGhlUm9DRU1vZGVmb3JhUXVldWVQYWlyKFFQKQ&#34;&gt;RDMA over Converged Ethernet (RoCE)&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;Packages-loss&#34;&gt;&lt;a href=&#34;#Packages-loss&#34; class=&#34;headerlink&#34; title=&#34;Packages loss&#34;&gt;&lt;/a&gt;Packages loss&lt;/h3&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
@@ -113,7 +259,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#BUGS"><span class="toc-number">1.</span> <span class="toc-text">BUGS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Packages-loss"><span class="toc-number">2.</span> <span class="toc-text">Packages loss</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#LAG-with-Mellanox-RoCEv2"><span class="toc-number">2.1.</span> <span class="toc-text">LAG with Mellanox RoCEv2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#initialization-broadcom-mellanox-RoCEv2-driver-under-AlmaLinux-8-5"><span class="toc-number">2.2.</span> <span class="toc-text">initialization broadcom&#x2F;mellanox RoCEv2 driver under AlmaLinux 8.5</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Here-is-the-direct-access-and-pass-the-switch-test-result"><span class="toc-number">2.3.</span> <span class="toc-text">Here is the direct access and pass the switch test result</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lustre"><span class="toc-number">3.</span> <span class="toc-text">Lustre</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mellanox-hard-reset"><span class="toc-number">4.</span> <span class="toc-text">Mellanox hard reset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#broadcom"><span class="toc-number">5.</span> <span class="toc-text">broadcom</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#NIC-upgrade-firmware"><span class="toc-number">5.1.</span> <span class="toc-text">NIC upgrade firmware</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Configuring-Peer-Memory-Direct-with-BCM5750X-Network-Adapters-with-NCCL"><span class="toc-number">5.2.</span> <span class="toc-text">Configuring Peer Memory Direct with BCM5750X Network Adapters with NCCL</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#broadcom-Switch-Configuration-for-RoCE"><span class="toc-number">5.3.</span> <span class="toc-text">broadcom Switch Configuration for RoCE</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NFS-server-over-RDMA-RoCEv2"><span class="toc-number">6.</span> <span class="toc-text">NFS server over RDMA&#x2F;RoCEv2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Configure-mellanox-tools-and-Set-Up-Lossless-Configuration"><span class="toc-number">7.</span> <span class="toc-text">Configure mellanox tools and Set Up Lossless Configuration</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tcpdump-rdma-rocev2"><span class="toc-number">8.</span> <span class="toc-text">tcpdump rdma rocev2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Soft-RoCE"><span class="toc-number">9.</span> <span class="toc-text">Soft-RoCE</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#RDMA"><span class="toc-number">1.</span> <span class="toc-text">RDMA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BUGS"><span class="toc-number">2.</span> <span class="toc-text">BUGS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Packages-loss"><span class="toc-number">4.</span> <span class="toc-text">Packages loss</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#LAG-with-Mellanox-RoCEv2"><span class="toc-number">4.1.</span> <span class="toc-text">LAG with Mellanox RoCEv2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#initialization-broadcom-mellanox-RoCEv2-driver-under-AlmaLinux-8-5"><span class="toc-number">4.2.</span> <span class="toc-text">initialization broadcom&#x2F;mellanox RoCEv2 driver under AlmaLinux 8.5</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Here-is-the-direct-access-and-pass-the-switch-test-result"><span class="toc-number">4.3.</span> <span class="toc-text">Here is the direct access and pass the switch test result</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lustre"><span class="toc-number">5.</span> <span class="toc-text">Lustre</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mellanox-hard-reset"><span class="toc-number">6.</span> <span class="toc-text">Mellanox hard reset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#broadcom"><span class="toc-number">7.</span> <span class="toc-text">broadcom</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#NIC-upgrade-firmware"><span class="toc-number">7.1.</span> <span class="toc-text">NIC upgrade firmware</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Configuring-Peer-Memory-Direct-with-BCM5750X-Network-Adapters-with-NCCL"><span class="toc-number">7.2.</span> <span class="toc-text">Configuring Peer Memory Direct with BCM5750X Network Adapters with NCCL</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#broadcom-Switch-Configuration-for-RoCE"><span class="toc-number">7.3.</span> <span class="toc-text">broadcom Switch Configuration for RoCE</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NFS-server-over-RDMA-RoCEv2"><span class="toc-number">8.</span> <span class="toc-text">NFS server over RDMA&#x2F;RoCEv2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Configure-mellanox-tools-and-Set-Up-Lossless-Configuration"><span class="toc-number">9.</span> <span class="toc-text">Configure mellanox tools and Set Up Lossless Configuration</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tcpdump-rdma-rocev2"><span class="toc-number">10.</span> <span class="toc-text">tcpdump rdma rocev2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Soft-RoCE"><span class="toc-number">11.</span> <span class="toc-text">Soft-RoCE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rdma-technology-features"><span class="toc-number">12.</span> <span class="toc-text">rdma-technology-features</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -162,10 +308,156 @@
   
 
   <div class="content" itemprop="articleBody">
-    <h3 id="BUGS"><a href="#BUGS" class="headerlink" title="BUGS"></a>BUGS</h3><ul>
+    <h3 id="RDMA"><a href="#RDMA" class="headerlink" title="RDMA"></a><a target="_blank" rel="noopener" href="https://hustcat.github.io/queue-pair-in-rdma/">RDMA</a></h3><ul>
+<li>RoCEv2 key feature<ul>
+<li>zero-copy (FC not support)</li>
+<li>bypass-kernel (FC support)</li>
+<li>lossless network</li>
+<li>PFC(Priority-based Flow Control)<ul>
+<li>over shreshold and send the “PFC pause frame”, until the value lower “shreshold” and send the “pause with zero duration”</li>
+<li><a target="_blank" rel="noopener" href="https://community.mellanox.com/docs/DOC-2022">PFC class (diff level)</a></li>
+<li>coarse-grained, influence a lot</li>
+<li>VLAN-based PFC<ul>
+<li>VLAN tag</li>
+<li><a target="_blank" rel="noopener" href="https://community.mellanox.com/docs/DOC-1415">HowTo Run RoCE and TCP over L2 Enabled with PFC</a></li>
+<li>VLAN PFC 2 issues<ul>
+<li>trunk mode for switch</li>
+<li>VLAN PCP could not transmit to L3, VLAN work in L2, try to import DSCP-based PFC</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>DSCP-based PFC<ul>
+<li>DSCP-based PFC requires both NICs and switches to classify and queue packets based on the DSCP value instead of the VLAN tag</li>
+</ul>
+</li>
+<li>DSCP vs TOS<ul>
+<li>The type of service (ToS) field in the IPv4 header has had various purposes over the years, and has been defined in different ways by five RFCs. The modern redefinition of the ToS field is a six-bit Differentiated Services Code Point (DSCP) field and a two-bit Explicit Congestion Notification (ECN) field. While Differentiated Services is somewhat backwards compatible with ToS, ECN is not.<ul>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Type_of_service">reference1</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Differentiated_services">reference2</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>RDMA PFC issues<ul>
+<li>RDMA transport livelock<ul>
+<li>尽管PFC可以避免buffer overflow导致的丢包，但是，其它一些原因，比如FCS错误，也可能导致网络丢包。RDMA的go-back-0算法，每次出现丢包，都会导致整个message的所有packet都会重传，从而导致livelock。TCP有SACK算法，由于RDMA传输层在NIC实现，受限于硬件资源，NIC很难实现SACK算法。可以使用go-back-N算法来避免这个问题</li>
+</ul>
+</li>
+<li>PFC Deadlock<ul>
+<li>当PFC机制与Ethernet的广播机制工作时，可能导致出现PFC Deadlock。简单来说，就是PFC机制会导致相应的port停止发包，而Ethernet的广播包可能引起新的PFC pause依赖（比如port对端的server down掉)，从而引起循环依赖。广播和多播对于loseless是非常危险的，建议不要将其归于loseless classes</li>
+</ul>
+</li>
+<li>NIC PFC pause frame storm<ul>
+<li>由于PFC pause是传递的，所以很容器引起pause frame storm。比如，NIC因为bug导致接收缓冲区填满，NIC会一直对外发送pause frame。需要在NIC端和交换机端使用watchdog机制来防止pause storm</li>
+</ul>
+</li>
+<li>The Slow-receiver symptom<ul>
+<li>由于NIC的资源有限，它将大部分数据结构，比如QPC(Queue Pair Context) 和WQE (Work Queue Element)都放在host memory。而NIC只会缓存部分数据对象，一旦出现cache miss，NIC的处理速度就会下降</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 将skb prio 0~7 映射到vlan prio 3</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> &#123;0..7&#125;; <span class="keyword">do</span> ip <span class="built_in">link</span> <span class="built_in">set</span> dev eth1.100 <span class="built_in">type</span> vlan egress-qos-map <span class="variable">$i</span>:3 ; <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## enable PFC on TC3</span></span><br><span class="line">mlnx_qos -i eth1 -f 0,0,0,1,0,0,0,0</span><br><span class="line"></span><br><span class="line">[root@node1 ~]<span class="comment"># cat /proc/net/vlan/eth1.100 </span></span><br><span class="line">eth1.100  VID: 100       REORDER_HDR: 1  dev-&gt;priv_flags: 1001</span><br><span class="line">         total frames received            0</span><br><span class="line">          total bytes received            0</span><br><span class="line">      Broadcast/Multicast Rcvd            0</span><br><span class="line"></span><br><span class="line">      total frames transmitted            0</span><br><span class="line">       total bytes transmitted            0</span><br><span class="line">Device: eth1</span><br><span class="line">INGRESS priority mappings: 0:0  1:0  2:0  3:0  4:0  5:0  6:0 7:0</span><br><span class="line"> EGRESS priority mappings: </span><br><span class="line">[root@node1 ~]<span class="comment"># for i in &#123;0..7&#125;; do ip link set dev eth1.100 type vlan egress-qos-map $i:3 ; done</span></span><br><span class="line">[root@node1 ~]<span class="comment"># cat /proc/net/vlan/eth1.100                                                      </span></span><br><span class="line">eth1.100  VID: 100       REORDER_HDR: 1  dev-&gt;priv_flags: 1001</span><br><span class="line">         total frames received            0</span><br><span class="line">          total bytes received            0</span><br><span class="line">      Broadcast/Multicast Rcvd            0</span><br><span class="line"></span><br><span class="line">      total frames transmitted            0</span><br><span class="line">       total bytes transmitted            0</span><br><span class="line">Device: eth1</span><br><span class="line">INGRESS priority mappings: 0:0  1:0  2:0  3:0  4:0  5:0  6:0 7:0</span><br><span class="line"> EGRESS priority mappings: 0:3 1:3 2:3 3:3 4:3 5:3 6:3 7:3 </span><br><span class="line"></span><br><span class="line">HowTo Set Egress Priority VLAN on Linux</span><br><span class="line">https://community.mellanox.com/docs/DOC-2311</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>Congestion Control (DCQCN)</p>
+<ul>
+<li>base Explicit Congestion Notification (ECN)</li>
+<li><a target="_blank" rel="noopener" href="https://community.mellanox.com/docs/DOC-2321">Understanding RoCEv2 Congestion Management</a></li>
+<li>ECN in RoCEv2<ul>
+<li>RoCEv2引入了ECN机制来实现拥塞控制，即RoCEv2 Congestion Management (RCM)。通过RCM，一旦网络发生拥塞，就会通知发送端降低发送速率。与TCP类似，RoCEv2使用传输层头部Base Transport Header (BTH)的FECN标志位来标识拥塞</li>
+<li>如果收到IP.ECN为11的包，HCA生成一个RoCEv2 CNP(Congestion Notification Packet)包，返回给发送端</li>
+<li>如果收到RoCEv2 CNP包，则降低对应QP的发送速率</li>
+<li>从上一次收到RoCEv2 CNP后，经过配置的时间或者字节数，HCA可以增加对应QP的发送速率</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>RP (Injector)</p>
+<ul>
+<li>Reaction Point - the end node that performs rate limitation to prevent congestion</li>
+</ul>
+</li>
+<li><p>NP</p>
+<ul>
+<li>Notification Point - the end node that receives the packets from the injector and sends back notifications to the injector for indications regarding the congestion situation</li>
+</ul>
+</li>
+<li><p>CP</p>
+<ul>
+<li>Congestion Point - the switch queue in which congestion happens</li>
+</ul>
+</li>
+<li><p>CNP</p>
+<ul>
+<li>The RoCEv2 Congestion Notification Packet - The notification message an NP sends to the RP when it receives CE marked packets</li>
+</ul>
+</li>
+<li><p>[Congestion Control Loop](<a target="_blank" rel="noopener" href="https://community.mellanox.com/docs/DOC-2321#jive_content_id_Congestion_Control_Loop]">https://community.mellanox.com/docs/DOC-2321#jive_content_id_Congestion_Control_Loop]</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://community.mellanox.com/docs/DOC-2733">How To Configure RoCE over a Lossless Fabric (PFC + ECN) End-to-End Using ConnectX-4 and Spectrum (Trust L2)</a></p>
+</li>
+<li><p>ECN with TCP&#x2F;IP</p>
+<ul>
+<li>ECN是一个端到端的拥塞通知机制，而不需要丢包。ECN是可选的特性，它需要端点开启ECN支持，同时底层的网络也需要支持。</li>
+<li>传统的TCP&#x2F;IP网络，通过丢包来表明网络拥塞，router&#x2F;switch&#x2F;server都会这么做。而对于支持ECN的路由器，当发生网络拥塞时，会设置IP头部的ECN(2bits)标志位，而接收端会给发送端返回拥塞的通知(echo of the congestion indication)，然后发送端降低发送速率。由于发送速率由传输层(TCP)控制，所以，ECN需要TCP和IP层同时配合。rfc3168定义了ECN for TCP&#x2F;IP。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ECN with IP</span><br><span class="line">IP头部有2个bit的ECN标志位：</span><br><span class="line"></span><br><span class="line">00 – Non ECN-Capable Transport, Non-ECT</span><br><span class="line">10 – ECN Capable Transport, ECT(0)</span><br><span class="line">01 – ECN Capable Transport, ECT(1)</span><br><span class="line">11 – Congestion Encountered, CE.</span><br></pre></td></tr></table></figure></li>
+<li>ECN with TCP<ul>
+<li>为了支持ECN，TCP使用了TCP头部的3个标志位：Nonce Sum (NS)，ECN-Echo (ECE)和Congestion Window Reduced (CWR)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://community.mellanox.com/docs/DOC-2894">IP&#x2F;Ethernet</a></p>
+<ul>
+<li>By using PCP bits on the VLAN header</li>
+<li>By using DSCP bits on the IP header</li>
+</ul>
+</li>
+<li><p>CA(Channel Adapter)</p>
+</li>
+<li><p>CM(Communication Manager)</p>
+</li>
+<li><p>QP</p>
+<ul>
+<li>Send Queue(SQ)</li>
+<li>Receive Queue(RQ)</li>
+<li>RC (Reliable Connected)</li>
+<li>struct ibv_qp *ibv_create_qp</li>
+<li>struct ib_qp</li>
+<li>struct mlx4_ib_qp</li>
+<li>QP status<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/hustcat/rdma-core/blob/v15/libibverbs/verbs.h#L842">https://github.com/hustcat/rdma-core/blob/v15/libibverbs/verbs.h#L842</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/hustcat/rdma-core/blob/v15/libibverbs/verbs.h#L2131">https://github.com/hustcat/rdma-core/blob/v15/libibverbs/verbs.h#L2131</a></li>
+<li>RESET  Newly created, queues empty.</li>
+<li>INIT   Basic information set. Ready for posting to receive queue.</li>
+<li>RTR    Ready to Receive. Remote address info set for connected QPs, QP may now receive packets.</li>
+<li>RTS    Ready to Send. Timeout and retry parameters set, QP may now send packets.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="BUGS"><a href="#BUGS" class="headerlink" title="BUGS"></a>BUGS</h3><ul>
 <li><a target="_blank" rel="noopener" href="https://forums.developer.nvidia.com/t/mlnx-ofed-linux-5-7-1-mlx5-2-create-qp-pid-19774-create-qp-type-2-failed/232369">infiniband mlx5_0: create_qp:3206:(pid 698661): Create QP type 2 failed</a><ul>
 <li>upgrade mlx5 dev firmware</li>
 </ul>
+</li>
+</ul>
+<h3 id=""><a href="#" class="headerlink" title=""></a><a target="_blank" rel="noopener" href="https://www.snia.org/sites/default/files/ESF/Optimizing-NVMe-Over-Fabrics-Performance-Final.pdf"></a></h3><ul>
+<li><p>Default MTU is 1500B, Ethernet frame adds 18B, if not tagged, to make it 1518B maximum Ethernet frame</p>
+</li>
+<li><p>If Jumbo Frame is supported, maximum Ethernet frame can be 9000B</p>
+</li>
+<li><p>Many modern OSes force the MTU transmission, regardless of upper level data size, for efficiency</p>
+</li>
+<li><p>Caveat: Jumbo Frame needs to be enabled on both Initiator, Target and all network devices along the path</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://docs.nvidia.com/networking/display/mlnxofedv543580/rdma+over+converged+ethernet+(roce)#src-96900067_safe-id-UkRNQW92ZXJDb252ZXJnZWRFdGhlcm5ldChSb0NFKS1TZXR0aW5ndGhlUm9DRU1vZGVmb3JhUXVldWVQYWlyKFFQKQ">RDMA over Converged Ethernet (RoCE)</a></p>
 </li>
 </ul>
 <h3 id="Packages-loss"><a href="#Packages-loss" class="headerlink" title="Packages loss"></a>Packages loss</h3><span id="more"></span>
@@ -481,6 +773,67 @@
 
 <h3 id="Soft-RoCE"><a href="#Soft-RoCE" class="headerlink" title="Soft-RoCE"></a>Soft-RoCE</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">modprobe  rdma_rxe</span><br><span class="line">$ rdma <span class="built_in">link</span> add <span class="variable">$your_soft</span>-roce-dev-name <span class="built_in">type</span> rxe netdev ens160 </span><br><span class="line">$ rdma <span class="built_in">link</span></span><br><span class="line">$ ibstat</span><br><span class="line">$ ibv_devinfo</span><br><span class="line"></span><br><span class="line">$ rdma <span class="built_in">link</span> del <span class="variable">$your_soft</span>-roce-dev-name</span><br><span class="line">$ ibstat</span><br></pre></td></tr></table></figure>
 
+<h3 id="rdma-technology-features"><a href="#rdma-technology-features" class="headerlink" title="rdma-technology-features"></a><a target="_blank" rel="noopener" href="https://asterfusion.com/blog20230809-rdma-technology-features/">rdma-technology-features</a></h3><ul>
+<li>IB<ul>
+<li>IBTA</li>
+<li>IB专网L3</li>
+<li>延时低, 成本高,可靠性高,CPU低,运维成本低</li>
+<li>建设成本高昂，服务器需要专用的IB网卡，专用的IB交换机搭建专用网络，一般是普通网络设备的五到十倍，只有在金融、期货交易等环境中才会考虑使用</li>
+<li>网络基础设施增多使相应的配套设施增加，如线缆、模块、监控、环动、电耗等</li>
+<li>InfiniBand网络具备高带宽、无丢包、配置和运维简单等优势</li>
+<li>InfiniBand交换机的延迟始终低于以太网交换机，一种特定类型的以太网交换机的端口到端口延迟为230ns，而具有相同端口数量的InfiniBand交换机的端口到端口延迟为100ns</li>
+<li>Mellanox</li>
+</ul>
+</li>
+<li>iWARP<ul>
+<li>IETF</li>
+<li>TCP&#x2F;IP以太网L3</li>
+<li>延时高, 成本中,可靠性低,CPU高,运维成本低</li>
+<li>WARP协议较复杂，包含DDP、MPA和RDMAP三层子协议</li>
+<li>基于TCP提供可靠的服务，但拥塞控制机制复杂，重传机制导致时延增大；</li>
+<li>TCP需建立连接，工作效率低，且只能适用于点到点的场景，不适合多播场景</li>
+<li>在大规模数据中心和大规模应用程序的场景中，大量的TCP连接会占用较多的系统资源（TCP流量将导致接近100%的CPU资源被占用），影响网络扩展性和性能</li>
+<li>iWARP与传统TCP流共享协议号空间，因此需要使用上下文状态来确定数据包是否为iWARP，增加处理延时</li>
+<li>iWARP是一个全新的协议，所以服务器网卡需要支持该协议</li>
+<li>Chelsio&#x2F;intel&#x2F;Marvel&#x2F;Kazan Networks</li>
+</ul>
+</li>
+<li>RoCE<ul>
+<li>IBTA</li>
+<li>依赖无损以太网，保障RDMA的低时延、零丢包和高可靠</li>
+<li>无损以太网配置较IB网络更加复杂，运维也更加复杂 </li>
+<li>RoCEv1<ul>
+<li>以太网L2</li>
+<li>只能在同一以太网广播域中通信，可伸缩性受限</li>
+</ul>
+</li>
+<li>RoCEv2高<ul>
+<li>UDP&#x2F;IP以太网L3</li>
+<li>延时中, 成本低,可靠性中,CPU低,运维成本高</li>
+<li>引入IP解决了网络扩展性问题，可以在三层间路由；引入UDP解决负载均衡的问题，提高网络利用率</li>
+<li>依赖无损以太网，并定义了拥塞控制协议ECN，保障低时延、零丢包和高可靠</li>
+<li>UDP是无连接的，高效，具有较好的实时性，且支持一对一，一对多，多对一和多对多的交互通信</li>
+<li>UDP具有较少的开销，占用较少的系统资源，网络扩展性和性能不受影响</li>
+<li>根据UDP端口号可以快速识别RoCE流，处理时延低</li>
+<li>Mellanox&#x2F;Emulex&#x2F;Broadcom&#x2F;QLogic&#x2F;Cavium&#x2F;Huawei&#x2F;ATTO&#x2F;intel&#x2F;Marvel&#x2F;Kazan Networks</li>
+</ul>
+</li>
+<li>ENC( Explicit Congestion Notification )<ul>
+<li>Weighted Random Early Detection (WRED) drops packets based on the average length exceeding a specific threshold value to indicate congestion. Explicit Congestion Notification (ECN) is an extension to WRED that marks the drop-eligible packets, instead of dropping, using the same criteria of minimum threshold, maximum threshold, and drop probability. WRED Behavior with and without ECN shows the WRED behavior without ECN and with ECN.</li>
+<li>RFC 3168 states that the two-bit ECN field comprises an ECT bit and a CE bit that are used to implement ECN. The ECT bit and the CE bit can be combined into four possible ECN field values 00 to 11. The first number is ECT bit and the second number is the CE bit. ENC Field Values shows the possible combination</li>
+<li><a target="_blank" rel="noopener" href="https://documentation.extremenetworks.com/exos_32.5/GUID-F6EA1959-8295-4B38-BCB2-194BD7CE8FD9.shtml">Limitations</a><ul>
+<li>TCP yellow traffic color is not supported.</li>
+<li>ECN over VXLAN is not supported. Any tunneling protocol implemented with double headers is not supported</li>
+<li>The ECN counters showing the number of marked packets is not available yet, so those appear as 0</li>
+<li>This implementation is limited to ECN pass-through. End points having TCP&#x2F;DCTCP&#x2F;RoCEv2 capabilities can use the ECN services</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
   </div>
 </article>
 
@@ -511,7 +864,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#BUGS"><span class="toc-number">1.</span> <span class="toc-text">BUGS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Packages-loss"><span class="toc-number">2.</span> <span class="toc-text">Packages loss</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#LAG-with-Mellanox-RoCEv2"><span class="toc-number">2.1.</span> <span class="toc-text">LAG with Mellanox RoCEv2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#initialization-broadcom-mellanox-RoCEv2-driver-under-AlmaLinux-8-5"><span class="toc-number">2.2.</span> <span class="toc-text">initialization broadcom&#x2F;mellanox RoCEv2 driver under AlmaLinux 8.5</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Here-is-the-direct-access-and-pass-the-switch-test-result"><span class="toc-number">2.3.</span> <span class="toc-text">Here is the direct access and pass the switch test result</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lustre"><span class="toc-number">3.</span> <span class="toc-text">Lustre</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mellanox-hard-reset"><span class="toc-number">4.</span> <span class="toc-text">Mellanox hard reset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#broadcom"><span class="toc-number">5.</span> <span class="toc-text">broadcom</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#NIC-upgrade-firmware"><span class="toc-number">5.1.</span> <span class="toc-text">NIC upgrade firmware</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Configuring-Peer-Memory-Direct-with-BCM5750X-Network-Adapters-with-NCCL"><span class="toc-number">5.2.</span> <span class="toc-text">Configuring Peer Memory Direct with BCM5750X Network Adapters with NCCL</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#broadcom-Switch-Configuration-for-RoCE"><span class="toc-number">5.3.</span> <span class="toc-text">broadcom Switch Configuration for RoCE</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NFS-server-over-RDMA-RoCEv2"><span class="toc-number">6.</span> <span class="toc-text">NFS server over RDMA&#x2F;RoCEv2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Configure-mellanox-tools-and-Set-Up-Lossless-Configuration"><span class="toc-number">7.</span> <span class="toc-text">Configure mellanox tools and Set Up Lossless Configuration</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tcpdump-rdma-rocev2"><span class="toc-number">8.</span> <span class="toc-text">tcpdump rdma rocev2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Soft-RoCE"><span class="toc-number">9.</span> <span class="toc-text">Soft-RoCE</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#RDMA"><span class="toc-number">1.</span> <span class="toc-text">RDMA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BUGS"><span class="toc-number">2.</span> <span class="toc-text">BUGS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Packages-loss"><span class="toc-number">4.</span> <span class="toc-text">Packages loss</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#LAG-with-Mellanox-RoCEv2"><span class="toc-number">4.1.</span> <span class="toc-text">LAG with Mellanox RoCEv2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#initialization-broadcom-mellanox-RoCEv2-driver-under-AlmaLinux-8-5"><span class="toc-number">4.2.</span> <span class="toc-text">initialization broadcom&#x2F;mellanox RoCEv2 driver under AlmaLinux 8.5</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Here-is-the-direct-access-and-pass-the-switch-test-result"><span class="toc-number">4.3.</span> <span class="toc-text">Here is the direct access and pass the switch test result</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lustre"><span class="toc-number">5.</span> <span class="toc-text">Lustre</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mellanox-hard-reset"><span class="toc-number">6.</span> <span class="toc-text">Mellanox hard reset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#broadcom"><span class="toc-number">7.</span> <span class="toc-text">broadcom</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#NIC-upgrade-firmware"><span class="toc-number">7.1.</span> <span class="toc-text">NIC upgrade firmware</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Configuring-Peer-Memory-Direct-with-BCM5750X-Network-Adapters-with-NCCL"><span class="toc-number">7.2.</span> <span class="toc-text">Configuring Peer Memory Direct with BCM5750X Network Adapters with NCCL</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#broadcom-Switch-Configuration-for-RoCE"><span class="toc-number">7.3.</span> <span class="toc-text">broadcom Switch Configuration for RoCE</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NFS-server-over-RDMA-RoCEv2"><span class="toc-number">8.</span> <span class="toc-text">NFS server over RDMA&#x2F;RoCEv2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Configure-mellanox-tools-and-Set-Up-Lossless-Configuration"><span class="toc-number">9.</span> <span class="toc-text">Configure mellanox tools and Set Up Lossless Configuration</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tcpdump-rdma-rocev2"><span class="toc-number">10.</span> <span class="toc-text">tcpdump rdma rocev2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Soft-RoCE"><span class="toc-number">11.</span> <span class="toc-text">Soft-RoCE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rdma-technology-features"><span class="toc-number">12.</span> <span class="toc-text">rdma-technology-features</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -525,10 +878,156 @@
   <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2022/11/13/rdma/&title=RDMA"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2022/11/13/rdma/&title=RDMA"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2022/11/13/rdma/&title=RDMA"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2022/11/13/rdma/&name=RDMA&description=&lt;h3 id=&#34;BUGS&#34;&gt;&lt;a href=&#34;#BUGS&#34; class=&#34;headerlink&#34; title=&#34;BUGS&#34;&gt;&lt;/a&gt;BUGS&lt;/h3&gt;&lt;ul&gt;
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2022/11/13/rdma/&name=RDMA&description=&lt;h3 id=&#34;RDMA&#34;&gt;&lt;a href=&#34;#RDMA&#34; class=&#34;headerlink&#34; title=&#34;RDMA&#34;&gt;&lt;/a&gt;&lt;a href=&#34;https://hustcat.github.io/queue-pair-in-rdma/&#34;&gt;RDMA&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;RoCEv2 key feature&lt;ul&gt;
+&lt;li&gt;zero-copy (FC not support)&lt;/li&gt;
+&lt;li&gt;bypass-kernel (FC support)&lt;/li&gt;
+&lt;li&gt;lossless network&lt;/li&gt;
+&lt;li&gt;PFC(Priority-based Flow Control)&lt;ul&gt;
+&lt;li&gt;over shreshold and send the “PFC pause frame”, until the value lower “shreshold” and send the “pause with zero duration”&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://community.mellanox.com/docs/DOC-2022&#34;&gt;PFC class (diff level)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;coarse-grained, influence a lot&lt;/li&gt;
+&lt;li&gt;VLAN-based PFC&lt;ul&gt;
+&lt;li&gt;VLAN tag&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://community.mellanox.com/docs/DOC-1415&#34;&gt;HowTo Run RoCE and TCP over L2 Enabled with PFC&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;VLAN PFC 2 issues&lt;ul&gt;
+&lt;li&gt;trunk mode for switch&lt;/li&gt;
+&lt;li&gt;VLAN PCP could not transmit to L3, VLAN work in L2, try to import DSCP-based PFC&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;DSCP-based PFC&lt;ul&gt;
+&lt;li&gt;DSCP-based PFC requires both NICs and switches to classify and queue packets based on the DSCP value instead of the VLAN tag&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;DSCP vs TOS&lt;ul&gt;
+&lt;li&gt;The type of service (ToS) field in the IPv4 header has had various purposes over the years, and has been defined in different ways by five RFCs. The modern redefinition of the ToS field is a six-bit Differentiated Services Code Point (DSCP) field and a two-bit Explicit Congestion Notification (ECN) field. While Differentiated Services is somewhat backwards compatible with ToS, ECN is not.&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Type_of_service&#34;&gt;reference1&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Differentiated_services&#34;&gt;reference2&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;RDMA PFC issues&lt;ul&gt;
+&lt;li&gt;RDMA transport livelock&lt;ul&gt;
+&lt;li&gt;尽管PFC可以避免buffer overflow导致的丢包，但是，其它一些原因，比如FCS错误，也可能导致网络丢包。RDMA的go-back-0算法，每次出现丢包，都会导致整个message的所有packet都会重传，从而导致livelock。TCP有SACK算法，由于RDMA传输层在NIC实现，受限于硬件资源，NIC很难实现SACK算法。可以使用go-back-N算法来避免这个问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;PFC Deadlock&lt;ul&gt;
+&lt;li&gt;当PFC机制与Ethernet的广播机制工作时，可能导致出现PFC Deadlock。简单来说，就是PFC机制会导致相应的port停止发包，而Ethernet的广播包可能引起新的PFC pause依赖（比如port对端的server down掉)，从而引起循环依赖。广播和多播对于loseless是非常危险的，建议不要将其归于loseless classes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;NIC PFC pause frame storm&lt;ul&gt;
+&lt;li&gt;由于PFC pause是传递的，所以很容器引起pause frame storm。比如，NIC因为bug导致接收缓冲区填满，NIC会一直对外发送pause frame。需要在NIC端和交换机端使用watchdog机制来防止pause storm&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;The Slow-receiver symptom&lt;ul&gt;
+&lt;li&gt;由于NIC的资源有限，它将大部分数据结构，比如QPC(Queue Pair Context) 和WQE (Work Queue Element)都放在host memory。而NIC只会缓存部分数据对象，一旦出现cache miss，NIC的处理速度就会下降&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;32&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;## 将skb prio 0~7 映射到vlan prio 3&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;for&lt;/span&gt; i &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; &amp;#123;0..7&amp;#125;; &lt;span class=&#34;keyword&#34;&gt;do&lt;/span&gt; ip &lt;span class=&#34;built_in&#34;&gt;link&lt;/span&gt; &lt;span class=&#34;built_in&#34;&gt;set&lt;/span&gt; dev eth1.100 &lt;span class=&#34;built_in&#34;&gt;type&lt;/span&gt; vlan egress-qos-map &lt;span class=&#34;variable&#34;&gt;$i&lt;/span&gt;:3 ; &lt;span class=&#34;keyword&#34;&gt;done&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;## enable PFC on TC3&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;mlnx_qos -i eth1 -f 0,0,0,1,0,0,0,0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;[root@node1 ~]&lt;span class=&#34;comment&#34;&gt;# cat /proc/net/vlan/eth1.100 &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;eth1.100  VID: 100       REORDER_HDR: 1  dev-&amp;gt;priv_flags: 1001&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;         total frames received            0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          total bytes received            0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      Broadcast/Multicast Rcvd            0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      total frames transmitted            0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;       total bytes transmitted            0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Device: eth1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;INGRESS priority mappings: 0:0  1:0  2:0  3:0  4:0  5:0  6:0 7:0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; EGRESS priority mappings: &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;[root@node1 ~]&lt;span class=&#34;comment&#34;&gt;# for i in &amp;#123;0..7&amp;#125;; do ip link set dev eth1.100 type vlan egress-qos-map $i:3 ; done&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;[root@node1 ~]&lt;span class=&#34;comment&#34;&gt;# cat /proc/net/vlan/eth1.100                                                      &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;eth1.100  VID: 100       REORDER_HDR: 1  dev-&amp;gt;priv_flags: 1001&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;         total frames received            0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          total bytes received            0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      Broadcast/Multicast Rcvd            0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      total frames transmitted            0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;       total bytes transmitted            0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Device: eth1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;INGRESS priority mappings: 0:0  1:0  2:0  3:0  4:0  5:0  6:0 7:0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; EGRESS priority mappings: 0:3 1:3 2:3 3:3 4:3 5:3 6:3 7:3 &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;HowTo Set Egress Priority VLAN on Linux&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;https://community.mellanox.com/docs/DOC-2311&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Congestion Control (DCQCN)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;base Explicit Congestion Notification (ECN)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://community.mellanox.com/docs/DOC-2321&#34;&gt;Understanding RoCEv2 Congestion Management&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;ECN in RoCEv2&lt;ul&gt;
+&lt;li&gt;RoCEv2引入了ECN机制来实现拥塞控制，即RoCEv2 Congestion Management (RCM)。通过RCM，一旦网络发生拥塞，就会通知发送端降低发送速率。与TCP类似，RoCEv2使用传输层头部Base Transport Header (BTH)的FECN标志位来标识拥塞&lt;/li&gt;
+&lt;li&gt;如果收到IP.ECN为11的包，HCA生成一个RoCEv2 CNP(Congestion Notification Packet)包，返回给发送端&lt;/li&gt;
+&lt;li&gt;如果收到RoCEv2 CNP包，则降低对应QP的发送速率&lt;/li&gt;
+&lt;li&gt;从上一次收到RoCEv2 CNP后，经过配置的时间或者字节数，HCA可以增加对应QP的发送速率&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;RP (Injector)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Reaction Point - the end node that performs rate limitation to prevent congestion&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;NP&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Notification Point - the end node that receives the packets from the injector and sends back notifications to the injector for indications regarding the congestion situation&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;CP&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Congestion Point - the switch queue in which congestion happens&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;CNP&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The RoCEv2 Congestion Notification Packet - The notification message an NP sends to the RP when it receives CE marked packets&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;[Congestion Control Loop](&lt;a href=&#34;https://community.mellanox.com/docs/DOC-2321#jive_content_id_Congestion_Control_Loop]&#34;&gt;https://community.mellanox.com/docs/DOC-2321#jive_content_id_Congestion_Control_Loop]&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://community.mellanox.com/docs/DOC-2733&#34;&gt;How To Configure RoCE over a Lossless Fabric (PFC + ECN) End-to-End Using ConnectX-4 and Spectrum (Trust L2)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;ECN with TCP&amp;#x2F;IP&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ECN是一个端到端的拥塞通知机制，而不需要丢包。ECN是可选的特性，它需要端点开启ECN支持，同时底层的网络也需要支持。&lt;/li&gt;
+&lt;li&gt;传统的TCP&amp;#x2F;IP网络，通过丢包来表明网络拥塞，router&amp;#x2F;switch&amp;#x2F;server都会这么做。而对于支持ECN的路由器，当发生网络拥塞时，会设置IP头部的ECN(2bits)标志位，而接收端会给发送端返回拥塞的通知(echo of the congestion indication)，然后发送端降低发送速率。由于发送速率由传输层(TCP)控制，所以，ECN需要TCP和IP层同时配合。rfc3168定义了ECN for TCP&amp;#x2F;IP。&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;ECN with IP&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;IP头部有2个bit的ECN标志位：&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;00 – Non ECN-Capable Transport, Non-ECT&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10 – ECN Capable Transport, ECT(0)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;01 – ECN Capable Transport, ECT(1)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11 – Congestion Encountered, CE.&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;ECN with TCP&lt;ul&gt;
+&lt;li&gt;为了支持ECN，TCP使用了TCP头部的3个标志位：Nonce Sum (NS)，ECN-Echo (ECE)和Congestion Window Reduced (CWR)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://community.mellanox.com/docs/DOC-2894&#34;&gt;IP&amp;#x2F;Ethernet&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;By using PCP bits on the VLAN header&lt;/li&gt;
+&lt;li&gt;By using DSCP bits on the IP header&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;CA(Channel Adapter)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;CM(Communication Manager)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;QP&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Send Queue(SQ)&lt;/li&gt;
+&lt;li&gt;Receive Queue(RQ)&lt;/li&gt;
+&lt;li&gt;RC (Reliable Connected)&lt;/li&gt;
+&lt;li&gt;struct ibv_qp *ibv_create_qp&lt;/li&gt;
+&lt;li&gt;struct ib_qp&lt;/li&gt;
+&lt;li&gt;struct mlx4_ib_qp&lt;/li&gt;
+&lt;li&gt;QP status&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/hustcat/rdma-core/blob/v15/libibverbs/verbs.h#L842&#34;&gt;https://github.com/hustcat/rdma-core/blob/v15/libibverbs/verbs.h#L842&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/hustcat/rdma-core/blob/v15/libibverbs/verbs.h#L2131&#34;&gt;https://github.com/hustcat/rdma-core/blob/v15/libibverbs/verbs.h#L2131&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;RESET  Newly created, queues empty.&lt;/li&gt;
+&lt;li&gt;INIT   Basic information set. Ready for posting to receive queue.&lt;/li&gt;
+&lt;li&gt;RTR    Ready to Receive. Remote address info set for connected QPs, QP may now receive packets.&lt;/li&gt;
+&lt;li&gt;RTS    Ready to Send. Timeout and retry parameters set, QP may now send packets.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;BUGS&#34;&gt;&lt;a href=&#34;#BUGS&#34; class=&#34;headerlink&#34; title=&#34;BUGS&#34;&gt;&lt;/a&gt;BUGS&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://forums.developer.nvidia.com/t/mlnx-ofed-linux-5-7-1-mlx5-2-create-qp-pid-19774-create-qp-type-2-failed/232369&#34;&gt;infiniband mlx5_0: create_qp:3206:(pid 698661): Create QP type 2 failed&lt;/a&gt;&lt;ul&gt;
 &lt;li&gt;upgrade mlx5 dev firmware&lt;/li&gt;
 &lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;&#34;&gt;&lt;a href=&#34;#&#34; class=&#34;headerlink&#34; title=&#34;&#34;&gt;&lt;/a&gt;&lt;a href=&#34;https://www.snia.org/sites/default/files/ESF/Optimizing-NVMe-Over-Fabrics-Performance-Final.pdf&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Default MTU is 1500B, Ethernet frame adds 18B, if not tagged, to make it 1518B maximum Ethernet frame&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;If Jumbo Frame is supported, maximum Ethernet frame can be 9000B&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Many modern OSes force the MTU transmission, regardless of upper level data size, for efficiency&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Caveat: Jumbo Frame needs to be enabled on both Initiator, Target and all network devices along the path&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://docs.nvidia.com/networking/display/mlnxofedv543580/rdma+over+converged+ethernet+(roce)#src-96900067_safe-id-UkRNQW92ZXJDb252ZXJnZWRFdGhlcm5ldChSb0NFKS1TZXR0aW5ndGhlUm9DRU1vZGVmb3JhUXVldWVQYWlyKFFQKQ&#34;&gt;RDMA over Converged Ethernet (RoCE)&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;Packages-loss&#34;&gt;&lt;a href=&#34;#Packages-loss&#34; class=&#34;headerlink&#34; title=&#34;Packages loss&#34;&gt;&lt;/a&gt;Packages loss&lt;/h3&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
