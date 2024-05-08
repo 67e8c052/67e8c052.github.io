@@ -14,7 +14,7 @@
 <meta property="og:description" content="readhat replacement Stratis file systemsabout stratis  Instead, Stratis chose to use some of the Linux kernel’s other existing capabilities:  The device mapper subsystem, which is most notably used by">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2016-12-04T07:06:13.000Z">
-<meta property="article:modified_time" content="2024-03-30T06:46:49.276Z">
+<meta property="article:modified_time" content="2024-05-01T05:46:15.000Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="zfs">
 <meta property="article:tag" content="scsi">
@@ -424,10 +424,23 @@ Loss of DWORD synchronization = 31
 <ul>
 <li><p>if you create a vdev with a disknumber that does not meet a golden number (power of 2 for datadisks) then you will waste some space (can be up to 10%). You can reduce that when you increase blocksize. For a backupsystem this is perfectly ok. If this would be a database or VM server this may affect performance negatively. Such systems would more prefer a recorsize of say 32k</p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://klarasystems.com/articles/choosing-the-right-zfs-pool-layout/">choosing-the-right-zfs-pool-layout</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://www.delphix.com/blog/zfs-raidz-stripe-width-or-how-i-learned-stop-worrying-and-love-raidz">zfs-raidz-stripe-width-or-how-i-learned-stop-worrying-and-love-raidz</a></p>
+<li><p><a target="_blank" rel="noopener" href="https://www.reddit.com/r/Proxmox/comments/x0sbsf/problems_replacing_disk_in_zfs_pool/">golden num</a></p>
 <ul>
+<li>The summary is that if you really want no wasted space in RAID-Z, then it must not just be a power-of-2 data disks, but the whole stripe size (data+parity disks) must be a multiple of P+1, where P is the number of parity disks</li>
+<li>The reason for the power-of-2 assumes no compression. The block size will itself be a power of 2, ensuring all data disks are allocated, so no parity blocks are allocated for fewer than D data disks at any time</li>
+<li>The P+1 rule is because a free space gap of P or fewer blocks are unusable as there’s no room to write the parity + data. So ZFS will just round up sector sizes to eliminate any gaps from so much as forming. In that document, the disk layout image uses an X to represent these filler sectors</li>
+<li>Even if you’re okay with these RAID configuration requirements, I did specifically say it assumes compression is off. Pretty much any (successful) use of compression destroys the power-of-2 rule since disk write sizes are effectively random, merely rounded up to 1 disk sector (4k presumably). And if compression is usable, it’ll save you far more space than you’ll lose to RAID-Z overhead. Right?</li>
+<li>When a single file is below the recordsize, you will use that size. Assuming 4k disks, it will be treated as 28k</li>
+<li>However, a 129k file will be treated as 256k because of how the rounding works. No I don’t know why. Yes am I a bit mad at it.</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#here is not enable compression</span></span><br><span class="line"></span><br><span class="line">raidz3 9+3=12, P+1=4, 128K/4K(ashift=12)=32x D, the minimal size is <span class="string">&quot;DPPP&quot;</span></span><br><span class="line">DDDDDDDDDPPP  9xD(data)</span><br><span class="line">DDDDDDDDDPPP  9xD</span><br><span class="line">DDDDDDDDDPPP  9xD</span><br><span class="line">DDDDDPPP     &lt;---here is not padding XXXX, because here could be written 1x DPPP, no enough alignment, 32/44 = 72.72%, there is 4x Data to store the tiny data(DPPP)</span><br><span class="line">                 waste space too <span class="keyword">in</span> reality</span><br><span class="line"></span><br><span class="line">raidz3 8+3=11</span><br><span class="line">DDDDDDDDPPP  </span><br><span class="line">DDDDDDDDPPP</span><br><span class="line">DDDDDDDDPPP</span><br><span class="line">DDDDDDDDPPP  &lt;---golden number, no padding, and alignment,  32/44 = 72.72%</span><br><span class="line"></span><br><span class="line">raidz3 7+3=10</span><br><span class="line">DDDDDDDPPP</span><br><span class="line">DDDDDDDPPP</span><br><span class="line">DDDDDDDPPP</span><br><span class="line">DDDDDDDPPP</span><br><span class="line">DDDDPPPXXX   &lt;---not enough space <span class="keyword">for</span> DPPP, to padding XXX ,  32D/50(total) = 64%</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li><a target="_blank" rel="noopener" href="https://klarasystems.com/articles/choosing-the-right-zfs-pool-layout/">choosing-the-right-zfs-pool-layout</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.delphix.com/blog/zfs-raidz-stripe-width-or-how-i-learned-stop-worrying-and-love-raidz">zfs-raidz-stripe-width-or-how-i-learned-stop-worrying-and-love-raidz</a><ul>
 <li>the key is the zfs raidz,z2,z3 malloc space base the (P+1)*N, N&gt;&#x3D;1<ul>
 <li>because the zfs stripe not fixed, it ‘s flexible<ul>
 <li>need more parity space</li>
