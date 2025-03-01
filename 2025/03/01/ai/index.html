@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="ollamaBuild and run ollama with vulkanreferencetest in ubuntu 24.04   123456789101112131415161718192021222324252627282930313233343536373839404142$ wget -qO- https:&#x2F;&#x2F;packages.lunarg.com&#x2F;lunarg-signing-">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI">
+<meta property="og:url" content="http://example.com/2025/03/01/ai/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="ollamaBuild and run ollama with vulkanreferencetest in ubuntu 24.04   123456789101112131415161718192021222324252627282930313233343536373839404142$ wget -qO- https:&#x2F;&#x2F;packages.lunarg.com&#x2F;lunarg-signing-">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-03-01T11:21:24.000Z">
+<meta property="article:modified_time" content="2025-03-01T12:11:51.746Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="ai">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>AI</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/01/05/zone_dev/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/03/01/ai/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/03/01/ai/&text=AI"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/03/01/ai/&title=AI"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/03/01/ai/&is_video=false&description=AI"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=AI&body=Check out this article: http://example.com/2025/03/01/ai/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/03/01/ai/&title=AI"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/03/01/ai/&title=AI"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/03/01/ai/&title=AI"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/03/01/ai/&title=AI"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/03/01/ai/&name=AI&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/03/01/ai/&t=AI"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ollama"><span class="toc-number">1.</span> <span class="toc-text">ollama</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Build-and-run-ollama-with-vulkan"><span class="toc-number">1.1.</span> <span class="toc-text">Build and run ollama with vulkan</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Compile-Open-WebUI"><span class="toc-number">1.2.</span> <span class="toc-text">Compile Open WebUI</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#force-running-model-with-swap"><span class="toc-number">1.3.</span> <span class="toc-text">force running model with swap</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#llama-cpp"><span class="toc-number">2.</span> <span class="toc-text">llama.cpp</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#benchmark-CPU"><span class="toc-number">2.1.</span> <span class="toc-text">benchmark CPU</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#llama-cmd"><span class="toc-number">2.2.</span> <span class="toc-text">llama cmd</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        AI
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">John Doe</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-03-01T11:21:24.000Z" itemprop="datePublished">2025-03-01</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/AI/">AI</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/ai/" rel="tag">ai</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="ollama"><a href="#ollama" class="headerlink" title="ollama"></a>ollama</h3><h4 id="Build-and-run-ollama-with-vulkan"><a href="#Build-and-run-ollama-with-vulkan" class="headerlink" title="Build and run ollama with vulkan"></a><a target="_blank" rel="noopener" href="https://kovasky.me/blogs/ollama_vulkan_intel/">Build and run ollama with vulkan</a></h4><p><a target="_blank" rel="noopener" href="https://github.com/wilgnne/ollama-vulkan/blob/main/Dockerfile">reference</a><br>test in ubuntu 24.04  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">$ wget -qO- https://packages.lunarg.com/lunarg-signing-key-pub.asc | sudo <span class="built_in">tee</span> /etc/apt/trusted.gpg.d/lunarg.asc</span><br><span class="line">$ sudo wget -qO /etc/apt/sources.list.d/lunarg-vulkan-noble.list http://packages.lunarg.com/vulkan/lunarg-vulkan-noble.list <span class="comment">#ubuntu 24.04</span></span><br><span class="line">                                                                 <span class="comment">#ubuntu 22.04 https://packages.lunarg.com/vulkan/lunarg-vulkan-jammy.list</span></span><br><span class="line">$ sudo apt update</span><br><span class="line">$ sudo apt install vulkan-sdk ccache</span><br><span class="line">$ <span class="built_in">which</span> glslc</span><br><span class="line">/usr/bin/glslc</span><br><span class="line"></span><br><span class="line"><span class="comment">#Vulkan must running by root, compile by root for vulkan lib</span></span><br><span class="line"></span><br><span class="line">$ git <span class="built_in">clone</span> -b vulkan https://github.com/whyvl/ollama-vulkan.git</span><br><span class="line">$ <span class="built_in">cd</span> ollama-vulkan</span><br><span class="line">$ git remote add ollama_vanilla https://github.com/ollama/ollama.git</span><br><span class="line">$ git fetch ollama_vanilla --tags</span><br><span class="line">$ git checkout tags/v0.5.11 -b ollama_vanilla_stable</span><br><span class="line">$ git checkout vulkan</span><br><span class="line">$ git merge ollama_vanilla_stable --allow-unrelated-histories --no-edit</span><br><span class="line">$ <span class="built_in">mkdir</span> -p /tmp/patches</span><br><span class="line">$ wget -O /tmp/patches/0002-fix-fix-vulkan-building.patch https://github.com/user-attachments/files/18783263/0002-fix-fix-vulkan-building.patch</span><br><span class="line">$ patch -p1 -N &lt; /tmp/patches/0002-fix-fix-vulkan-building.patch</span><br><span class="line"></span><br><span class="line">$ make -f Makefile.<span class="built_in">sync</span> clean <span class="built_in">sync</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;Building CPU variant...&quot;</span></span><br><span class="line">$ cmake --preset CPU</span><br><span class="line">$ cmake --build --parallel --preset CPU</span><br><span class="line">$ cmake --install build --component CPU --strip</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;Building Vulkan variant...&quot;</span></span><br><span class="line">$ cmake --preset Vulkan</span><br><span class="line">$ cmake --build --parallel --preset Vulkan</span><br><span class="line">$ cmake --install build --component Vulkan --strip</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">source</span> scripts/env.sh || <span class="literal">true</span></span><br><span class="line">$ <span class="built_in">mkdir</span> -p dist/bin</span><br><span class="line">$ go build -trimpath -buildmode=pie -o dist/bin/ollama .</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;CPU libraries are in:      <span class="variable">$&#123;REPO_DIR&#125;</span>/dist/lib/ollama&quot;</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;Vulkan libraries are in:   <span class="variable">$&#123;REPO_DIR&#125;</span>/dist/lib/ollama/vulkan&quot;</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;ollama binary is in:       <span class="variable">$&#123;REPO_DIR&#125;</span>/dist/bin/ollama&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#comment the env is OK, looks like is not necessary</span></span><br><span class="line"><span class="comment">#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/root/ollama-vulkan/dist/lib/ollama:/root/ollama-vulkan/dist/lib/ollama/vulkan</span></span><br></pre></td></tr></table></figure>
+<p>make sure  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#server start by root, non-root user could not running to GPU, only CPU</span></span><br><span class="line">$ dist/bin/ollama serve</span><br><span class="line">......</span><br><span class="line">time=2025-03-01T19:29:45.444+08:00 level=INFO <span class="built_in">source</span>=routes.go:1237 msg=<span class="string">&quot;Listening on 127.0.0.1:11434 (version 0.0.0)&quot;</span></span><br><span class="line">time=2025-03-01T19:29:45.472+08:00 level=INFO <span class="built_in">source</span>=gpu.go:254 msg=<span class="string">&quot;looking for compatible GPUs&quot;</span></span><br><span class="line">time=2025-03-01T19:29:45.491+08:00 level=INFO <span class="built_in">source</span>=gpu.go:199 msg=<span class="string">&quot;vulkan: load libvulkan and libcap ok&quot;</span></span><br><span class="line">time=2025-03-01T19:29:45.526+08:00 level=INFO <span class="built_in">source</span>=gpu.go:421 msg=<span class="string">&quot;error looking up vulkan GPU memory&quot;</span> error=<span class="string">&quot;device is a CPU&quot;</span></span><br><span class="line">time=2025-03-01T19:29:45.526+08:00 level=WARN <span class="built_in">source</span>=amd_linux.go:61 msg=<span class="string">&quot;ollama recommends running the https://www.amd.com/en/support/linux-drivers&quot;</span> error=<span class="string">&quot;amdgpu version file missing: /sys/module/amdgpu/version stat /sys/module/amdgpu/version: no such file or directory&quot;</span></span><br><span class="line">time=2025-03-01T19:29:45.526+08:00 level=WARN <span class="built_in">source</span>=amd_linux.go:309 msg=<span class="string">&quot;amdgpu too old gfx803&quot;</span> gpu=0</span><br><span class="line">time=2025-03-01T19:29:45.526+08:00 level=INFO <span class="built_in">source</span>=amd_linux.go:402 msg=<span class="string">&quot;no compatible amdgpu devices detected&quot;</span></span><br><span class="line">time=2025-03-01T19:29:45.528+08:00 level=INFO <span class="built_in">source</span>=types.go:137 msg=<span class="string">&quot;inference compute&quot;</span> <span class="built_in">id</span>=0 library=vulkan variant=<span class="string">&quot;&quot;</span> compute=1.3 driver=1.3 name=<span class="string">&quot;AMD Radeon RX 580 2048SP (RADV POLARIS10)&quot;</span> total=<span class="string">&quot;8.0 GiB&quot;</span> available=<span class="string">&quot;7.5 GiB&quot;</span></span><br><span class="line"></span><br><span class="line">$ dist/bin/ollama run deepseek-r1:7b</span><br><span class="line"></span><br><span class="line"><span class="comment"># service start</span></span><br><span class="line">$ <span class="built_in">cat</span> /etc/systemd/system/ollama.service</span><br><span class="line">[Unit]</span><br><span class="line">Description=Ollama Service</span><br><span class="line">After=network-online.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">ExecStart=/home/testuser/ollama-vulkan/dist/bin/ollama serve</span><br><span class="line">User=root</span><br><span class="line">Group=root</span><br><span class="line">Restart=always</span><br><span class="line">RestartSec=3</span><br><span class="line">Environment=<span class="string">&quot;OLLAMA_MODELS=/home/testuser/ollama_models&quot;</span></span><br><span class="line">Environment=<span class="string">&quot;OLLAMA_HOST=0.0.0.0:11434&quot;</span></span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=default.target</span><br><span class="line"></span><br><span class="line">$ sudo systemctl daemon-reload</span><br><span class="line">$ sudo systemctl <span class="built_in">enable</span> ollama</span><br><span class="line">$ sudo systemctl start ollama</span><br></pre></td></tr></table></figure>
+<p>AMD RX580 worked(radeontop)  </p>
+<h4 id="Compile-Open-WebUI"><a href="#Compile-Open-WebUI" class="headerlink" title="Compile Open WebUI"></a><a target="_blank" rel="noopener" href="https://community.hetzner.com/tutorials/ai-chatbot-with-ollama-and-open-webui">Compile Open WebUI</a></h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt update &amp;&amp; sudo apt install npm python3-pip python3-venv git -y</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/open-webui/open-webui.git</span><br><span class="line">$ <span class="built_in">cd</span> open-webui</span><br><span class="line">$ <span class="built_in">cp</span> -RPp .env.example .<span class="built_in">env</span></span><br><span class="line"></span><br><span class="line">$ npm i </span><br><span class="line">npm ERR! code EBADENGINE</span><br><span class="line">npm ERR! engine Unsupported engine</span><br><span class="line">npm ERR! engine Not compatible with your version of node/npm: undici@7.4.0</span><br><span class="line">npm ERR! notsup Not compatible with your version of node/npm: undici@7.4.0</span><br><span class="line">npm ERR! notsup Required: &#123;<span class="string">&quot;node&quot;</span>:<span class="string">&quot;&gt;=20.18.1&quot;</span>&#125;</span><br><span class="line">npm ERR! notsup Actual:   &#123;<span class="string">&quot;npm&quot;</span>:<span class="string">&quot;9.2.0&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">rm</span> package-lock.json</span><br><span class="line">$ npm i</span><br><span class="line"><span class="comment">#not working ,upgrade</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#upgrade</span></span><br><span class="line">$ sudo npm install -g n</span><br><span class="line">$ node --version</span><br><span class="line">V22.14.0</span><br><span class="line"></span><br><span class="line">$ npm i </span><br><span class="line"><span class="comment"># not complete, suggest audit fix --force</span></span><br><span class="line">$ sudo npm audit fix --force</span><br><span class="line"><span class="comment"># there are some errors not fix, continue is OK</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#####If you get an error like Not compatible with your version, run the following commands to use the latest version:</span></span><br><span class="line">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash</span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br><span class="line">nvm install 22 &amp;&amp; nvm use 22</span><br><span class="line">npm install -g npm@latest</span><br><span class="line"><span class="comment">#####</span></span><br><span class="line"></span><br><span class="line">$ npm run build</span><br><span class="line">$ <span class="built_in">cd</span> backend</span><br><span class="line">$ python3 -m venv venv &amp;&amp; <span class="built_in">source</span> venv/bin/activate</span><br><span class="line">$ pip install -r requirements.txt -U -i https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">source</span> venv/bin/activate; bash start.sh</span><br><span class="line">Loading WEBUI_SECRET_KEY from file, not provided as an environment variable.</span><br><span class="line">Loading WEBUI_SECRET_KEY from .webui_secret_key</span><br><span class="line">/home/homerl/open-webui/backend/open_webui</span><br><span class="line">/home/homerl/open-webui/backend</span><br><span class="line">/home/homerl/open-webui</span><br><span class="line">INFO  [alembic.runtime.migration] Context impl SQLiteImpl.</span><br><span class="line">INFO  [alembic.runtime.migration] Will assume non-transactional DDL.</span><br><span class="line">INFO  [open_webui.env] <span class="string">&#x27;ENABLE_DIRECT_CONNECTIONS&#x27;</span> loaded from the latest database entry</span><br><span class="line">INFO  [open_webui.env] <span class="string">&#x27;ENABLE_OPENAI_API&#x27;</span> loaded from the latest database entry</span><br><span class="line">INFO  [open_webui.env] <span class="string">&#x27;OPENAI_API_KEYS&#x27;</span> loaded from the latest database entry</span><br><span class="line">INFO  [open_webui.env] <span class="string">&#x27;OPENAI_API_BASE_URLS&#x27;</span> loaded from the latest database entry</span><br><span class="line">INFO  [open_webui.env] <span class="string">&#x27;OPENAI_API_CONFIGS&#x27;</span> loaded from the latest database entry</span><br><span class="line">INFO  [open_webui.env] <span class="string">&#x27;ENABLE_SIGNUP&#x27;</span> loaded from the latest database entry</span><br><span class="line">INFO  [open_webui.env] <span class="string">&#x27;DEFAULT_LOCALE&#x27;</span> loaded from the latest database entry</span><br><span class="line">INFO  [open_webui.env] <span class="string">&#x27;DEFAULT_PROMPT_SUGGESTIONS&#x27;</span> loaded from the latest database entry</span><br><span class="line">WARNI [open_webui.env] </span><br><span class="line"></span><br><span class="line">WARNING: CORS_ALLOW_ORIGIN IS SET TO <span class="string">&#x27;*&#x27;</span> - NOT RECOMMENDED FOR PRODUCTION DEPLOYMENTS.</span><br><span class="line"></span><br><span class="line">INFO  [open_webui.env] Embedding model <span class="built_in">set</span>: sentence-transformers/all-MiniLM-L6-v2</span><br><span class="line">WARNI [langchain_community.utils.user_agent] USER_AGENT environment variable not <span class="built_in">set</span>, consider setting it to identify your requests.</span><br><span class="line"></span><br><span class="line"> ██████╗ ██████╗ ███████╗███╗   ██╗    ██╗    ██╗███████╗██████╗ ██╗   ██╗██╗</span><br><span class="line">██╔═══██╗██╔══██╗██╔════╝████╗  ██║    ██║    ██║██╔════╝██╔══██╗██║   ██║██║</span><br><span class="line">██║   ██║██████╔╝█████╗  ██╔██╗ ██║    ██║ █╗ ██║█████╗  ██████╔╝██║   ██║██║</span><br><span class="line">██║   ██║██╔═══╝ ██╔══╝  ██║╚██╗██║    ██║███╗██║██╔══╝  ██╔══██╗██║   ██║██║</span><br><span class="line">╚██████╔╝██║     ███████╗██║ ╚████║    ╚███╔███╔╝███████╗██████╔╝╚██████╔╝██║</span><br><span class="line"> ╚═════╝ ╚═╝     ╚══════╝╚═╝  ╚═══╝     ╚══╝╚══╝ ╚══════╝╚═════╝  ╚═════╝ ╚═╝</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">v0.5.18 - building the best open-source AI user interface.</span><br><span class="line"></span><br><span class="line">https://github.com/open-webui/open-webui</span><br><span class="line"></span><br><span class="line"><span class="comment">#because openwebui will be connect some web I can&#x27;t access because firewall, </span></span><br><span class="line"><span class="comment">#after 3~4 mins until timeout log show, I can access localhost:8080</span></span><br><span class="line"></span><br><span class="line">ERROR [open_webui.retrieval.utils] Cannot determine model snapshot path: An error happened <span class="keyword">while</span> trying to locate the files on the Hub and we cannot find the appropriate snapshot folder <span class="keyword">for</span> the specified revision on the <span class="built_in">local</span> disk. Please check your internet connection and try again.</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;/home/homerl/open-webui/backend/venv/lib/python3.12/site-packages/urllib3/connection.py&quot;</span>, line 198, <span class="keyword">in</span> _new_conn</span><br><span class="line">    sock = connection.create_connection(</span><br><span class="line">           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span><br><span class="line">  File <span class="string">&quot;/home/homerl/open-webui/backend/venv/lib/python3.12/site-packages/urllib3/util/connection.py&quot;</span>, line 85, <span class="keyword">in</span> create_connection</span><br><span class="line">    raise err</span><br><span class="line">  File <span class="string">&quot;/home/homerl/open-webui/backend/venv/lib/python3.12/site-packages/urllib3/util/connection.py&quot;</span>, line 73, <span class="keyword">in</span> create_connection</span><br><span class="line">    sock.connect(sa)</span><br><span class="line">OSError: [Errno 101] Network is unreachable</span><br><span class="line"></span><br><span class="line">The above exception was the direct cause of the following exception:</span><br><span class="line">.....</span><br><span class="line">The above exception was the direct cause of the following exception:</span><br><span class="line"></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;/home/homerl/open-webui/backend/open_webui/retrieval/utils.py&quot;</span>, line 536, <span class="keyword">in</span> get_model_path</span><br><span class="line">    model_repo_path = snapshot_download(**snapshot_kwargs)</span><br><span class="line">                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span><br><span class="line">  File <span class="string">&quot;/home/homerl/open-webui/backend/venv/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py&quot;</span>, line 114, <span class="keyword">in</span> _inner_fn</span><br><span class="line">    <span class="built_in">return</span> fn(*args, **kwargs)</span><br><span class="line">           ^^^^^^^^^^^^^^^^^^^</span><br><span class="line">  File <span class="string">&quot;/home/homerl/open-webui/backend/venv/lib/python3.12/site-packages/huggingface_hub/_snapshot_download.py&quot;</span>, line 235, <span class="keyword">in</span> snapshot_download</span><br><span class="line">    raise LocalEntryNotFoundError(</span><br><span class="line">huggingface_hub.errors.LocalEntryNotFoundError: An error happened <span class="keyword">while</span> trying to locate the files on the Hub and we cannot find the appropriate snapshot folder <span class="keyword">for</span> the specified revision on the <span class="built_in">local</span> disk. Please check your internet connection and try again.</span><br><span class="line">WARNI [sentence_transformers.SentenceTransformer] No sentence-transformers model found with name sentence-transformers/all-MiniLM-L6-v2. Creating a new one with mean pooling.</span><br></pre></td></tr></table></figure>
+<p>Now ,you can go to localhost:8080 to access</p>
+<h4 id="force-running-model-with-swap"><a href="#force-running-model-with-swap" class="headerlink" title="force running model with swap"></a>force running model with swap</h4><p>Error: model requires more system memory than is available  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sudo fallocate -l 180G /swapfile</span><br><span class="line">sudo <span class="built_in">chmod</span> 600 /swapfile</span><br><span class="line">sudo mkswap /swapfile</span><br><span class="line">sudo swapon /swapfile</span><br></pre></td></tr></table></figure>
+
+<h3 id="llama-cpp"><a href="#llama-cpp" class="headerlink" title="llama.cpp"></a>llama.cpp</h3><h4 id="benchmark-CPU"><a href="#benchmark-CPU" class="headerlink" title="benchmark CPU"></a>benchmark CPU</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># CPU only example with no layers offloaded to GPU</span></span><br><span class="line">numactl -c 0-1 ./build/bin/llama-bench \</span><br><span class="line">    --model /mnt/ai/models/unsloth/DeepSeek-R1-GGUF/DeepSeek-R1-UD-Q2_K_XL-00001-of-00005.gguf</span><br><span class="line">    --cache-type-k q4_0 \</span><br><span class="line">    --cache-type-v f16 \</span><br><span class="line">    --threads 24</span><br></pre></td></tr></table></figure>
+
+<h4 id="llama-cmd"><a href="#llama-cmd" class="headerlink" title="llama cmd"></a>llama cmd</h4><p><a target="_blank" rel="noopener" href="https://www.reddit.com/r/LocalLLaMA/comments/1cyzi9e/llamacpp_now_supports_distributed_inference/">reference1</a><br><a target="_blank" rel="noopener" href="https://blog.steelph0enix.dev/posts/llama-cpp-guide/">reference2</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line">$ llama.cpp-b4719-CPU/build/bin/llama-cli -dev Vulkan0 --model DeepSeek-R1-Distill-Qwen-32B-Q4_K_M.gguf -p <span class="string">&quot;Write a story about a bear with 600 words.&quot;</span> --n-gpu-layers 200 --ctx-size 512 --batch_size 8 --no-warmup </span><br><span class="line"></span><br><span class="line">$ llama.cpp-b4719-CPU/build/bin/llama-cli -dev Vulkan0 --model ./.local/share/nomic.ai/GPT4All/DeepSeek-R1-Distill-Qwen-7B-Q4_0.gguf --cache-type-k q8_0 --threads 10  --prompt <span class="string">&#x27;&lt;｜User｜&gt;如何和孩子解释分数的除法&lt;｜Assistant｜&gt;&#x27;</span> -no-cnv</span><br><span class="line"></span><br><span class="line">$ ./build/bin/llama-server \</span><br><span class="line">    --model <span class="string">&quot;/mnt/fastdrive/models/unsloth/DeepSeek-R1-UD-IQ1_S/DeepSeek-R1-UD-IQ1_S-00001-of-00003.gguf&quot;</span> \</span><br><span class="line">    --ctx-size 8192 \</span><br><span class="line">    --override-kv deepseek2.expert_used_count=int:8 \</span><br><span class="line">    --cache-type-k q4_0 \</span><br><span class="line">    --cache-type-v f16 \</span><br><span class="line">    --parallel 1 \</span><br><span class="line">    --threads 16 \</span><br><span class="line">    --host 127.0.0.1 \</span><br><span class="line">    --port 8080</span><br><span class="line"></span><br><span class="line">$ wget -qO- https://packages.lunarg.com/lunarg-signing-key-pub.asc | sudo <span class="built_in">tee</span> /etc/apt/trusted.gpg.d/lunarg.asc</span><br><span class="line">$ sudo wget -qO /etc/apt/sources.list.d/lunarg-vulkan-noble.list http://packages.lunarg.com/vulkan/lunarg-vulkan-noble.list <span class="comment">#ubuntu 24.04</span></span><br><span class="line">                                                                 <span class="comment">#ubuntu 22.04 https://packages.lunarg.com/vulkan/lunarg-vulkan-jammy.list</span></span><br><span class="line">$ sudo apt update</span><br><span class="line">$ sudo apt install vulkan-sdk ccache</span><br><span class="line">$ <span class="built_in">which</span> glslc</span><br><span class="line"></span><br><span class="line"><span class="comment">#if intel UHD 630</span></span><br><span class="line"><span class="comment">#download binary from https://vulkan.lunarg.com/sdk/home#linux</span></span><br><span class="line"><span class="comment">#https://vulkan.lunarg.com/doc/view/1.3.250.1/linux/getting_started.html</span></span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&#x27;. ~/vulkan/1.4.304.1/setup-env.sh&#x27;</span> &gt; ~/.bashrc</span><br><span class="line">$ . ~/.bashrc</span><br><span class="line"></span><br><span class="line"><span class="comment"># if env not woring ,upgrade and reboot the OS</span></span><br><span class="line"><span class="comment">#https://github.com/ggml-org/llama.cpp/issues/11358</span></span><br><span class="line">$ apt uprate &amp;&amp; reboot</span><br><span class="line"></span><br><span class="line"><span class="comment"># install</span></span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/ggerganov/llama.cpp</span><br><span class="line">$ <span class="built_in">mkdir</span> build</span><br><span class="line">$ <span class="built_in">cd</span> build</span><br><span class="line">$ cmake .. -DGGML_VULKAN=on -DCMAKE_BUILD_TYPE=Release -DLLAMA_CURL=ON</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&#x27;export PATH=$PATH:&#x27;</span>$(<span class="built_in">realpath</span> bin) &gt;&gt; ~/.bashrc</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">mkdir</span> build;</span><br><span class="line">$ cmake -B build -DGGML_VULKAN=ON -DGGML_CUDA=OFF; </span><br><span class="line">$ cmake --build build --config Release -j 12</span><br><span class="line"></span><br><span class="line">$ Example with Q8_0 K quantized cache Notice -no-cnv disables auto conversation mode</span><br><span class="line"></span><br><span class="line">$ ./llama.cpp/llama-cli \</span><br><span class="line">    --model unsloth/DeepSeek-R1-Distill-Qwen-32B-GGUF/DeepSeek-R1-Distill-Qwen-32B-Q4_K_M.gguf \</span><br><span class="line">    --cache-type-k q8_0 \</span><br><span class="line">    --threads 16 \</span><br><span class="line">    --prompt <span class="string">&#x27;&lt;｜User｜&gt;What is 1+1?&lt;｜Assistant｜&gt;&#x27;</span> \</span><br><span class="line">    -no-cnv</span><br><span class="line"></span><br><span class="line"><span class="comment">#If you have a GPU (RTX 4090 for example) with 24GB, you can offload multiple layers to the GPU for faster processing. If you have multiple GPUs, you can probably offload more layers.</span></span><br><span class="line">$ ./llama.cpp/llama-cli \</span><br><span class="line">--model unsloth/DeepSeek-R1-Distill-Qwen-32B-GGUF/DeepSeek-R1-Distill-Qwen-32B-Q4_K_M.gguf</span><br><span class="line">--cache-type-k q8_0 </span><br><span class="line">--threads 16 </span><br><span class="line">--prompt <span class="string">&#x27;&lt;｜User｜&gt;What is 1+1?&lt;｜Assistant｜&gt;&#x27;</span></span><br><span class="line">--n-gpu-layers 20 \</span><br><span class="line"> -no-cnv</span><br><span class="line"></span><br><span class="line">$ llama.cpp-b4719/build/bin/llama-cli -dev Vulkan0 --model DeepSeek-R1-Distill-Llama-8B-Q4_0.gguf --cache-type-k q8_0 --threads 12  --prompt <span class="string">&#x27;&lt;｜User｜&gt;Enter your question&lt;｜Assistant｜&gt;&#x27;</span> -no-cnv</span><br><span class="line"></span><br><span class="line">-ngl,  --gpu-layers, --n-gpu-layers N   number of layers to store <span class="keyword">in</span> VRAM</span><br><span class="line">add it , GPU will work, default is CPU ?</span><br><span class="line"></span><br><span class="line">$ llama.cpp-gpu/build/bin/llama-cli -dev Vulkan0 --model point_local_share_nomic.ai_GPT4All/DeepSeek-R1-Distill-Qwen-7B-Q4_0.gguf -p <span class="string">&quot;Write a story about a bear with 600 words.&quot;</span> --n-gpu-layers 200 --ctx-size 512 --batch_size 8 --no-warmup</span><br><span class="line"></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">Llama-server -dev Vulkan0 –model DeepSeek-R1-Distill-Qwen-32B-Q4_K_M.gguf -ngl 200 –host 192.168.0.1 –port 8888 –api-key 12345678 </span><br><span class="line"></span><br><span class="line">curl --request POST \</span><br><span class="line">     --url http://localhost:8080/completion \</span><br><span class="line">     --header <span class="string">&quot;Authorization: Bearer YOUR_API_KEY&quot;</span> \</span><br><span class="line">     --header <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">     --data <span class="string">&#x27;&#123;</span></span><br><span class="line"><span class="string">        &quot;prompt&quot;: &quot;Hello, how are you?&quot;</span></span><br><span class="line"><span class="string">     &#125;&#x27;</span></span><br><span class="line">https://github.com/ggml-org/llama.cpp/discussions/9080</span><br><span class="line"></span><br><span class="line"><span class="comment">#API</span></span><br><span class="line">https://localhost:8888/v1/chat/completions</span><br><span class="line">Get /v1/models  <span class="comment">#show model</span></span><br><span class="line">POST /v1/chat/completions <span class="comment">#new chat</span></span><br><span class="line">POST /v1/completions </span><br><span class="line">POST /v1/engines/&#123;model_name&#125;/embeddings <span class="comment">#create enbeddings</span></span><br><span class="line">POST /v1/embeddings</span><br><span class="line">POST /api/v1/token_check</span><br><span class="line">POST /api/v1/chat/completions</span><br></pre></td></tr></table></figure>
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ollama"><span class="toc-number">1.</span> <span class="toc-text">ollama</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Build-and-run-ollama-with-vulkan"><span class="toc-number">1.1.</span> <span class="toc-text">Build and run ollama with vulkan</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Compile-Open-WebUI"><span class="toc-number">1.2.</span> <span class="toc-text">Compile Open WebUI</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#force-running-model-with-swap"><span class="toc-number">1.3.</span> <span class="toc-text">force running model with swap</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#llama-cpp"><span class="toc-number">2.</span> <span class="toc-text">llama.cpp</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#benchmark-CPU"><span class="toc-number">2.1.</span> <span class="toc-text">benchmark CPU</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#llama-cmd"><span class="toc-number">2.2.</span> <span class="toc-text">llama cmd</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/03/01/ai/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/03/01/ai/&text=AI"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/03/01/ai/&title=AI"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/03/01/ai/&is_video=false&description=AI"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=AI&body=Check out this article: http://example.com/2025/03/01/ai/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/03/01/ai/&title=AI"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/03/01/ai/&title=AI"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/03/01/ai/&title=AI"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/03/01/ai/&title=AI"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/03/01/ai/&name=AI&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/03/01/ai/&t=AI"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    John Doe
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = '67e8c052/67e8c052.github.io';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'blog-comments';
+      var utterances_theme = 'github-dark';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>
